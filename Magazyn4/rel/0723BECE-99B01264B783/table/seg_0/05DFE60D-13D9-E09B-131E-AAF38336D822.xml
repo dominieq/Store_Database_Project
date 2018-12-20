@@ -1,0 +1,113 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="05DFE60D-13D9-E09B-131E-AAF38336D822" name="Stan_Magazynowy">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>74D9D488-705C-A1DC-530D-5B8157078CB8</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<abbreviation>Stan_Mag</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Ilość" id="377DB548-C9D8-5904-B1A6-616BB2AF4FA9">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>25B53EE7-F324-5E9F-DC4A-B309F228D889</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Towar_IdTowaru" id="4EE91568-2217-0996-72F2-DA7FF5D7F2A7">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>AFA9ECDF-03E1-C5C4-CC6A-F83226204401</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="DACF72F7-DA8E-02CA-511E-F3CBBC023739" referredColumn="7A007A6A-14F4-EF92-70BB-39DFF23CE893"/>
+</associations>
+</Column>
+<Column name="Magazyn_IdMagazynu" id="A33F5B78-460C-FBD7-9097-A1F9C990F5AC">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>3A0EFF53-D39C-2FCE-5335-A563F1533BDA</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="41AECBC6-0529-D0DC-0EDF-F8EA7A244A06" referredColumn="9C49F17C-3511-3765-1BE7-D5CBE4CAB612"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="9365AAF2-5CA9-7427-8948-6B94CF149D8C" name="Stan_Magazynowy_PK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>424A826C-4DA6-6074-FDFC-30DFD386C5F6</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4EE91568-2217-0996-72F2-DA7FF5D7F2A7"/>
+<colUsage columnID="A33F5B78-460C-FBD7-9097-A1F9C990F5AC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F820E51B-BBD9-85FB-1928-B4783D338FD3" name="Stan_Magazynowy__IDX">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-20 00:37:59 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4EE91568-2217-0996-72F2-DA7FF5D7F2A7"/>
+<colUsage columnID="A33F5B78-460C-FBD7-9097-A1F9C990F5AC"/>
+<colUsage columnID="377DB548-C9D8-5904-B1A6-616BB2AF4FA9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2BB12F9D-304E-3431-8DAF-964CFEAC2B2E" name="Stan_Magazynowy__IDXv1">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-20 00:38:18 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A33F5B78-460C-FBD7-9097-A1F9C990F5AC"/>
+<colUsage columnID="4EE91568-2217-0996-72F2-DA7FF5D7F2A7"/>
+<colUsage columnID="377DB548-C9D8-5904-B1A6-616BB2AF4FA9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7A3633A6-EE17-3E10-7CE5-C859F5DD836B" name="Stan_Magazynowy_Towar_FK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>AE928B58-64CC-76A6-71A3-41155F5859ED</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4EE91568-2217-0996-72F2-DA7FF5D7F2A7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5415E985-B70A-C7DB-1A3E-7FF9BCAA9BF0" name="Stan_Magazynowy_Magazyn_FK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>D39C1778-4085-8D88-C5D3-0A7170A39BD4</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A33F5B78-460C-FBD7-9097-A1F9C990F5AC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

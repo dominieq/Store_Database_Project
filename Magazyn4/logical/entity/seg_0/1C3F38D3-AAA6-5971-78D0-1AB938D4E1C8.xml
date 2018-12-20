@@ -1,0 +1,53 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="1C3F38D3-AAA6-5971-78D0-1AB938D4E1C8" name="Kategoria">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-11-26 21:52:25 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<engineerTo>
+<item key="0723BECE-1B86-0B20-AF46-99B01264B783" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="IdKategorii" id="43E2B8E9-B9B4-F6D7-0EAE-46B1C804A742">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-11-26 21:52:31 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<engineerTo>
+<item key="0723BECE-1B86-0B20-AF46-99B01264B783" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="NazwaKategorii" id="E5F76DF6-3571-7384-66BD-E65167D6D365">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-11-26 21:52:58 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<engineerTo>
+<item key="0723BECE-1B86-0B20-AF46-99B01264B783" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="C3F070CA-68B8-3FD6-6165-F6BD3708E010" name="Kategoria PK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-11-26 21:52:55 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<engineerTo>
+<item key="0723BECE-1B86-0B20-AF46-99B01264B783" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>43E2B8E9-B9B4-F6D7-0EAE-46B1C804A742</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

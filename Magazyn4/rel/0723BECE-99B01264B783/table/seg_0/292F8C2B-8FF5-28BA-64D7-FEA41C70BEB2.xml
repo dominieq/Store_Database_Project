@@ -1,0 +1,50 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="292F8C2B-8FF5-28BA-64D7-FEA41C70BEB2" name="Kategoria">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>1C3F38D3-AAA6-5971-78D0-1AB938D4E1C8</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="IdKategorii" id="8C468F9B-B7D7-A4E7-E729-E2B30C2940CA">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>43E2B8E9-B9B4-F6D7-0EAE-46B1C804A742</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NazwaKategorii" id="A2B5D754-9975-4D7F-C7BA-01CD2E8CDDC5">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>E5F76DF6-3571-7384-66BD-E65167D6D365</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>A3A3C77D-0366-9768-FF89-1C25E56881C8</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="5EF1DB32-E6C7-C9FC-840E-F6CF88D4F368" name="Kategoria_PK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>C3F070CA-68B8-3FD6-6165-F6BD3708E010</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8C468F9B-B7D7-A4E7-E729-E2B30C2940CA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

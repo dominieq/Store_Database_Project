@@ -1,0 +1,88 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="28454534-5CBF-599D-BEA8-D8AC3A65AF51" name="Dostawa">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>851D0957-474A-F1F4-A56B-6C20DA813978</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="NrFaktury" id="C4BB733D-E359-1530-A375-A987E3DCE73D">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>EC22BFB1-3F0F-BE32-E47C-B640625826FE</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DataRozpoczęcia" id="4C561762-B047-E2CE-7EBE-A06920F1E11B">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>7C418DFC-45D4-9A9C-1A11-330BE7B3A63B</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DataRealizacji" id="B659C678-99F6-ABC9-544E-3DCB12BC5BE2">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>BFD80548-6983-E6B1-0EAB-2CEAB319AC74</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Dostawca_IdDostawcy" id="96212490-0DC4-57DD-0247-19F048FDB85C">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>8D9B2F9C-12A4-E8B9-E5A0-D14200C893B2</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B802C226-5BAB-F360-96C7-0B9525023DDF" referredColumn="BD7B3962-7A5B-DC44-BB9B-8516B1A0077F"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="5602BCEF-23A9-5248-4E62-127CCCCEE1D9" name="Dostawa_PK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>094B32CE-9AB6-E7E1-ADD5-D22C1F52DEF8</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C4BB733D-E359-1530-A375-A987E3DCE73D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="83FE5DB5-9999-9225-6CF0-9F76C633764A" name="Dostawa_Dostawca_FK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>4AEEA178-89B9-23A2-1EC4-80223D0CE531</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="96212490-0DC4-57DD-0247-19F048FDB85C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="DACF72F7-DA8E-02CA-511E-F3CBBC023739" containerWithKeyObject="05DFE60D-13D9-E09B-131E-AAF38336D822" localFKIndex="7A3633A6-EE17-3E10-7CE5-C859F5DD836B" name="Stan_Magazynowy_Towar_FK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>AE928B58-64CC-76A6-71A3-41155F5859ED</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<referredTableLongName>Towar</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>61CCAB43-C91F-4DAE-7FF4-5FD0E2086FDC</referredTableID>
+<keyObject>4459C93D-099E-042A-410E-EB0507D7C8E4</keyObject>
+<referredKeyID>4459C93D-099E-042A-410E-EB0507D7C8E4</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>IdTowaru</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

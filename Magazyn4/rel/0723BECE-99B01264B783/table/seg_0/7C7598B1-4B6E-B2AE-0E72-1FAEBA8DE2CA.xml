@@ -1,0 +1,124 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="7C7598B1-4B6E-B2AE-0E72-1FAEBA8DE2CA" name="Zamówienie">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>E9BCE60B-E14A-88F1-05B8-F94DDE822420</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<ordsAlias>zamowienie</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="NrZamówienia" id="3A467DD8-D2A8-B2AD-16F1-2499ECC00122">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>2353BEEF-E932-100D-12C0-562C48A6DFE5</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DataZamówienia" id="0AEA25C7-DC3D-7970-E8F1-8BAFED813A24">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>D2570FC8-A328-E12D-54EE-651C978F8B9C</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DataRealizacji" id="6645BA00-DADD-59D6-BABD-E0148EA3E518">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>08F0DF42-C5F3-92CE-38B9-B256261743EB</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Kurier_IdKuriera" id="7C3FDE1D-D19B-5CAA-5AFA-55322BD49F9C">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>F2568C6D-9114-59F7-1567-20BA1A2A6811</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="69C75066-ACE2-86E2-D1C3-A018673F7237" referredColumn="74FC1C3D-2FA7-04D2-3CD4-4FC8B88EFB9D"/>
+</associations>
+</Column>
+<Column name="Odbiorca_IdOdbiorcy" id="55492481-1E56-CCDC-AB7A-6A95D0D0A237">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>E4996E5A-CF90-0DB2-CB53-B32B38F076BD</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0852287C-C943-B9B2-66D0-BB00866B576A" referredColumn="42236615-D312-3E25-0659-734FB32229B1"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="26CC9F8D-8B7E-7753-49D1-AA8DA5E3D619" name="Zamówienie_PK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>56A95DF2-1688-96C9-ECC1-2D49CCD013EC</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3A467DD8-D2A8-B2AD-16F1-2499ECC00122"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="CC4134F7-04CF-34C3-3BDF-65816346EB99" name="Zamówienie__IDX">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-20 00:38:39 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="55492481-1E56-CCDC-AB7A-6A95D0D0A237"/>
+<colUsage columnID="3A467DD8-D2A8-B2AD-16F1-2499ECC00122"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9F464285-BED4-4B4E-2958-43449AB11CE4" name="Zamówienie_Kurier_FK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>9EE659CA-9BA7-B3AB-F5E0-C1BD69B931A6</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7C3FDE1D-D19B-5CAA-5AFA-55322BD49F9C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F5D57EDE-02A2-F67D-8441-D6E7DE858131" name="Zamówienie_Odbiorca_FK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>A360F771-11F2-24F6-25BB-F990B73D4629</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="55492481-1E56-CCDC-AB7A-6A95D0D0A237"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

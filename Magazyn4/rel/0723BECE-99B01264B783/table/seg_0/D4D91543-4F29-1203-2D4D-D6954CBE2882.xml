@@ -1,0 +1,102 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D4D91543-4F29-1203-2D4D-D6954CBE2882" name="Podpunkty_Dostawy">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<ordsAlias>relation_20</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Dostawa_NrFaktury" id="4EA334F0-3AC5-2434-6582-A86183FC98E5">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A252F6AD-A864-BFB5-6F8D-EE22840669F0" referredColumn="C4BB733D-E359-1530-A375-A987E3DCE73D"/>
+</associations>
+</Column>
+<Column name="Stan_Magazynowy_Towar_IdTowaru" id="F88068D4-475A-66F4-3251-06D6F5FA1397">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2D3ED73F-E638-E1EE-E8F4-7641DE5E76BB" referredColumn="4EE91568-2217-0996-72F2-DA7FF5D7F2A7"/>
+</associations>
+</Column>
+<Column name="Stan_Magazynowy_Magazyn_IdMagazynu" id="64F9C093-6FA1-8B24-D3EA-04CF5F978A4B">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2D3ED73F-E638-E1EE-E8F4-7641DE5E76BB" referredColumn="A33F5B78-460C-FBD7-9097-A1F9C990F5AC"/>
+</associations>
+</Column>
+<Column name="Ilość" id="843A74D9-4494-392B-8DF7-EB35EB97B07D">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-20 01:35:51 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="3BB413A1-D0A2-2359-3EBE-32418A943176" name="Relation_20_PK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4EA334F0-3AC5-2434-6582-A86183FC98E5"/>
+<colUsage columnID="F88068D4-475A-66F4-3251-06D6F5FA1397"/>
+<colUsage columnID="64F9C093-6FA1-8B24-D3EA-04CF5F978A4B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B60F01D5-2023-56F3-A1DA-09A50FEE2CA7" name="Relation_20_Dostawa_FK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>8FB4B452-5054-F5FD-ABDD-C0A97CC67686</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4EA334F0-3AC5-2434-6582-A86183FC98E5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="723D9792-39EE-9EAC-13B4-C7FF237A1979" name="Relation_20_Stan_Magazynowy_FK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>8FB4B452-5054-F5FD-ABDD-C0A97CC67686</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F88068D4-475A-66F4-3251-06D6F5FA1397"/>
+<colUsage columnID="64F9C093-6FA1-8B24-D3EA-04CF5F978A4B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

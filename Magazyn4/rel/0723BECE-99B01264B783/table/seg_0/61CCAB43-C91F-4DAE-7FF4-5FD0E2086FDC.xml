@@ -1,0 +1,144 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="61CCAB43-C91F-4DAE-7FF4-5FD0E2086FDC" name="Towar">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>E5DEF07A-2027-D58A-0C79-EE32C8B069AA</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="IdTowaru" id="7A007A6A-14F4-EF92-70BB-39DFF23CE893">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>BCE7F326-0338-BEC0-5BF4-F7ACEDE013D6</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<identityColumn>true</identityColumn>
+<autoIncrementGenerateAlways>true</autoIncrementGenerateAlways>
+<autoIncrementMinValue>1</autoIncrementMinValue>
+<autoIncrementCycle>false</autoIncrementCycle>
+<autoIncrementSequenceName>SEQ_Towar</autoIncrementSequenceName>
+</Column>
+<Column name="Nazwa" id="039EC0ED-D759-1A00-C3E7-5A2625AC1EFB">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>9C94EDB6-3290-B0B5-1E07-3A59DF4BB794</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>A3A3C77D-0366-9768-FF89-1C25E56881C8</logicalDatatype>
+<dataTypeSize>25 CHAR</dataTypeSize>
+<ownDataTypeParameters>25 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CenaDetaliczna" id="142FAD57-A8FA-2F7F-18F1-98CF28F9B24B">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>D42A6488-F18C-B3E9-F605-9A7D656283A3</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>12</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,12,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CenaProducenta" id="9C6FC5A3-B0B0-F7F9-9E4A-B114B0BC3442">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>B4D34209-BB94-968A-6300-E48AA172BED6</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>12</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,12,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Producent_IdProducenta" id="0AA046BC-A6F9-F51D-0325-7C9CBCE8579C">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>30737103-24F0-E3EA-0DE9-229A2FC137AA</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A23EC582-A15D-AFE3-3E89-91DCDC36A32B" referredColumn="6C899E14-A98F-499D-0E36-1B024BBFC4D9"/>
+</associations>
+</Column>
+<Column name="Kategoria_IdKategorii" id="C8F98ABC-6AE5-1EAC-11DA-994985B5D935">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>D9FF28F6-F17E-53FE-0AE9-D3FAF5B39B98</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C8F845AF-D9F1-EB4F-59B3-1BB3107CBA3F" referredColumn="8C468F9B-B7D7-A4E7-E729-E2B30C2940CA"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4459C93D-099E-042A-410E-EB0507D7C8E4" name="Towar_PK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>BCB95119-3692-FE38-F67B-6D38520A175C</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7A007A6A-14F4-EF92-70BB-39DFF23CE893"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D3663BAF-0BFC-1F85-0F2E-FDD80617F8BD" name="Towar__IDX">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-20 00:37:33 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="039EC0ED-D759-1A00-C3E7-5A2625AC1EFB"/>
+<colUsage columnID="7A007A6A-14F4-EF92-70BB-39DFF23CE893"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D8CABDA8-0FB6-15DA-2DF8-1ECF77B7E67A" name="Towar_Producent_FK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>54AAD9DA-E532-26D6-16FA-8D1916160050</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0AA046BC-A6F9-F51D-0325-7C9CBCE8579C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D2036A77-E232-6491-488D-45F8346CFE80" name="Towar_Kategoria_FK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>D9FCE611-48AF-6694-56F0-850F1BA67EA5</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C8F98ABC-6AE5-1EAC-11DA-994985B5D935"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

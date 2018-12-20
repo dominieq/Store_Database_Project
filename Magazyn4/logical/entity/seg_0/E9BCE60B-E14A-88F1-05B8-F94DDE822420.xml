@@ -1,0 +1,88 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="E9BCE60B-E14A-88F1-05B8-F94DDE822420" name="Zamówienie">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-11-26 22:20:13 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<engineerTo>
+<item key="0723BECE-1B86-0B20-AF46-99B01264B783" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="NrZamówienia" id="2353BEEF-E932-100D-12C0-562C48A6DFE5">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-11-26 22:20:18 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<engineerTo>
+<item key="0723BECE-1B86-0B20-AF46-99B01264B783" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="DataZamówienia" id="D2570FC8-A328-E12D-54EE-651C978F8B9C">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-11-26 22:20:26 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<engineerTo>
+<item key="0723BECE-1B86-0B20-AF46-99B01264B783" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="DataRealizacji" id="08F0DF42-C5F3-92CE-38B9-B256261743EB">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-11-26 22:20:35 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<engineerTo>
+<item key="0723BECE-1B86-0B20-AF46-99B01264B783" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="IdKuriera" id="F2568C6D-9114-59F7-1567-20BA1A2A6811">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-11-26 22:33:49 UTC</createdTime>
+<generatorID>9EE659CA-9BA7-B3AB-F5E0-C1BD69B931A6</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<engineerTo>
+<item key="0723BECE-1B86-0B20-AF46-99B01264B783" value="true"/>
+</engineerTo>
+<referedAttribute>CA057A1C-0DE0-74E9-7EC1-C90AAC73FFE6</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="IdOdbiorcy" id="E4996E5A-CF90-0DB2-CB53-B32B38F076BD">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-11-26 22:34:12 UTC</createdTime>
+<generatorID>A360F771-11F2-24F6-25BB-F990B73D4629</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<engineerTo>
+<item key="0723BECE-1B86-0B20-AF46-99B01264B783" value="true"/>
+</engineerTo>
+<referedAttribute>416994C0-5509-220C-01BA-FA8A22FDA425</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="56A95DF2-1688-96C9-ECC1-2D49CCD013EC" name="Zamówienie PK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-11-26 22:20:25 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<engineerTo>
+<item key="0723BECE-1B86-0B20-AF46-99B01264B783" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>2353BEEF-E932-100D-12C0-562C48A6DFE5</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

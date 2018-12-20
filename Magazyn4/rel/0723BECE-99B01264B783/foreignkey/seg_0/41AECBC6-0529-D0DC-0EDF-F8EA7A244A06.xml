@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="41AECBC6-0529-D0DC-0EDF-F8EA7A244A06" containerWithKeyObject="05DFE60D-13D9-E09B-131E-AAF38336D822" localFKIndex="5415E985-B70A-C7DB-1A3E-7FF9BCAA9BF0" name="Stan_Magazynowy_Magazyn_FK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>D39C1778-4085-8D88-C5D3-0A7170A39BD4</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<referredTableLongName>Magazyn</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>6E45947C-7A0C-BC0F-D58B-BBB53C2A391B</referredTableID>
+<keyObject>8655871D-2CB8-9C41-86AC-481E5ECF81A7</keyObject>
+<referredKeyID>8655871D-2CB8-9C41-86AC-481E5ECF81A7</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>IdMagazynu</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

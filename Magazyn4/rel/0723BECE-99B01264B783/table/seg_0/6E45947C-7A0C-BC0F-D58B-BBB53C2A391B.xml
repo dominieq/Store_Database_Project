@@ -1,0 +1,89 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6E45947C-7A0C-BC0F-D58B-BBB53C2A391B" name="Magazyn">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>53852973-1D70-9AAA-6729-5F53642E00D4</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="IdMagazynu" id="9C49F17C-3511-3765-1BE7-D5CBE4CAB612">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>0E7E2C6F-5882-0432-6704-2A447BE5E114</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementGenerateAlways>true</autoIncrementGenerateAlways>
+<autoIncrementMinValue>1</autoIncrementMinValue>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Adres" id="F72EC7E3-575B-64F4-9AEB-DF56B010B29C">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>DB211BA6-67D3-B1D9-BC1C-B13E425CC7BB</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>A3A3C77D-0366-9768-FF89-1C25E56881C8</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Pracownik_IdPracownika" id="EA99B0AA-1CB8-97BB-F777-69CAAAE5D64E">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>251A0E11-3C7E-4543-7803-908077A68278</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="80CB02A8-79D2-92AE-7522-36BA5A2C44B9" referredColumn="97620811-429A-AC29-82C0-AA0617C0EB76"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8655871D-2CB8-9C41-86AC-481E5ECF81A7" name="Magazyn_PK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>883616BE-F712-DB75-33AE-6D232E84ECE7</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9C49F17C-3511-3765-1BE7-D5CBE4CAB612"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B6D2409C-D0F5-35B8-134C-58915F1872FB" name="Magazyn__IDX">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>0FBADAFB-F89F-59B2-102E-46B43E74F043</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="EA99B0AA-1CB8-97BB-F777-69CAAAE5D64E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6D88596C-AA5F-513D-7508-300B74E43B26" name="Magazyn_Pracownik_FK">
+<createdBy>wojciech</createdBy>
+<createdTime>2018-12-18 01:26:44 UTC</createdTime>
+<generatorID>0FBADAFB-F89F-59B2-102E-46B43E74F043</generatorID>
+<ownerDesignName>Magazyn4</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EA99B0AA-1CB8-97BB-F777-69CAAAE5D64E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
