@@ -4,11 +4,12 @@
 <createdTime>2018-12-18 01:26:44 UTC</createdTime>
 <ownerDesignName>Magazyn4</ownerDesignName>
 <ordsAlias>relation_21</ordsAlias>
+<useDDLTransformationScript>true</useDDLTransformationScript>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="Zamówienie_NrZamówienia" id="E62A1B8D-AF72-B609-C489-CD2DE13F7DF5">
+<Column name="Z_NrZamówienia" id="E62A1B8D-AF72-B609-C489-CD2DE13F7DF5">
 <createdBy>wojciech</createdBy>
 <createdTime>2018-12-18 01:26:44 UTC</createdTime>
 <ownerDesignName>Magazyn4</ownerDesignName>
@@ -22,7 +23,7 @@
 <colAssociation fkAssociation="B67F6940-01A6-7636-4BE2-515FF7DFB399" referredColumn="3A467DD8-D2A8-B2AD-16F1-2499ECC00122"/>
 </associations>
 </Column>
-<Column name="Stan_Magazynowy_Towar_IdTowaru" id="F96DE709-2EEB-AD0F-1109-6D98A4861D32">
+<Column name="SM_Towar_IdTowaru" id="F96DE709-2EEB-AD0F-1109-6D98A4861D32">
 <createdBy>wojciech</createdBy>
 <createdTime>2018-12-18 01:26:44 UTC</createdTime>
 <ownerDesignName>Magazyn4</ownerDesignName>
@@ -36,7 +37,7 @@
 <colAssociation fkAssociation="8A4BAD5C-A9D7-5B64-7755-DE7FF3E2B770" referredColumn="4EE91568-2217-0996-72F2-DA7FF5D7F2A7"/>
 </associations>
 </Column>
-<Column name="Stan_Magazynowy_Magazyn_IdMagazynu" id="A500E7D4-8AFA-4D50-A635-325F4B0568CE">
+<Column name="SM_Magazyn_IdMagazynu" id="A500E7D4-8AFA-4D50-A635-325F4B0568CE">
 <createdBy>wojciech</createdBy>
 <createdTime>2018-12-18 01:26:44 UTC</createdTime>
 <ownerDesignName>Magazyn4</ownerDesignName>
@@ -75,7 +76,7 @@
 <colUsage columnID="A500E7D4-8AFA-4D50-A635-325F4B0568CE"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="89257490-9941-48DA-E319-0191B6BDBA66" name="Relation_21_Zamówienie_FK">
+<ind_PK_UK id="89257490-9941-48DA-E319-0191B6BDBA66" name="R_21_Zamówienie_FK">
 <createdBy>wojciech</createdBy>
 <createdTime>2018-12-18 01:26:44 UTC</createdTime>
 <generatorID>C05EDE89-8AA6-5C9E-E297-9B65A550749B</generatorID>
@@ -86,7 +87,7 @@
 <colUsage columnID="E62A1B8D-AF72-B609-C489-CD2DE13F7DF5"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="D928204E-E0D5-3162-5146-D12B736B6B52" name="Relation_21_Stan_Magazynowy_FK">
+<ind_PK_UK id="D928204E-E0D5-3162-5146-D12B736B6B52" name="R_21_Stan_Magazynowy_FK">
 <createdBy>wojciech</createdBy>
 <createdTime>2018-12-18 01:26:44 UTC</createdTime>
 <generatorID>C05EDE89-8AA6-5C9E-E297-9B65A550749B</generatorID>

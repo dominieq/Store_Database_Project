@@ -4,6 +4,7 @@
 <createdTime>2018-12-18 01:26:44 UTC</createdTime>
 <ownerDesignName>Magazyn4</ownerDesignName>
 <ordsAlias>relation_20</ordsAlias>
+<useDDLTransformationScript>true</useDDLTransformationScript>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
@@ -22,7 +23,7 @@
 <colAssociation fkAssociation="A252F6AD-A864-BFB5-6F8D-EE22840669F0" referredColumn="C4BB733D-E359-1530-A375-A987E3DCE73D"/>
 </associations>
 </Column>
-<Column name="Stan_Magazynowy_Towar_IdTowaru" id="F88068D4-475A-66F4-3251-06D6F5FA1397">
+<Column name="SM_Towar_IdTowaru" id="F88068D4-475A-66F4-3251-06D6F5FA1397">
 <createdBy>wojciech</createdBy>
 <createdTime>2018-12-18 01:26:44 UTC</createdTime>
 <ownerDesignName>Magazyn4</ownerDesignName>
@@ -36,7 +37,7 @@
 <colAssociation fkAssociation="2D3ED73F-E638-E1EE-E8F4-7641DE5E76BB" referredColumn="4EE91568-2217-0996-72F2-DA7FF5D7F2A7"/>
 </associations>
 </Column>
-<Column name="Stan_Magazynowy_Magazyn_IdMagazynu" id="64F9C093-6FA1-8B24-D3EA-04CF5F978A4B">
+<Column name="SMy_Magazyn_IdMagazynu" id="64F9C093-6FA1-8B24-D3EA-04CF5F978A4B">
 <createdBy>wojciech</createdBy>
 <createdTime>2018-12-18 01:26:44 UTC</createdTime>
 <ownerDesignName>Magazyn4</ownerDesignName>
@@ -75,7 +76,7 @@
 <colUsage columnID="64F9C093-6FA1-8B24-D3EA-04CF5F978A4B"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="B60F01D5-2023-56F3-A1DA-09A50FEE2CA7" name="Relation_20_Dostawa_FK">
+<ind_PK_UK id="B60F01D5-2023-56F3-A1DA-09A50FEE2CA7" name="R_20_Dostawa_FK">
 <createdBy>wojciech</createdBy>
 <createdTime>2018-12-18 01:26:44 UTC</createdTime>
 <generatorID>8FB4B452-5054-F5FD-ABDD-C0A97CC67686</generatorID>
@@ -86,7 +87,7 @@
 <colUsage columnID="4EA334F0-3AC5-2434-6582-A86183FC98E5"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="723D9792-39EE-9EAC-13B4-C7FF237A1979" name="Relation_20_Stan_Magazynowy_FK">
+<ind_PK_UK id="723D9792-39EE-9EAC-13B4-C7FF237A1979" name="R_20_Stan_Magazynowy_FK">
 <createdBy>wojciech</createdBy>
 <createdTime>2018-12-18 01:26:44 UTC</createdTime>
 <generatorID>8FB4B452-5054-F5FD-ABDD-C0A97CC67686</generatorID>

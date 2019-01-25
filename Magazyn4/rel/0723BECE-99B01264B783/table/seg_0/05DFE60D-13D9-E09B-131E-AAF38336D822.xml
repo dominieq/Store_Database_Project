@@ -4,6 +4,7 @@
 <createdTime>2018-12-18 01:26:44 UTC</createdTime>
 <generatorID>74D9D488-705C-A1DC-530D-5B8157078CB8</generatorID>
 <ownerDesignName>Magazyn4</ownerDesignName>
+<useDDLTransformationScript>true</useDDLTransformationScript>
 <abbreviation>Stan_Mag</abbreviation>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
@@ -87,7 +88,7 @@
 <colUsage columnID="377DB548-C9D8-5904-B1A6-616BB2AF4FA9"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="7A3633A6-EE17-3E10-7CE5-C859F5DD836B" name="Stan_Magazynowy_Towar_FK">
+<ind_PK_UK id="7A3633A6-EE17-3E10-7CE5-C859F5DD836B" name="SM_Towar_FK">
 <createdBy>wojciech</createdBy>
 <createdTime>2018-12-18 01:26:44 UTC</createdTime>
 <generatorID>AE928B58-64CC-76A6-71A3-41155F5859ED</generatorID>
@@ -98,7 +99,7 @@
 <colUsage columnID="4EE91568-2217-0996-72F2-DA7FF5D7F2A7"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="5415E985-B70A-C7DB-1A3E-7FF9BCAA9BF0" name="Stan_Magazynowy_Magazyn_FK">
+<ind_PK_UK id="5415E985-B70A-C7DB-1A3E-7FF9BCAA9BF0" name="SM_Magazyn_FK">
 <createdBy>wojciech</createdBy>
 <createdTime>2018-12-18 01:26:44 UTC</createdTime>
 <generatorID>D39C1778-4085-8D88-C5D3-0A7170A39BD4</generatorID>
