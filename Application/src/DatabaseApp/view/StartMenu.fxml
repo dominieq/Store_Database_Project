@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="870.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DatabaseApp.view.StartMenuController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="586.0" layoutY="121.0" text="Database Project" textAlignment="CENTER" AnchorPane.bottomAnchor="700.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="25.0">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Button layoutX="574.0" layoutY="336.0" mnemonicParsing="false" text="Handle warehouses and workers" AnchorPane.bottomAnchor="490.0" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="460.0" AnchorPane.topAnchor="300.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="574.0" layoutY="482.0" mnemonicParsing="false" text="Handle warehouse's business" AnchorPane.bottomAnchor="330.0" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="460.0" AnchorPane.topAnchor="460.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
