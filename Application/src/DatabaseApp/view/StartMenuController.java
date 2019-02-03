@@ -3,6 +3,9 @@ package DatabaseApp.view;
 import DatabaseApp.DatabaseApp;
 import javafx.fxml.FXML;
 
+/**
+ * TODO comments
+ */
 public class StartMenuController {
 
     private DatabaseApp app;
@@ -12,19 +15,17 @@ public class StartMenuController {
     @FXML private void initialize() {}
 
     /**
-     * Shows WarehouseLogisticsLayout
+     * Changes BorderPane's center to WarehouseLogistics.
      */
     @FXML private void handleWarehouseLogistics() {
-
-        /* TODO Show WarehouseLogisticsLayout*/
-
+        this.app.showWarehouseLogistics();
     }
 
     /**
-     * Shows WarehouseBusinessLayout
+     * Changes BorderPane's center WarehouseBusiness
      */
     @FXML private void handleWarehouseBusiness() {
-        /* TODO Show WarehouseBusinessLayout */
+        this.app.showWarehouseBusiness();
     }
 
     /**

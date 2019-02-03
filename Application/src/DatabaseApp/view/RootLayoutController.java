@@ -23,18 +23,17 @@ public class RootLayoutController {
      * Changes BorderPane's center to StartMenu
      */
     @FXML private void handleBackToStartButton() {
-
-        /* TODO Change BorderPane's center to StartMenu*/
-
+        this.app.showStartMenu();
+        if(backToStartMenuItem.isVisible()) {
+            setInvisible();
+        }
     }
 
     /**
      * Closes application
      */
     @FXML private void handleCloseButton() {
-
-        /* TODO Close application */
-
+        this.app.getPrimaryStage().close();
     }
 
     /**
@@ -48,7 +47,7 @@ public class RootLayoutController {
     /**
      * Sets backToStartMenuItem and separatorMenuItem to invisible
      */
-    public void setInvisible() {
+    private void setInvisible() {
         this.backToStartMenuItem.setVisible(false);
         this.separatorMenuItem.setVisible(false);
     }

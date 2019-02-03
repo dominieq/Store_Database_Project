@@ -44,7 +44,7 @@ public class Warehouse {
      * Returns warehouse's id as SimpleIntegerProperty
      * @return SimpleIntegerProperty
      */
-    public SimpleIntegerProperty getIdWarehouseProperty() {
+    public SimpleIntegerProperty getIdWarehouse() {
         return new SimpleIntegerProperty(idWarehouse);
     }
 
