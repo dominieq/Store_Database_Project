@@ -16,7 +16,10 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
+import java.sql.*;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.io.IOException;
 
 /**
@@ -30,11 +33,51 @@ public class DatabaseApp extends Application {
     private ObservableList<Warehouse> warehouses;
     private ObservableList<Worker> workers;
 
+    private void testest(){
+        Connection conn = null;
+        Properties connectionProps = new Properties();
+        connectionProps.put("user", "inf132289");
+        connectionProps.put("password", "E");
+        try {
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@//admlab2.cs.put.poznan.pl:1521/dblab02_students.cs.put.poznan.pl"
+, connectionProps);
+            System.out.println("Połączono z bazą danych");
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseApp.class.getName()).log(Level.SEVERE,
+                    "nie udało się połączyć z bazą danych", ex);
+            System.exit(-1);
+        }
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery("select *" +
+                    "from pracownicy");
+            while (rs.next()) {
+                System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " +
+                        rs.getFloat(3));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Bład wykonania polecenia" + ex.toString());
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) { /* kod obsługi */ }
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) { /* kod obsługi */ }
+            }
+    }}
+
     /**
      * Starts application. Launches initRootLayout and showStartMenu functions.
      * @param primaryStage Stage
      */
     @Override public void start(Stage primaryStage) {
+        testest();
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Database Project");
         initRootLayout();
