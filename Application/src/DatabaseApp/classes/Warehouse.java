@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Warehouse {
 
-    private int idWarehouse;
+    private String idWarehouse;
 
     private String addressWarehouse;
 
@@ -23,9 +23,10 @@ public class Warehouse {
      * @param idWarehouse warehouse's id
      * @param addressWarehouse warehouse's address
      */
-    public Warehouse(int idWarehouse, String addressWarehouse) {
+    public Warehouse(String idWarehouse, String addressWarehouse) {
         this.idWarehouse = idWarehouse;
         this.addressWarehouse = addressWarehouse;
+        workerArrayList = new ArrayList<>();
     }
 
     /**
@@ -34,7 +35,7 @@ public class Warehouse {
      * @param addressWarehouse warehouse's address
      * @param workerArrayList list of workers in warehouse
      */
-    public Warehouse(int idWarehouse, String addressWarehouse, ArrayList<Worker> workerArrayList) {
+    public Warehouse(String idWarehouse, String addressWarehouse, ArrayList<Worker> workerArrayList) {
         this.idWarehouse = idWarehouse;
         this.addressWarehouse = addressWarehouse;
         this.workerArrayList = workerArrayList;
@@ -44,15 +45,15 @@ public class Warehouse {
      * Returns warehouse's id as SimpleIntegerProperty
      * @return SimpleIntegerProperty
      */
-    public SimpleIntegerProperty getIdWarehouse() {
-        return new SimpleIntegerProperty(idWarehouse);
+    public SimpleStringProperty getIdWarehouseProperty() {
+        return new SimpleStringProperty(idWarehouse);
     }
 
     /**
      * Sets warehouse's id
      * @param idWarehouse int
      */
-    public void setIdWarehouse(int idWarehouse) {
+    public void setIdWarehouse(String idWarehouse) {
         this.idWarehouse = idWarehouse;
     }
 
@@ -60,8 +61,16 @@ public class Warehouse {
      * Returns warehouse's address as SimpleStringProperty
      * @return SimpleStringProperty
      */
-    public SimpleStringProperty getAddressWarehouse() {
+    public SimpleStringProperty getAddressWarehouseProperty() {
         return new SimpleStringProperty(addressWarehouse);
+    }
+
+    public String getIdWarehouse() {
+        return idWarehouse;
+    }
+
+    public String getAddressWarehouse() {
+        return addressWarehouse;
     }
 
     /**

@@ -18,6 +18,15 @@ public class Worker {
     private String mailWorker;
 
     private String PESELWorker;
+    private String idWarehouse;
+
+    public String getIdWarehouse() {
+        return idWarehouse;
+    }
+
+    public void setIdWarehouse(String idWarehouse) {
+        this.idWarehouse = idWarehouse;
+    }
 
     /**
      * Creates Worker object. Sets idWorker, nameWorker, surnameWorker, addressWorker and PESELWorker
@@ -48,7 +57,7 @@ public class Worker {
      * @param PESELWorker String
      */
     public Worker (String idWorker, String nameWorker, String surnameWorker, String addressWorker,
-                   String telNumWorker, String mailWorker, String PESELWorker) {
+                   String telNumWorker, String mailWorker, String PESELWorker, String idMagazynu) {
         this.idWorker = idWorker;
         this.nameWorker = nameWorker;
         this.surnameWorker = surnameWorker;
@@ -56,6 +65,7 @@ public class Worker {
         this.telNumWorker = telNumWorker;
         this.mailWorker = mailWorker;
         this.PESELWorker = PESELWorker;
+        this.idWarehouse=idMagazynu;
     }
 
     /**
