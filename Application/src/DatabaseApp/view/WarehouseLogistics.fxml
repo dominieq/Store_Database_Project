@@ -19,35 +19,39 @@
    <children>
       <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
-            <SplitPane dividerPositions="0.1, 0.9" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+            <SplitPane dividerPositions="0.125, 0.875" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
               <items>
-                  <GridPane hgap="15.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleAddWarehouse" prefHeight="84.0" prefWidth="189.6" text="Add" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#handleDelWarehouse" prefHeight="84.0" prefWidth="189.6" text="Delete" GridPane.columnIndex="1">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#handleEditWarehouse" prefHeight="84.0" prefWidth="189.6" text="Edit" GridPane.columnIndex="2">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </GridPane>
+                  <SplitPane dividerPositions="0.33, 0.66" prefHeight="160.0" prefWidth="200.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleAddWarehouse" prefHeight="84.0" prefWidth="189.6" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleDelWarehouse" prefHeight="84.0" prefWidth="189.6" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditWarehouse" prefHeight="84.0" prefWidth="189.6" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
                   <TableView fx:id="warehouseTableView" prefHeight="200.0" prefWidth="200.0">
                     <columns>
                       <TableColumn fx:id="warehouseAddressTableColumn" prefWidth="75.0" text="Warehouse's address" />
@@ -60,54 +64,87 @@
                         <Cursor fx:constant="OPEN_HAND" />
                      </cursor>
                   </TableView>
-                  <SplitPane dividerPositions="0.5, 0.7" prefHeight="160.0" prefWidth="200.0">
+                  <SplitPane dividerPositions="0.33, 0.66" prefHeight="160.0" prefWidth="200.0">
                      <items>
-                        <ChoiceBox fx:id="warehouseTraitChoiceBox" prefHeight="84.0" prefWidth="189.6" />
-                        <TextField fx:id="warehouseTraitTextField" alignment="CENTER" prefHeight="84.0" prefWidth="189.6" promptText="Choose feature">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <Button mnemonicParsing="false" onAction="#handleSearchWarehouse" prefHeight="84.0" prefWidth="189.6" text="Search">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </Button>
+                        <AnchorPane>
+                           <children>
+                              <ChoiceBox fx:id="warehouseTraitChoiceBox" prefHeight="84.0" prefWidth="189.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <TextField fx:id="warehouseTraitTextField" alignment="CENTER" prefHeight="84.0" prefWidth="189.6" promptText="Choose feature" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleSearchWarehouse" prefHeight="84.0" prefWidth="189.6" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
                      </items>
                   </SplitPane>
               </items>
             </SplitPane>
-            <SplitPane dividerPositions="0.1, 0.2, 0.9" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+            <SplitPane dividerPositions="0.125, 0.25, 0.875" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
               <items>
-                  <ChoiceBox fx:id="workerChoiceBox" prefHeight="84.0" prefWidth="596.0" />
-                  <GridPane hgap="15.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#handleAddWorker" prefHeight="81.6" prefWidth="189.6" text="Add">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#handleDelWorker" prefHeight="81.6" prefWidth="189.6" text="Delete" GridPane.columnIndex="1">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#handleEditWorker" prefHeight="81.6" prefWidth="189.6" text="Edit" GridPane.columnIndex="2">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </GridPane>
-                  <GridPane vgap="25.0">
+                  <SplitPane dividerPositions="0.5">
+                     <items>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label text="All workers available. &#10;Choose warehouse to narrow down number of workers." textAlignment="CENTER" textFill="#737473" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <ChoiceBox fx:id="workerChoiceBox" prefHeight="84.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+                  <SplitPane dividerPositions="0.33, 0.66">
+                     <items>
+                        <AnchorPane>
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleAddWorker" prefHeight="81.6" prefWidth="189.6" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleDelWorker" prefHeight="81.6" prefWidth="189.6" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleEditWorker" prefHeight="81.6" prefWidth="189.6" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+                  <GridPane hgap="15.0" vgap="15.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -197,19 +234,31 @@
                         </Label>
                      </children>
                   </GridPane>
-                  <SplitPane dividerPositions="0.5, 0.7" prefHeight="160.0" prefWidth="200.0">
+                  <SplitPane dividerPositions="0.33, 0.66" prefHeight="160.0" prefWidth="200.0">
                      <items>
-                        <ChoiceBox fx:id="workerTraitChoiceBox" prefHeight="84.0" prefWidth="189.6" />
-                        <TextField fx:id="workerTraitTextField" alignment="CENTER" prefHeight="84.0" prefWidth="189.6" promptText="Choose feature">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <Button mnemonicParsing="false" onAction="#handleSearchWorker" prefHeight="84.0" prefWidth="189.6" text="Search">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </Button>
+                        <AnchorPane>
+                           <children>
+                              <ChoiceBox fx:id="workerTraitChoiceBox" prefHeight="84.0" prefWidth="189.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <TextField fx:id="workerTraitTextField" alignment="CENTER" prefHeight="84.0" prefWidth="189.6" promptText="Choose feature" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleSearchWorker" prefHeight="84.0" prefWidth="189.6" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
                      </items>
                   </SplitPane>
               </items>
