@@ -1,4 +1,4 @@
-package DatabaseApp.classes;
+package DatabaseApp.models;
 
 /**
  * TODO comments

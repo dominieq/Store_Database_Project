@@ -1,16 +1,12 @@
 package DatabaseApp.view;
 
 import DatabaseApp.DatabaseApp;
-import DatabaseApp.SQLHelper;
-import DatabaseApp.classes.Warehouse;
-import DatabaseApp.classes.Worker;
+import DatabaseApp.models.Warehouse;
+import DatabaseApp.models.Worker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class WarehouseLogisticsController {
 

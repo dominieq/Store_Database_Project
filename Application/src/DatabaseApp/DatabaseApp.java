@@ -1,7 +1,8 @@
 package DatabaseApp;
 
-import DatabaseApp.classes.Warehouse;
-import DatabaseApp.classes.Worker;
+import DatabaseApp.helpers.SQLHelper;
+import DatabaseApp.models.Warehouse;
+import DatabaseApp.models.Worker;
 import DatabaseApp.view.RootLayoutController;
 import DatabaseApp.view.StartMenuController;
 import DatabaseApp.view.WarehouseBusinessController;
@@ -17,9 +18,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.sql.*;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.io.IOException;
 
 /**
@@ -34,42 +32,12 @@ public class DatabaseApp extends Application {
     private ObservableList<Warehouse> warehouses;
     private ObservableList<Worker> workers;
 
-
-    private void wypelnij(){
-        ResultSet rsMagazyny = sqlhelper.selectALL("Magazyn");
-        ResultSet rsPracownicy = sqlhelper.selectALL("pracownik");
-        try{
-            while (true) {
-                if (!rsMagazyny.next()) break;
-                warehouses.add(new Warehouse(rsMagazyny.getInt(1)+"",rsMagazyny.getString(2)));
-            }
-        } catch (SQLException e) {}
-
-        try{
-            while (true) {
-                if (!rsPracownicy.next()) break;
-                for(int i=2;i<9;i++){
-                    System.out.println(rsPracownicy.getString(i));
-                }
-                Worker w = new Worker(rsPracownicy.getInt(1)+"",rsPracownicy.getString(2),rsPracownicy.getString(3),rsPracownicy.getString(4),rsPracownicy.getString(5),rsPracownicy.getString(6),rsPracownicy.getString(7),rsPracownicy.getString(8));
-                workers.add(w);
-                for (int i=0;i<warehouses.size();i++){
-                    if(warehouses.get(i).getIdWarehouse().equals(w.getIdWarehouse())){
-                        warehouses.get(i).addWorker(w);
-                    }
-                }
-            }
-        } catch (SQLException e) {}
-
-
-    }
-
     /**
      * Starts application. Launches initRootLayout and showStartMenu functions.
      * @param primaryStage Stage
      */
     @Override public void start(Stage primaryStage) {
-        sqlhelper = new SQLHelper();
+        this.sqlhelper = new SQLHelper(this);
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Database Project");
         initRootLayout();
@@ -94,13 +62,7 @@ public class DatabaseApp extends Application {
 
             this.warehouses = FXCollections.observableArrayList();
             this.workers = FXCollections.observableArrayList();
-            wypelnij();
-            for (Worker w:workers){
-                System.out.println(1);
-            }
-            for(Warehouse w:warehouses){
-                System.out.println(2);
-            }
+
             this.primaryStage.show();
         } catch (Exception exception) {
 
@@ -153,6 +115,7 @@ public class DatabaseApp extends Application {
      */
     public void showWarehouseLogistics() {
         try {
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(DatabaseApp.class.getResource("view/WarehouseLogistics.fxml"));
             AnchorPane pane = loader.load();
@@ -162,6 +125,7 @@ public class DatabaseApp extends Application {
             WarehouseLogisticsController controller = loader.getController();
             controller.setApp(this);
             this.rootLayoutController.setVisible();
+
         } catch (Exception exception) {
 
             if(exception instanceof IOException) {
@@ -173,7 +137,37 @@ public class DatabaseApp extends Application {
                 System.out.println("Error occurred when loading WarehouseLogistics");
                 showError("Exception", exception);
             }
+
+        } finally {
+
+            handleSQLExceptions(this.sqlhelper.fillWarehouses());
+            handleSQLExceptions(this.sqlhelper.fillWorkers());
+
         }
+    }
+
+    /**
+     * Handles some exceptions that may occur when using SQL queries.
+     * @param exception Exception
+     */
+    private void handleSQLExceptions(Exception exception) {
+
+        if(exception instanceof SQLException) {
+            showError("SQLError", "Error while executing SELECT query.");
+            System.out.println("#####--------#####");
+            exception.printStackTrace();
+            System.out.println("#####--------#####");
+        }
+        else if(exception instanceof NullPointerException) {
+            showError("Database empty", "Couldn't select relation from database.");
+            System.out.println("#####--------#####");
+            exception.printStackTrace();
+            System.out.println("#####--------#####");
+        }
+        else if(exception != null) {
+            showError("Error", exception);
+        }
+
     }
 
     /**
@@ -182,6 +176,7 @@ public class DatabaseApp extends Application {
      */
     public void showWarehouseBusiness() {
         try {
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(DatabaseApp.class.getResource("view/WarehouseBusiness.fxml"));
             TabPane pane = loader.load();
