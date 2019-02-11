@@ -16,7 +16,10 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
+import java.sql.*;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.io.IOException;
 
 /**
@@ -24,17 +27,49 @@ import java.io.IOException;
  */
 public class DatabaseApp extends Application {
 
+    private SQLHelper sqlhelper;
     private Stage primaryStage;
     private BorderPane rootLayout;
     private RootLayoutController rootLayoutController;
     private ObservableList<Warehouse> warehouses;
     private ObservableList<Worker> workers;
 
+
+    private void wypelnij(){
+        ResultSet rsMagazyny = sqlhelper.selectALL("Magazyn");
+        ResultSet rsPracownicy = sqlhelper.selectALL("pracownik");
+        try{
+            while (true) {
+                if (!rsMagazyny.next()) break;
+                warehouses.add(new Warehouse(rsMagazyny.getInt(1)+"",rsMagazyny.getString(2)));
+            }
+        } catch (SQLException e) {}
+
+        try{
+            while (true) {
+                if (!rsPracownicy.next()) break;
+                for(int i=2;i<9;i++){
+                    System.out.println(rsPracownicy.getString(i));
+                }
+                Worker w = new Worker(rsPracownicy.getInt(1)+"",rsPracownicy.getString(2),rsPracownicy.getString(3),rsPracownicy.getString(4),rsPracownicy.getString(5),rsPracownicy.getString(6),rsPracownicy.getString(7),rsPracownicy.getString(8));
+                workers.add(w);
+                for (int i=0;i<warehouses.size();i++){
+                    if(warehouses.get(i).getIdWarehouse().equals(w.getIdWarehouse())){
+                        warehouses.get(i).addWorker(w);
+                    }
+                }
+            }
+        } catch (SQLException e) {}
+
+
+    }
+
     /**
      * Starts application. Launches initRootLayout and showStartMenu functions.
      * @param primaryStage Stage
      */
     @Override public void start(Stage primaryStage) {
+        sqlhelper = new SQLHelper();
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Database Project");
         initRootLayout();
@@ -59,7 +94,13 @@ public class DatabaseApp extends Application {
 
             this.warehouses = FXCollections.observableArrayList();
             this.workers = FXCollections.observableArrayList();
-
+            wypelnij();
+            for (Worker w:workers){
+                System.out.println(1);
+            }
+            for(Warehouse w:warehouses){
+                System.out.println(2);
+            }
             this.primaryStage.show();
         } catch (Exception exception) {
 

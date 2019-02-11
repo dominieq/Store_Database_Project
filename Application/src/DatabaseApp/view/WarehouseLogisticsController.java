@@ -1,6 +1,7 @@
 package DatabaseApp.view;
 
 import DatabaseApp.DatabaseApp;
+import DatabaseApp.SQLHelper;
 import DatabaseApp.classes.Warehouse;
 import DatabaseApp.classes.Worker;
 import javafx.collections.FXCollections;
@@ -8,12 +9,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class WarehouseLogisticsController {
 
     private DatabaseApp app;
-
     @FXML private TableView<Warehouse> warehouseTableView;
-    @FXML private TableColumn<Warehouse, Number> warehouseIdTableColumn;
+    @FXML private TableColumn<Warehouse, String> warehouseIdTableColumn;
     @FXML private TableColumn<Warehouse, String> warehouseAddressTableColumn;
     @FXML private ChoiceBox<String> warehouseTraitChoiceBox;
     @FXML private TextField warehouseTraitTextField;
@@ -33,11 +36,11 @@ public class WarehouseLogisticsController {
 
     @FXML private void initialize() {
         this.warehouseIdTableColumn.setCellValueFactory(
-                cellData -> cellData.getValue().getIdWarehouse()
+                cellData -> cellData.getValue().getIdWarehouseProperty()
         );
 
         this.warehouseAddressTableColumn.setCellValueFactory(
-                cellData -> cellData.getValue().getAddressWarehouse()
+                cellData -> cellData.getValue().getAddressWarehouseProperty()
         );
 
         this.warehouseTableView.getSelectionModel().selectedItemProperty().addListener(
@@ -47,6 +50,9 @@ public class WarehouseLogisticsController {
         this.workerChoiceBox.getSelectionModel().selectedItemProperty().addListener(
                 ((observable, oldValue, newValue) -> showWorker(newValue))
         );
+
+
+
     }
 
     /**
@@ -167,6 +173,7 @@ public class WarehouseLogisticsController {
         ObservableList<String> workerTraits = FXCollections.observableArrayList();
         workerTraits.addAll("Id", "Name", "Surname", "Address",
                 "Telephone Number", "Mail Address", "PESEL");
+        this.workerChoiceBox.setItems(this.app.getWorkers());
         this.warehouseTraitChoiceBox.setItems(warehouseTraits);
         this.workerTraitChoiceBox.setItems(workerTraits);
     }
