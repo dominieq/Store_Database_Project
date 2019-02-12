@@ -41,7 +41,7 @@
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddStock" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -50,7 +50,7 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditStock" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -163,7 +163,7 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="39.0" mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="39.0" mnemonicParsing="false" onAction="#handleSearchStock" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -189,7 +189,7 @@
                                       <items>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="34.0" mnemonicParsing="false" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleAddPackDelivery" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -198,7 +198,7 @@
                                           </AnchorPane>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="34.0" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleDelPackDelivery" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -207,7 +207,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="34.0" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleEditPackDelivery" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -320,7 +320,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="35.0" mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleSearchPackDelivery" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -346,7 +346,7 @@
                                       <items>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="34.0" mnemonicParsing="false" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleAddPackOrder" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -355,7 +355,7 @@
                                           </AnchorPane>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="34.0" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleDelPackOrder" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -364,7 +364,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="34.0" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleEditPackOrder" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -477,7 +477,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="35.0" mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleSearchPackOrder" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -510,7 +510,7 @@
                            <items>
                               <AnchorPane>
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddMerch" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -519,7 +519,7 @@
                               </AnchorPane>
                               <AnchorPane>
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelMerch" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -528,7 +528,7 @@
                               </AnchorPane>
                               <AnchorPane>
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditMerch" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -679,7 +679,7 @@
                               </AnchorPane>
                               <AnchorPane>
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchMerch" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -732,7 +732,7 @@
                                                       </AnchorPane>
                                                       <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                          <children>
-                                                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchCategory" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <font>
                                                                   <Font size="30.0" />
                                                                </font>
@@ -747,7 +747,7 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Filter merchandise" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleFilterMerch" text="Filter merchandise" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font size="30.0" />
                                              </font>
@@ -790,7 +790,7 @@
                                                       </AnchorPane>
                                                       <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                          <children>
-                                                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchProducer" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <font>
                                                                   <Font size="30.0" />
                                                                </font>
@@ -829,7 +829,7 @@
                                        <items>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddProducer" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -838,7 +838,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelProducer" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -847,7 +847,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditProducer" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -998,7 +998,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchProducer" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -1033,7 +1033,7 @@
                                        <items>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button contentDisplay="CENTER" mnemonicParsing="false" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddCategory" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -1042,7 +1042,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelCategory" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -1051,7 +1051,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditCategory" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -1126,7 +1126,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchCategory" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -1169,7 +1169,7 @@
                            <items>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddSupplier" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -1178,7 +1178,7 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelSupplier" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -1187,7 +1187,7 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditSupplier" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -1319,7 +1319,7 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchSupplier" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -1350,7 +1350,7 @@
                            <items>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddSupply" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -1359,7 +1359,7 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelSupply" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -1368,7 +1368,7 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditSupply" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -1481,7 +1481,7 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchSupply" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -1510,7 +1510,7 @@
                            <items>
                               <AnchorPane>
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddOrder" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -1519,7 +1519,7 @@
                               </AnchorPane>
                               <AnchorPane>
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelOrder" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -1528,7 +1528,7 @@
                               </AnchorPane>
                               <AnchorPane>
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditOrder" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -1660,7 +1660,7 @@
                               </AnchorPane>
                               <AnchorPane>
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchOrder" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -1874,7 +1874,7 @@
                                        <items>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddRecipient" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -1883,7 +1883,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelRecipient" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -1892,7 +1892,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditRecipient" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -2024,7 +2024,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchRecipient" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -2059,7 +2059,7 @@
                                        <items>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddCourier" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -2068,7 +2068,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelCourier" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -2077,7 +2077,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditCourier" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -2152,7 +2152,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchCourier" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
