@@ -11,114 +11,94 @@ import java.util.ArrayList;
  */
 public class Warehouse {
 
-    private String idWarehouse;
+    private int index;
 
-    private String addressWarehouse;
+    private String address;
 
-    private ArrayList<Worker> workerArrayList;
-
-    /**
-     * Creates Warehouse object. Sets idWarehouse and addressWarehouse
-     * @param idWarehouse warehouse's id
-     * @param addressWarehouse warehouse's address
-     */
-    public Warehouse(String idWarehouse, String addressWarehouse) {
-        this.idWarehouse = idWarehouse;
-        this.addressWarehouse = addressWarehouse;
-        workerArrayList = new ArrayList<>();
-    }
+    private ArrayList<Worker> workers;
 
     /**
-     * Creates Warehouse object. Sets idWarehouse, addressWarehouse and workerArrayList
-     * @param idWarehouse warehouse's id
-     * @param addressWarehouse warehouse's address
-     * @param workerArrayList list of workers in warehouse
+     * Creates Warehouse object. Sets index and address
+     * @param index warehouse's id
+     * @param address warehouse's address
      */
-    public Warehouse(String idWarehouse, String addressWarehouse, ArrayList<Worker> workerArrayList) {
-        this.idWarehouse = idWarehouse;
-        this.addressWarehouse = addressWarehouse;
-        this.workerArrayList = workerArrayList;
+    public Warehouse(int index, String address) {
+        this.index = index;
+        this.address = address;
+        this.workers = new ArrayList<>();
     }
 
     /**
-     * Returns warehouse's id as SimpleIntegerProperty
-     * @return SimpleIntegerProperty
+     * Creates Warehouse object. Sets index, address and workers
+     * @param index warehouse's id
+     * @param address warehouse's address
+     * @param workers list of workers in warehouse
      */
-    public SimpleStringProperty getIdWarehouseProperty() {
-        return new SimpleStringProperty(idWarehouse);
+    public Warehouse(int index, String address, ArrayList<Worker> workers) {
+        this.index = index;
+        this.address = address;
+        this.workers = workers;
     }
 
-    /**
-     * Sets warehouse's id
-     * @param idWarehouse int
-     */
-    public void setIdWarehouse(String idWarehouse) {
-        this.idWarehouse = idWarehouse;
+
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
-    /**
-     * Returns warehouse's address as SimpleStringProperty
-     * @return SimpleStringProperty
-     */
-    public SimpleStringProperty getAddressWarehouseProperty() {
-        return new SimpleStringProperty(addressWarehouse);
+    public void setIndex(String index) {
+        this.index = Integer.parseInt(index);
     }
 
-    public String getIdWarehouse() {
-        return idWarehouse;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getAddressWarehouse() {
-        return addressWarehouse;
+
+
+    public int getIndex() {
+        return this.index;
     }
 
-    /**
-     * Sets warehouse's address
-     * @param addressWarehouse String
-     */
-    public void setAddressWarehouse(String addressWarehouse) {
-        this.addressWarehouse = addressWarehouse;
+    public String getIndexString() {
+        return String.valueOf(index);
     }
 
-    /**
-     * Returns warehouse's workerArrayList as ObservableList
-     * @return ObservableList
-     */
-    public ObservableList<Worker> getWorkerArrayList() {
+    public String getAddress() {
+        return address;
+    }
+
+
+
+    public SimpleStringProperty getIndexProperty() {
+        return new SimpleStringProperty(String.valueOf(index));
+    }
+
+    public SimpleStringProperty getAddressProperty() {
+        return new SimpleStringProperty(address);
+    }
+
+
+
+    public ObservableList<Worker> getWorkersObservable() {
         ObservableList<Worker> temp = FXCollections.observableArrayList();
-        temp.addAll(this.workerArrayList);
+        temp.addAll(this.workers);
         return temp;
     }
 
-    /**
-     * Sets warehouse's workerArrayList
-     * @param workerArrayList ArrayList
-     */
-    public void setWorkerArrayList(ArrayList<Worker> workerArrayList) {
-        this.workerArrayList = workerArrayList;
+    public void setWorkers(ArrayList<Worker> workers) {
+        this.workers = workers;
     }
 
-    /**
-     * Adds worker to workerArrayList
-     * @param worker Worker
-     */
     public void addWorker(Worker worker) {
-        this.workerArrayList.add(worker);
+        this.workers.add(worker);
     }
 
-    /**
-     * Deletes worker from workerArrayList
-     * @param worker Worker
-     */
     public void deleteWorker(Worker worker) {
-        this.workerArrayList.remove(worker);
+        this.workers.remove(worker);
     }
 
-    /**
-     * Deletes worker from workerArrayList
-     * @param idWorker int
-     */
     public void deleteWorker(int idWorker) {
-        this.workerArrayList.remove(idWorker);
+        this.workers.remove(idWorker);
     }
 }

@@ -32,15 +32,15 @@ public class WarehouseLogisticsController {
 
     @FXML private void initialize() {
         this.warehouseIdTableColumn.setCellValueFactory(
-                cellData -> cellData.getValue().getIdWarehouseProperty()
+                cellData -> cellData.getValue().getIndexProperty()
         );
 
         this.warehouseAddressTableColumn.setCellValueFactory(
-                cellData -> cellData.getValue().getAddressWarehouseProperty()
+                cellData -> cellData.getValue().getAddressProperty()
         );
 
         this.warehouseTableView.getSelectionModel().selectedItemProperty().addListener(
-                ((observable, oldValue, newValue) -> this.workerChoiceBox.setItems(newValue.getWorkerArrayList()))
+                ((observable, oldValue, newValue) -> this.workerChoiceBox.setItems(newValue.getWorkersObservable()))
         );
 
         this.workerChoiceBox.getSelectionModel().selectedItemProperty().addListener(
@@ -136,13 +136,13 @@ public class WarehouseLogisticsController {
      */
     private void showWorker(Worker worker) {
         if(worker != null) {
-            this.workerIdLabel.setText(worker.getIdWorker());
-            this.workerNameLabel.setText(worker.getNameWorker());
-            this.workerSurnameLabel.setText(worker.getSurnameWorker());
-            this.workerAddressLabel.setText(worker.getAddressWorker());
-            this.workerTelNumLabel.setText(worker.getTelNumWorker());
-            this.workerMailLabel.setText(worker.getMailWorker());
-            this.workerPESELLabel.setText(worker.getPESELWorker());
+            this.workerIdLabel.setText(worker.getIndexString());
+            this.workerNameLabel.setText(worker.getName());
+            this.workerSurnameLabel.setText(worker.getSurname());
+            this.workerAddressLabel.setText(worker.getAddress());
+            this.workerTelNumLabel.setText(worker.getTelNum());
+            this.workerMailLabel.setText(worker.getMail());
+            this.workerPESELLabel.setText(worker.getPESEL());
         }
         else {
             this.workerIdLabel.setText("No selection");

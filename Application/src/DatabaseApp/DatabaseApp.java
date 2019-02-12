@@ -1,12 +1,8 @@
 package DatabaseApp;
 
 import DatabaseApp.helpers.SQLHelper;
-import DatabaseApp.models.Warehouse;
-import DatabaseApp.models.Worker;
-import DatabaseApp.view.RootLayoutController;
-import DatabaseApp.view.StartMenuController;
-import DatabaseApp.view.WarehouseBusinessController;
-import DatabaseApp.view.WarehouseLogisticsController;
+import DatabaseApp.models.*;
+import DatabaseApp.view.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

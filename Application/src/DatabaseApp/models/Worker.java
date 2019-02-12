@@ -5,186 +5,154 @@ package DatabaseApp.models;
  */
 public class Worker {
 
-    private String idWorker;
+    private int index;
 
-    private String nameWorker;
+    private String name;
 
-    private String surnameWorker;
+    private String surname;
 
-    private String addressWorker;
+    private String address;
 
-    private String telNumWorker;
+    private String telNum;
 
-    private String mailWorker;
+    private String mail;
 
-    private String PESELWorker;
-    private String idWarehouse;
+    private String PESEL;
 
-    public String getIdWarehouse() {
-        return idWarehouse;
-    }
-
-    public void setIdWarehouse(String idWarehouse) {
-        this.idWarehouse = idWarehouse;
-    }
+    private int warehouseIndex;
 
     /**
-     * Creates Worker object. Sets idWorker, nameWorker, surnameWorker, addressWorker and PESELWorker
-     * @param idWorker String
-     * @param nameWorker String
-     * @param surnameWorker String
-     * @param addressWorker String
-     * @param PESELWorker String
+     * Creates Worker object using index, name, surname, address and PESEL
+     * @param index String
+     * @param name String
+     * @param surname String
+     * @param address String
+     * @param PESEL String
+     * @param warehouseIndex int
      */
-    public Worker (String idWorker, String nameWorker, String surnameWorker,
-                   String addressWorker, String PESELWorker) {
-        this.idWorker = idWorker;
-        this.nameWorker = nameWorker;
-        this.surnameWorker = surnameWorker;
-        this.addressWorker = addressWorker;
-        this.PESELWorker = PESELWorker;
+    public Worker (int index, String name, String surname,
+                   String address, String PESEL, int warehouseIndex) {
+        this.index = index;
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.PESEL = PESEL;
+        this.warehouseIndex = warehouseIndex;
     }
 
     /**
-     * Creates Worker object. Sets idWorker, nameWorker, surnameWorker, addressWorker, telNumWorker,
-     * mailWorker and PESELWorker
-     * @param idWorker String
-     * @param nameWorker String
-     * @param surnameWorker String
-     * @param addressWorker String
-     * @param telNumWorker String
-     * @param mailWorker String
-     * @param PESELWorker String
+     * Creates new Worker object using index, name, surname, address, telNum, mail, PESEL and warehouseIndex
+     * @param index String
+     * @param name String
+     * @param surname String
+     * @param address String
+     * @param telNum String
+     * @param mail String
+     * @param PESEL String
+     * @param warehouseIndex String
      */
-    public Worker (String idWorker, String nameWorker, String surnameWorker, String addressWorker,
-                   String telNumWorker, String mailWorker, String PESELWorker, String idMagazynu) {
-        this.idWorker = idWorker;
-        this.nameWorker = nameWorker;
-        this.surnameWorker = surnameWorker;
-        this.addressWorker = addressWorker;
-        this.telNumWorker = telNumWorker;
-        this.mailWorker = mailWorker;
-        this.PESELWorker = PESELWorker;
-        this.idWarehouse=idMagazynu;
+    public Worker (int index, String name, String surname, String address,
+                   String telNum, String mail, String PESEL, int warehouseIndex) {
+        this.index = index;
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.telNum = telNum;
+        this.mail = mail;
+        this.PESEL = PESEL;
+        this.warehouseIndex = warehouseIndex;
     }
 
     /**
-     * Returns PESEL which is a unique worker's trait.
-     * @return String
+     * Overridden function that return Stock's PESEL.
+     * @return String: Stock's PESEL
      */
     @Override public String toString() {
-        return this.PESELWorker;
+        return this.name + " " + this.surname + " " + this.PESEL;
     }
 
-    /**
-     * Returns worker's id
-     * @return String
-     */
-    public String getIdWorker() {
-        return idWorker;
+
+
+    public  int getIndex() {
+        return this.index;
     }
 
-    /**
-     * Sets worker's id
-     * @param idWorker String
-     */
-    public void setIdWorker(String idWorker) {
-        this.idWorker = idWorker;
+    public String getIndexString() {
+        return String.valueOf(index);
     }
 
-    /**
-     * Returns worker's name
-     * @return String
-     */
-    public String getNameWorker() {
-        return nameWorker;
+    public String getName() {
+        return name;
     }
 
-    /**
-     * Sets worker's name
-     * @param nameWorker String
-     */
-    public void setNameWorker(String nameWorker) {
-        this.nameWorker = nameWorker;
+    public String getSurname() {
+        return surname;
     }
 
-    /**
-     * Returns worker's surname
-     * @return String
-     */
-    public String getSurnameWorker() {
-        return surnameWorker;
+    public String getAddress() {
+        return address;
     }
 
-    /**
-     * Sets worker's surname
-     * @param surnameWorker String
-     */
-    public void setSurnameWorker(String surnameWorker) {
-        this.surnameWorker = surnameWorker;
+    public String getTelNum() {
+        return telNum;
     }
 
-    /**
-     * Returns worker's address
-     * @return String
-     */
-    public String getAddressWorker() {
-        return addressWorker;
+    public String getMail() {
+        return mail;
     }
 
-    /**
-     * Sets worker's address
-     * @param addressWorker String
-     */
-    public void setAddressWorker(String addressWorker) {
-        this.addressWorker = addressWorker;
+    public String getPESEL() {
+        return PESEL;
     }
 
-    /**
-     * Returns worker's telephone number
-     * @return String
-     */
-    public String getTelNumWorker() {
-        return telNumWorker;
+    public int getWarehouseIndex() {
+        return this.warehouseIndex;
     }
 
-    /**
-     * Sets worker's telephone number
-     * @param telNumWorker String
-     */
-    public void setTelNumWorker(String telNumWorker) {
-        this.telNumWorker = telNumWorker;
+    public String getWarehouseIndexString() {
+        return String.valueOf(warehouseIndex);
     }
 
-    /**
-     * Returns worker's email address
-     * @return String
-     */
-    public String getMailWorker() {
-        return mailWorker;
+
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
-    /**
-     * Sets worker's email address
-     * @param mailWorker String
-     */
-    public void setMailWorker(String mailWorker) {
-        this.mailWorker = mailWorker;
+    public void setIndex(String index) {
+        this.index = Integer.parseInt(index);
     }
 
-    /**
-     * Returns worker's PESEL
-     * @return String
-     */
-    public String getPESELWorker() {
-        return PESELWorker;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    /**
-     * Sets worker's PESEL
-     * @param PESELWorker String
-     */
-    public void setPESELWorker(String PESELWorker) {
-        this.PESELWorker = PESELWorker;
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setTelNum(String telNum) {
+        this.telNum = telNum;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public void setPESEL(String PESEL) {
+        this.PESEL = PESEL;
+    }
+
+    public void setWarehouseIndex(int warehouseIndex) {
+        this.warehouseIndex = warehouseIndex;
+    }
+
+    public void setWarehouseIndex(String warehouseIndex) {
+        this.warehouseIndex = Integer.parseInt(warehouseIndex);
     }
 }
+

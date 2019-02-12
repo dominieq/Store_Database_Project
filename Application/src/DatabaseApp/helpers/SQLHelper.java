@@ -94,7 +94,7 @@ public class SQLHelper {
                         rsWorker.getString(7), rsWorker.getString(8));
                 this.app.getWorkers().add(worker);
                 for (Warehouse warehouse : this.app.getWarehouses()) {
-                    if (warehouse.getIdWarehouse().equals(worker.getIdWarehouse())) {
+                    if (warehouse.getIndexString().equals(worker.getWarehouseIndexString())) {
                         warehouse.addWorker(worker);
                     }
                 }
