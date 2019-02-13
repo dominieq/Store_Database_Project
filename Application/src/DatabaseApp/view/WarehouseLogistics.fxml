@@ -99,7 +99,7 @@
                      <items>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Label text="All workers available. &#10;Choose warehouse to narrow down number of workers." textAlignment="CENTER" textFill="#737473" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Label fx:id="informationLabel" text="All workers available. &#10;Choose warehouse to narrow down number of workers." textAlignment="CENTER" textFill="#737473" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font size="20.0" />
                                  </font>

@@ -28,6 +28,8 @@ public class WarehouseLogisticsController {
     @FXML private ChoiceBox<String> workerTraitChoiceBox;
     @FXML private TextField workerTraitTextField;
 
+    @FXML private Label informationLabel;
+
     public WarehouseLogisticsController() {}
 
     @FXML private void initialize() {
@@ -40,14 +42,32 @@ public class WarehouseLogisticsController {
         );
 
         this.warehouseTableView.getSelectionModel().selectedItemProperty().addListener(
-                ((observable, oldValue, newValue) -> this.workerChoiceBox.setItems(newValue.getWorkersObservable()))
+                ((observable, oldValue, newValue) -> {
+                    if(newValue != null) {
+                        this.workerChoiceBox.setItems(newValue.getWorkersObservable());
+                        this.informationLabel.setText("Workers from: " + newValue.toString() +
+                                ".\n Double click on warehouse to cancel selection.");
+                    }
+                })
         );
+
+        this.warehouseTableView.setRowFactory( doubleClick -> {
+            TableRow<Warehouse> row = new TableRow<>();
+            row.setOnMouseClicked( event -> {
+                if(event.getClickCount() == 2 && (!row.isEmpty())) {
+                    this.workerChoiceBox.setItems(this.app.getWorkers());
+                    this.warehouseTableView.getSelectionModel().clearSelection();
+                    this.informationLabel.setText("You are currently viewing all workers. " +
+                            "Select warehouse to view it's workers");
+                    this.workerChoiceBox.getSelectionModel().selectPrevious();
+                }
+            });
+            return row;
+        });
 
         this.workerChoiceBox.getSelectionModel().selectedItemProperty().addListener(
                 ((observable, oldValue, newValue) -> showWorker(newValue))
         );
-
-
 
     }
 
@@ -98,7 +118,13 @@ public class WarehouseLogisticsController {
      * Commits changes to database.
      */
     @FXML private void handleAddWorker() {
-
+        Worker worker = new Worker(100, "[name]", "[surname]", "[address]",
+                "[telephone number]", "[email address]", "00000000000",
+                this.app.getWarehouses().get(0).getIndex());
+        if(this.app.showWorkerEditDialog("Add Worker", worker)){
+            this.app.getWorkers().add(worker);
+            refreshWorker(worker);
+        }
     }
 
     /**
@@ -108,7 +134,20 @@ public class WarehouseLogisticsController {
      * Commits changes to database.
      */
     @FXML private void handleDelWorker() {
-
+        Worker worker = this.workerChoiceBox.getSelectionModel().getSelectedItem();
+        if(worker != null) {
+            for (Warehouse warehouse : this.app.getWarehouses()) {
+                if(worker.getWarehouseIndex() == warehouse.getIndex()) {
+                    warehouse.deleteWorker(worker);
+                    this.app.getWorkers().remove(worker);
+                }
+            }
+            showWorker(null);
+            this.workerChoiceBox.getSelectionModel().selectFirst();
+        }
+        else {
+            this.app.showWarning("No selection", "First choose worker to delete it");
+        }
     }
 
     /**
@@ -118,7 +157,13 @@ public class WarehouseLogisticsController {
      * Commits changes to database.
      */
     @FXML private void handleEditWorker() {
-
+        Worker worker = this.workerChoiceBox.getSelectionModel().getSelectedItem();
+        if(worker != null) {
+            if(this.app.showWorkerEditDialog("Edit worker", worker)) refreshWorker(worker);
+        }
+        else {
+            this.app.showWarning("No selection", "First choose worker to edit it");
+        }
     }
 
     /**
@@ -128,6 +173,16 @@ public class WarehouseLogisticsController {
      */
     @FXML private void handleSearchWorker() {
 
+    }
+
+    private void refreshWorker(Worker worker) {
+        for(Warehouse warehouse : this.app.getWarehouses()) {
+            if(warehouse.getIndex() == worker.getWarehouseIndex()) {
+                this.warehouseTableView.getSelectionModel().select(warehouse);
+                this.workerChoiceBox.getSelectionModel().select(worker);
+            }
+        }
+        showWorker(worker);
     }
 
     /**
@@ -164,12 +219,12 @@ public class WarehouseLogisticsController {
     public void setApp(DatabaseApp app) {
         this.app = app;
         this.warehouseTableView.setItems(this.app.getWarehouses());
+        this.workerChoiceBox.setItems(this.app.getWorkers());
         ObservableList<String> warehouseTraits = FXCollections.observableArrayList();
         warehouseTraits.addAll("Address", "Id");
         ObservableList<String> workerTraits = FXCollections.observableArrayList();
         workerTraits.addAll("Id", "Name", "Surname", "Address",
                 "Telephone Number", "Mail Address", "PESEL");
-        this.workerChoiceBox.setItems(this.app.getWorkers());
         this.warehouseTraitChoiceBox.setItems(warehouseTraits);
         this.workerTraitChoiceBox.setItems(workerTraits);
     }

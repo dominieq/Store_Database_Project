@@ -40,6 +40,14 @@ public class Warehouse {
         this.workers = workers;
     }
 
+    /**
+     * Overridden function that return Warehouse's index and address with "@" between them.
+     * @return String: index + "@" + address
+     */
+    @Override public String toString() {
+        return this.index + "@" + this.address;
+    }
+
 
 
     public void setIndex(int index) {

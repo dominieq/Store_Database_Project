@@ -36,12 +36,16 @@ public class Worker {
         this.name = name;
         this.surname = surname;
         this.address = address;
+        this.telNum = "";
+        this.mail = "";
         this.PESEL = PESEL;
         this.warehouseIndex = warehouseIndex;
     }
 
     /**
-     * Creates new Worker object using index, name, surname, address, telNum, mail, PESEL and warehouseIndex
+     * Creates new Worker object using index, name, surname, address, telNum, mail, PESEL and warehouseIndex.
+     * Preferably used at the beginning when selecting all Workers from Database and creating new objects.
+     * (index and warehouseIndex are ints)
      * @param index String
      * @param name String
      * @param surname String
@@ -64,8 +68,32 @@ public class Worker {
     }
 
     /**
-     * Overridden function that return Stock's PESEL.
-     * @return String: Stock's PESEL
+     * Creates new Worker object using index, name, surname, address, telNum, mail, PESEL and warehouseIndex.
+     * Preferably used when creating new object from application (index and warehouseIndex are Strings)
+     * @param index String
+     * @param name String
+     * @param surname String
+     * @param address String
+     * @param telNum String
+     * @param mail String
+     * @param PESEL String
+     * @param warehouseIndex String
+     */
+    public Worker (String index, String name, String surname, String address,
+                   String telNum, String mail, String PESEL, String warehouseIndex) {
+        this.index = Integer.parseInt(index);
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.telNum = telNum;
+        this.mail = mail;
+        this.PESEL = PESEL;
+        this.warehouseIndex = Integer.parseInt(warehouseIndex);
+    }
+
+    /**
+     * Overridden function that return Worker's PESEL.
+     * @return String: Worker's PESEL
      */
     @Override public String toString() {
         return this.name + " " + this.surname + " " + this.PESEL;

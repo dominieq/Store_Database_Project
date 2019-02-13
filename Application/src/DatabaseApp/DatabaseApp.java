@@ -3,15 +3,18 @@ package DatabaseApp;
 import DatabaseApp.helpers.SQLHelper;
 import DatabaseApp.models.*;
 import DatabaseApp.view.*;
+import DatabaseApp.viewExtended.EditWorkerLayoutController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.sql.*;
 import java.io.IOException;
@@ -197,12 +200,46 @@ public class DatabaseApp extends Application {
         }
     }
 
+    public boolean showWorkerEditDialog(String title, Worker worker) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DatabaseApp.class.getResource("viewExtended/EditWorkerLayout.fxml"));
+            SplitPane pane = loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle(title);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(this.primaryStage);
+            Scene scene = new Scene(pane);
+            dialogStage.setScene(scene);
+
+            EditWorkerLayoutController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setWorker(worker, this.warehouses);
+
+            dialogStage.showAndWait();
+
+            return controller.isAcceptClicked();
+        } catch (Exception exception) {
+            if(exception instanceof IOException) {
+                String error = "IOException: Couldn't load EditWorkerDialog";
+                System.out.println(error);
+                showError("IOException", error);
+            }
+            else {
+                System.out.println("Error occurred when loading EditWorkerDialog");
+                showError("Exception", exception);
+            }
+            return false;
+        }
+    }
+
     /**
      * Shows alert.ERROR using title and content
      * @param title String
      * @param content String
      */
-    public void showError(String title, String content) {
+    private void showError(String title, String content) {
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -216,11 +253,18 @@ public class DatabaseApp extends Application {
      * @param title String
      * @param exception Exception
      */
-    public void showError(String title, Exception exception) {
+    private void showError(String title, Exception exception) {
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(exception.getMessage());
+        alert.showAndWait();
+    }
+
+    public void showWarning(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setContentText(content);
         alert.showAndWait();
     }
 
