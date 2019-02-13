@@ -68,7 +68,7 @@ public class SQLHelper {
         try{
             while (rsWarehouse.next()) {
                 this.app.getWarehouses().add(new Warehouse(
-                        rsWarehouse.getInt(1) + "", rsWarehouse.getString(2)));
+                        rsWarehouse.getInt(1), rsWarehouse.getString(2)));
             }
         } catch (Exception exception) {
             return exception;
@@ -88,10 +88,10 @@ public class SQLHelper {
         try{
             while (rsWorker.next()) {
                 Worker worker = new Worker(
-                        rsWorker.getInt(1) + "", rsWorker.getString(2),
+                        rsWorker.getInt(1), rsWorker.getString(2),
                         rsWorker.getString(3), rsWorker.getString(4),
                         rsWorker.getString(5), rsWorker.getString(6),
-                        rsWorker.getString(7), rsWorker.getString(8));
+                        rsWorker.getString(7), rsWorker.getInt(8));
                 this.app.getWorkers().add(worker);
                 for (Warehouse warehouse : this.app.getWarehouses()) {
                     if (warehouse.getIndexString().equals(worker.getWarehouseIndexString())) {
