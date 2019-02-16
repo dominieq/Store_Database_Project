@@ -1,8 +1,10 @@
 package DatabaseApp.helpers;
 
 import DatabaseApp.DatabaseApp;
+import DatabaseApp.models.Courier;
 import DatabaseApp.models.Warehouse;
 import DatabaseApp.models.Worker;
+import DatabaseApp.models.*;
 
 import java.sql.*;
 import java.util.Properties;
@@ -106,5 +108,327 @@ public class SQLHelper {
         }
 
         return null;
+    }
+
+    /**
+     * Fills observable category's list with information from database.
+     * When an error occurs function returns exception otherwise returns null.
+     * @return Exception
+     */
+    public Exception fillCategories() {
+        ResultSet rsCategory = selectALL("category");
+        try{
+            while (rsCategory.next()) {
+                this.app.getCategories().add(new Category(
+                        rsCategory.getInt(1), rsCategory.getString(2)));
+            }
+        } catch (Exception exception) {
+            return exception;
+        }
+
+        return null;
+    }
+
+    /**
+     * Fills observable courier's list with information from database.
+     * When an error occurs function returns exception otherwise returns null.
+     * @return Exception
+     */
+    public Exception fillCouriers() {
+        ResultSet rsCourier = selectALL("courier");
+        try{
+            while (rsCourier.next()) {
+                this.app.getCouriers().add(new Courier(
+                        rsCourier.getInt(1), rsCourier.getString(2)));
+            }
+        } catch (Exception exception) {
+            return exception;
+        }
+
+        return null;
+    }
+
+    /**
+     * Fills observable merchandise's list with information from database.
+     * When an error occurs function returns exception otherwise returns null.
+     * @return Exception
+     */
+    public Exception fillMerchandisies() {
+        ResultSet rsMerchandise = selectALL("merchandise");
+        try{
+            while (rsMerchandise.next()) {
+                int t_producer_int = rsMerchandise.getInt(5);
+                Producer t_producer = null;
+                for (Producer producer : this.app.getProducers()) {
+                    if (producer.getIndexString().equals(t_producer_int)) {
+                        t_producer = producer;
+                        break;
+                    }
+                }
+                int t_category_int = rsMerchandise.getInt(6);
+                Category t_category = null;
+                for (Category category : this.app.getCategories()) {
+                    if (category.getIndexString().equals(t_category_int)) {
+                        t_category = category;
+                        break;
+                    }
+                }
+                this.app.getMerchandise().add(new Merchandise(
+                        rsMerchandise.getInt(1), rsMerchandise.getString(2),
+                        rsMerchandise.getFloat(3), rsMerchandise.getFloat(4), t_producer, t_category));
+            }
+        } catch (Exception exception) {
+            return exception;
+        }
+
+        return null;
+    }
+
+    /**
+     * Fills observable order's list with information from database.
+     * When an error occurs function returns exception otherwise returns null.
+     * @return Exception
+     */
+    public Exception fillOrders() {
+        ResultSet rsOrder = selectALL("w_order");
+        try{
+            while (rsOrder.next()) {
+                int t_recipient_int = rsOrder.getInt(4);
+                Recipient t_recipient = null;
+                for (Recipient recipient : this.app.getRecipients()) {
+                    if (recipient.getIndexString().equals(t_recipient_int)) {
+                        t_recipient = recipient;
+                        break;
+                    }
+                }
+                int t_courier_int = rsOrder.getInt(5);
+                Courier t_courier = null;
+                for (Courier courier : this.app.getCouriers()) {
+                    if (courier.getIndexString().equals(t_courier_int)) {
+                        t_courier = courier;
+                        break;
+                    }
+                }
+                this.app.getOrders().add(new Order(
+                        rsOrder.getInt(1), rsOrder.getDate(2),
+                        rsOrder.getDate(3), t_recipient, t_courier));
+            }
+        } catch (Exception exception) {
+            return exception;
+        }
+
+        return null;
+    }
+
+    /**
+     * Fills observable packdelivery's list with information from database.
+     * When an error occurs function returns exception otherwise returns null.
+     * @return Exception
+     */
+    public Exception fillPackDeliveries() {
+        ResultSet rsPackDelivery = selectALL("packdelivery");
+        try{
+            while (rsPackDelivery.next()) {
+                int t_supply_int = rsPackDelivery.getInt(1);
+                Supply t_supply = null;
+                for (Supply supply : this.app.getSupplies()) {
+                    if (supply.getInvoiceNumber() == t_supply_int) {
+                        t_supply = supply;
+                        break;
+                    }
+                }
+
+                Stock t_stock = this.create_temp_ID(rsPackDelivery.getInt(2), rsPackDelivery.getInt(3));
+
+                this.app.getPackDeliveries().add(new PackDelivery(
+                        rsPackDelivery.getInt(4), t_supply,
+                        t_stock));
+            }
+        } catch (Exception exception) {
+            return exception;
+        }
+
+        return null;
+    }
+
+    /**
+     * Fills observable packorder's list with information from database.
+     * When an error occurs function returns exception otherwise returns null.
+     * @return Exception
+     */
+    public Exception fillPackOrders() {
+        ResultSet rsPackOrder = selectALL("packorder");
+        try{
+            while (rsPackOrder.next()) {
+                int t_order_int = rsPackOrder.getInt(1);
+                Order t_order = null;
+                for (Order order : this.app.getOrders()) {
+                    if (order.getInvoiceNumber() == t_order_int) {
+                        t_order = order;
+                        break;
+                    }
+                }
+
+                Stock t_stock = this.create_temp_ID(rsPackOrder.getInt(2), rsPackOrder.getInt(3));
+
+                this.app.getPackOrders().add(new PackOrder(
+                        rsPackOrder.getInt(4), t_order,
+                        t_stock));
+            }
+        } catch (Exception exception) {
+            return exception;
+        }
+
+        return null;
+    }
+    
+    /**
+     * Fills observable producer's list with information from database.
+     * When an error occurs function returns exception otherwise returns null.
+     * @return Exception
+     */
+    public Exception fillProducers() {
+        ResultSet rsProducer = selectALL("producer");
+        try{
+            while (rsProducer.next()) {
+                this.app.getProducers().add(new Producer(
+                        rsProducer.getInt(1), rsProducer.getString(2), rsProducer.getString(3), rsProducer.getString(4), rsProducer.getString(5), rsProducer.getString(6)));
+            }
+        } catch (Exception exception) {
+            return exception;
+        }
+
+        return null;
+    }
+
+    /**
+     * Fills observable recipient's list with information from database.
+     * When an error occurs function returns exception otherwise returns null.
+     * @return Exception
+     */
+    public Exception fillRecipients() {
+        ResultSet rsRecipient = selectALL("recipient");
+        try{
+            while (rsRecipient.next()) {
+                this.app.getRecipients().add(new Recipient(
+                        rsRecipient.getInt(1), rsRecipient.getString(2), rsRecipient.getString(3), rsRecipient.getString(4), rsRecipient.getString(5)));
+            }
+        } catch (Exception exception) {
+            return exception;
+        }
+
+        return null;
+    }
+
+    /**
+     * Fills observable stock's list with information from database.
+     * When an error occurs function returns exception otherwise returns null.
+     * @return Exception
+     */
+    public Exception fillStocks() {
+        ResultSet rsStock = selectALL("stock");
+        try{
+            while (rsStock.next()) {
+                int t_merchandise_int = rsStock.getInt(2);
+                Merchandise t_merchandise = null;
+                for (Merchandise merchandise : this.app.getMerchandise()) {
+                    if (merchandise.getIndexString().equals(t_merchandise_int)) {
+                        t_merchandise = merchandise;
+                        break;
+                    }
+                }
+                int t_warehouse_int = rsStock.getInt(3);
+                Warehouse t_warehouse = null;
+                for (Warehouse warehouse : this.app.getWarehouses()) {
+                    if (warehouse.getIndexString().equals(t_warehouse_int)) {
+                        t_warehouse = warehouse;
+                        break;
+                    }
+                }
+                this.app.getStocks().add(new Stock(
+                        rsStock.getInt(1), t_merchandise, t_warehouse));
+            }
+        } catch (Exception exception) {
+            return exception;
+        }
+
+        return null;
+    }
+
+    /**
+     * Fills observable supplier's list with information from database.
+     * When an error occurs function returns exception otherwise returns null.
+     * @return Exception
+     */
+    public Exception fillSuppliers() {
+        ResultSet rsSupplier = selectALL("supplier");
+        try{
+            while (rsSupplier.next()) {
+                this.app.getSuppliers().add(new Supplier(
+                        rsSupplier.getInt(1), rsSupplier.getString(2), rsSupplier.getString(3), rsSupplier.getString(4), rsSupplier.getString(5)));
+            }
+        } catch (Exception exception) {
+            return exception;
+        }
+
+        return null;
+    }
+
+    /**
+     * Fills observable supply's list with information from database.
+     * When an error occurs function returns exception otherwise returns null.
+     * @return Exception
+     */
+    public Exception fillSupplies() {
+        ResultSet rsSupply = selectALL("supply");
+        try{
+            while (rsSupply.next()) {
+                int t_supplier_int = rsSupply.getInt(4);
+                Supplier t_supplier = null;
+                for (Supplier supplier : this.app.getSuppliers()) {
+                    if (supplier.getIndex() == t_supplier_int) {
+                        t_supplier = supplier;
+                        break;
+                    }
+                }
+                this.app.getSupplies().add(new Supply(
+                        rsSupply.getInt(1), rsSupply.getDate(2), rsSupply.getDate(3), t_supplier));
+            }
+        } catch (Exception exception) {
+            return exception;
+        }
+
+        return null;
+    }
+
+    /*
+     * for Stock key
+     */
+    private Stock create_temp_ID(int merchandise_int, int warehouse_int) {
+        Merchandise t_merchandise = null;
+        for (Merchandise merchandise : this.app.getMerchandise()) {
+            if (merchandise.getIndex() == merchandise_int) {
+                t_merchandise = merchandise;
+                break;
+            }
+        }
+        Warehouse t_warehouse = null;
+        for (Warehouse warehouse : this.app.getWarehouses()) {
+            if (warehouse.getIndex() == warehouse_int) {
+                t_warehouse = warehouse;
+                break;
+            }
+        }
+
+        String stock_int = "#" + t_merchandise.getName() + "-" + t_warehouse.getIndexString();
+        Stock t_stock = null;
+        for (Stock stock : this.app.getStocks()) {
+            if (stock.getIndex().equals(stock_int)) {
+                t_stock = stock;
+                break;
+            }
+        }
+
+        return t_stock;
     }
 }

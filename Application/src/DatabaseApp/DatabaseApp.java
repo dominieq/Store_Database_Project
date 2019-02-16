@@ -32,6 +32,17 @@ public class DatabaseApp extends Application {
     private RootLayoutController rootLayoutController;
     private volatile ObservableList<Warehouse> warehouses;
     private volatile ObservableList<Worker> workers;
+    private volatile ObservableList<Category> categories;
+    private volatile ObservableList<Courier> couriers;
+    private volatile ObservableList<Merchandise> merchandises;
+    private volatile ObservableList<Order> orders;
+    private volatile ObservableList<PackDelivery> packDeliveries;
+    private volatile ObservableList<PackOrder> packOrders;
+    private volatile ObservableList<Producer> producers;
+    private volatile ObservableList<Recipient> recipients;
+    private volatile ObservableList<Stock> stocks;
+    private volatile ObservableList<Supplier> suppliers;
+    private volatile ObservableList<Supply> supplies;
 
 
     /**
@@ -358,5 +369,49 @@ public class DatabaseApp extends Application {
 
     public ObservableList<Worker> getWorkers() {
         return workers;
+    }
+
+    public ObservableList<Category> getCategories() {
+        return categories;
+    }
+
+    public ObservableList<Merchandise> getMerchandise() {
+        return merchandises;
+    }
+
+    public ObservableList<Courier> getCouriers() {
+        return couriers;
+    }
+
+    public ObservableList<Order> getOrders() {
+        return orders;
+    }
+
+    public ObservableList<PackDelivery> getPackDeliveries() {
+        return packDeliveries;
+    }
+
+    public ObservableList<PackOrder> getPackOrders() {
+        return packOrders;
+    }
+
+    public ObservableList<Producer> getProducers() {
+        return producers;
+    }
+
+    public ObservableList<Recipient> getRecipients() {
+        return recipients;
+    }
+
+    public ObservableList<Stock> getStocks() {
+        return stocks;
+    }
+
+    public ObservableList<Supplier> getSuppliers() {
+        return suppliers;
+    }
+
+    public ObservableList<Supply> getSupplies() {
+        return supplies;
     }
 }
