@@ -66,7 +66,7 @@ public class SQLHelper {
      * @return Exception
      */
     public Exception fillWarehouses() {
-        ResultSet rsWarehouse = selectALL("Magazyn");
+        ResultSet rsWarehouse = selectALL("warehouse");
         try{
             while (rsWarehouse.next()) {
                 this.app.getWarehouses().add(new Warehouse(
@@ -85,7 +85,7 @@ public class SQLHelper {
      * @return Exception
      */
     public Exception fillWorkers() {
-        ResultSet rsWorker = selectALL("pracownik");
+        ResultSet rsWorker = selectALL("worker");
 
         try{
             while (rsWorker.next()) {
