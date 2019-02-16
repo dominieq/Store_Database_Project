@@ -259,7 +259,7 @@ public class DatabaseApp extends Application {
 
             EditWarehouseLayoutController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setWorker(warehouse);
+            controller.setWarehouse(warehouse);
 
             dialogStage.showAndWait();
 

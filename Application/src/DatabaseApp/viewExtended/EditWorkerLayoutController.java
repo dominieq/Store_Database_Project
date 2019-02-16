@@ -4,12 +4,10 @@ import DatabaseApp.models.Warehouse;
 import DatabaseApp.models.Worker;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-public class EditWorkerLayoutController {
+public class EditWorkerLayoutController extends EditController {
 
     @FXML private TextField indexField;
 
@@ -27,51 +25,33 @@ public class EditWorkerLayoutController {
 
     @FXML private ChoiceBox<Warehouse> warehouseIndexBox;
 
-    private Stage dialogStage;
-
     private Worker worker;
 
-    private boolean acceptClicked;
+    @Override void fillEditObject() {
+        worker.setIndex(indexField.getText());
+        worker.setName(nameField.getText());
+        worker.setSurname(surnameField.getText());
+        worker.setAddress(addressField.getText());
+        worker.setTelNum(telNumField.getText());
+        worker.setMail(mailField.getText());
+        worker.setPESEL(PESELField.getText());
 
-    @FXML public void initialize() {
-
-    }
-
-    @FXML private void handleAccept() {
-        if(isInputValid()) {
-            worker.setIndex(indexField.getText());
-            worker.setName(nameField.getText());
-            worker.setSurname(surnameField.getText());
-            worker.setAddress(addressField.getText());
-            worker.setTelNum(telNumField.getText());
-            worker.setMail(mailField.getText());
-            worker.setPESEL(PESELField.getText());
-
-            ObservableList<Warehouse> warehouses = warehouseIndexBox.getItems();
-            Warehouse newWarehouse = warehouseIndexBox.getSelectionModel().getSelectedItem();
-            if(worker.getWarehouseIndex() == newWarehouse.getIndex()) {
-                worker.setWarehouseIndex(newWarehouse.getIndex());
-            } else {
-                for (Warehouse oldWarehouse : warehouses) {
-                    if(worker.getWarehouseIndex() == oldWarehouse.getIndex()) {
-                        oldWarehouse.deleteWorker(worker);
-                    }
+        ObservableList<Warehouse> warehouses = warehouseIndexBox.getItems();
+        Warehouse newWarehouse = warehouseIndexBox.getSelectionModel().getSelectedItem();
+        if(worker.getWarehouseIndex() == newWarehouse.getIndex()) {
+            worker.setWarehouseIndex(newWarehouse.getIndex());
+        } else {
+            for (Warehouse oldWarehouse : warehouses) {
+                if(worker.getWarehouseIndex() == oldWarehouse.getIndex()) {
+                    oldWarehouse.deleteWorker(worker);
                 }
-                worker.setWarehouseIndex(newWarehouse.getIndex());
-                newWarehouse.addWorker(worker);
             }
-
-            this.acceptClicked = true;
-            dialogStage.close();
+            worker.setWarehouseIndex(newWarehouse.getIndex());
+            newWarehouse.addWorker(worker);
         }
     }
 
-    @FXML private void handleCancel() {
-        dialogStage.close();
-    }
-
-    private boolean isInputValid() {
-        String content = "";
+    @Override String fillContent(String content) {
         if(indexField.getText() == null || indexField.getText().length() == 0) {
             content += "No valid index\n";
         }
@@ -96,23 +76,7 @@ public class EditWorkerLayoutController {
         if(warehouseIndexBox.getSelectionModel().getSelectedItem() == null) {
             content += "No warehouse index selected\n";
         }
-
-        if(content.length() == 0) {
-            return true;
-        }
-        else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields:");
-            alert.setContentText(content);
-            alert.showAndWait();
-            return false;
-        }
-    }
-
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
+        return content;
     }
 
     public void setWorker(Worker worker, ObservableList<Warehouse> warehouses) {
@@ -132,9 +96,5 @@ public class EditWorkerLayoutController {
                 this.warehouseIndexBox.setValue(warehouse);
             }
         }
-    }
-
-    public boolean isAcceptClicked() {
-        return this.acceptClicked;
     }
 }
