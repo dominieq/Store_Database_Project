@@ -33,8 +33,10 @@ public class SQLHelper {
                     connectionProps);
             System.out.println("Connection with database established.");
         } catch (Exception exception) {
-            System.out.println("Couldn't connect with database.");
-            System.exit(1);
+            // System.out.println("Couldn't connect with database.");
+            System.out.println("Couldn't establish connection. Emergency start.");
+            // System.exit(1);
+            this.app.setEmergencyStart(true);
         }
 
     }

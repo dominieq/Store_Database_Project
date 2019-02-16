@@ -26,11 +26,13 @@ import java.io.IOException;
 public class DatabaseApp extends Application {
 
     private SQLHelper sqlhelper;
+    private boolean emergencyStart;
     private Stage primaryStage;
     private BorderPane rootLayout;
     private RootLayoutController rootLayoutController;
     private volatile ObservableList<Warehouse> warehouses;
     private volatile ObservableList<Worker> workers;
+
 
     /**
      * Starts application. Launches initRootLayout and showStartMenu functions.
@@ -142,10 +144,10 @@ public class DatabaseApp extends Application {
             }
 
         } finally {
-
-            handleSQLExceptions(this.sqlhelper.fillWarehouses());
-            handleSQLExceptions(this.sqlhelper.fillWorkers());
-
+            if(!emergencyStart) {
+                handleSQLExceptions(this.sqlhelper.fillWarehouses());
+                handleSQLExceptions(this.sqlhelper.fillWorkers());
+            }
         }
     }
 
@@ -336,34 +338,24 @@ public class DatabaseApp extends Application {
         launch(args);
     }
 
-    /**
-     * Returns app's primaryStage
-     * @return Stage
-     */
+
+
+    public void setEmergencyStart(boolean start) {
+        this.emergencyStart = start;
+    }
+
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
-    /**
-     * Returns app's rootLayoutController.
-     * @return RootLayoutController
-     */
     public RootLayoutController getRootLayoutController() {
         return rootLayoutController;
     }
 
-    /**
-     * Returns app's warehouses.
-     * @return ObservableList
-     */
     public ObservableList<Warehouse> getWarehouses() {
         return warehouses;
     }
 
-    /**
-     * Returns app's workers.
-     * @return ObservableList
-     */
     public ObservableList<Worker> getWorkers() {
         return workers;
     }
