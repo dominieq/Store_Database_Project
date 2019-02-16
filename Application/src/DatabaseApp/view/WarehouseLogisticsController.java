@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.util.ArrayList;
+
 public class WarehouseLogisticsController {
 
     private DatabaseApp app;
@@ -59,7 +61,7 @@ public class WarehouseLogisticsController {
                     this.warehouseTableView.getSelectionModel().clearSelection();
                     this.informationLabel.setText("You are currently viewing all workers. " +
                             "Select warehouse to view it's workers");
-                    this.workerChoiceBox.getSelectionModel().selectPrevious();
+                    this.workerChoiceBox.getSelectionModel().selectFirst();
                 }
             });
             return row;
@@ -72,113 +74,196 @@ public class WarehouseLogisticsController {
     }
 
     /**
-     * Displays WarehouseWindow. After confirmation adds new warehouse to:
-     *    1) warehouseObservableList,
-     *    2) database.
-     * Commits changes to database.
+     * Creates dummy warehouse then opens window to edit it's features.
+     * When dialog succeeds new warehouse will be added to warehouses and database.
+     * Function refreshes all fxml elements.
      */
     @FXML private void handleAddWarehouse() {
+        Warehouse warehouse = new Warehouse(100, "[address]");
+        if(this.app.showWarehouseDialog("Add warehouse", warehouse)) {
+            System.out.println("Warehouse: " + warehouse.toString() + " added");
+            this.app.getWarehouses().add(warehouse);
 
-        /* TODO Display WarehouseWindow */
+            // TODO SQL query INSERT INTO
 
+            refreshWarehouse(warehouse);
+        }
     }
 
     /**
-     * Deletes selected Warehouse from:
-     *     1) warehouseObservableList,
-     *     2) database.
-     * Commits changes to database.
+     * Gets selected warehouse and deletes it from warehouses and database.
+     * When no warehouse was selected displays error.
+     * Function refreshes all fxml elements.
      */
     @FXML private void handleDelWarehouse() {
+        Warehouse warehouse = this.warehouseTableView.getSelectionModel().getSelectedItem();
+        if(warehouse != null) {
+            ArrayList<Worker> toRemove = new ArrayList<>();
+            for(Worker worker : this.app.getWorkers()) {
+                if(worker.getWarehouseIndex() == warehouse.getIndex()) {
+                    toRemove.add(worker);
+                }
+            }
+            System.out.println("Warehouse " + warehouse.toString() + " removed");
+            this.app.getWorkers().removeAll(toRemove);
+            this.app.getWarehouses().remove(warehouse);
+
+            // TODO SQL query DELETE FROM
+
+            this.warehouseTableView.refresh();
+            this.warehouseTableView.getSelectionModel().selectFirst();
+            this.workerChoiceBox.setItems(
+                    this.warehouseTableView.getSelectionModel().getSelectedItem().getWorkersObservable());
+        } else {
+            this.app.showWarning("No selection", "You have to select warehouse to delete it.");
+        }
 
     }
 
     /**
-     * Displays WarehouseWindow. After confirmation adds changes to:
-     *     1) warehouseObservableList,
-     *     2) database.
-     * Commits changes to database.
+     * Gets selected warehouse then opens window to edit it's features.
+     * When dialog succeeds function refreshes all fxml elements.
      */
     @FXML private void handleEditWarehouse() {
+        Warehouse warehouse = this.warehouseTableView.getSelectionModel().getSelectedItem();
+        if(warehouse != null) {
+            if(this.app.showWarehouseDialog("Edit warehouse", warehouse)) {
+                System.out.println("Warehouse: " + warehouse.toString() + " edited");
 
+                // TODO SQL query UPDATE
+
+                refreshWarehouse(warehouse);
+            }
+        } else {
+            this.app.showWarning("No selection", "You have to select warehouse to edit it.");
+        }
     }
 
     /**
-     * Search for Warehouse in warehouseObservableList.
-     * When a warehouse is found, selects it in TableView.
+     * Search for Warehouse using SQL query.
+     * When a warehouse is found, function refreshes all fxml elements.
      */
     @FXML private void handleSearchWarehouse() {
+        String trait = this.warehouseTraitChoiceBox.getValue();
+        String wantedTrait = this.warehouseTraitTextField.getText();
 
+        // TODO use SQL query to search for warehouse
+        // SELECT index FROM warehouses
+        // WHERE [trait] = [wantedTrait]
     }
 
     /**
-     * Displays WorkerWindow. After confirmation adds new worker to:
-     *    1) workerObservableList,
-     *    2) database.
-     * Commits changes to database.
+     * Creates dummy worker then opens window to edit it's features.
+     * When dialog succeeds new worker will be added to workers and database.
+     * Function refreshes all fxml elements.
      */
     @FXML private void handleAddWorker() {
         Worker worker = new Worker(100, "[name]", "[surname]", "[address]",
                 "[telephone number]", "[email address]", "00000000000",
                 this.app.getWarehouses().get(0).getIndex());
         if(this.app.showWorkerEditDialog("Add Worker", worker)){
-            this.app.getWorkers().add(worker);
+            for(Warehouse warehouse : this.app.getWarehouses()) {
+                if(warehouse.getIndex() == worker.getWarehouseIndex()) {
+                    System.out.println("Worker: " + worker.toString() + " added");
+                    warehouse.addWorker(worker);
+                    this.app.getWorkers().add(worker);
+                }
+            }
+
+            // TODO SQL query INSERT INTO
+
             refreshWorker(worker);
         }
     }
 
     /**
-     * Deletes selected Worker from:
-     *     1) workerObservableList,
-     *     2) database.
-     * Commits changes to database.
+     * Gets selected workers and deletes it from workers and database.
+     * When no worker was selected displays error.
+     * Function refreshes all fxml elements.
      */
     @FXML private void handleDelWorker() {
         Worker worker = this.workerChoiceBox.getSelectionModel().getSelectedItem();
         if(worker != null) {
             for (Warehouse warehouse : this.app.getWarehouses()) {
                 if(worker.getWarehouseIndex() == warehouse.getIndex()) {
+                    System.out.println("Worker: " + worker.toString() + " removed");
                     warehouse.deleteWorker(worker);
                     this.app.getWorkers().remove(worker);
+
+                    // TODO SQL query DELETE FROM
+
                 }
             }
             showWorker(null);
+            this.warehouseTableView.refresh();
+            this.workerChoiceBox.getSelectionModel().clearSelection();
+            this.workerChoiceBox.setItems(
+                    this.warehouseTableView.getSelectionModel().getSelectedItem().getWorkersObservable());
             this.workerChoiceBox.getSelectionModel().selectFirst();
+
         }
         else {
-            this.app.showWarning("No selection", "First choose worker to delete it");
+            this.app.showWarning("No selection", "You have to select worker to delete it.");
         }
     }
 
     /**
-     * Displays WorkerWindow. After confirmation adds changes to:
-     *     1) workerObservableList,
-     *     2) database.
-     * Commits changes to database.
+     * Gets selected worker then opens window to edit it's features.
+     * When dialog succeeds function refreshes all fxml elements.
      */
     @FXML private void handleEditWorker() {
         Worker worker = this.workerChoiceBox.getSelectionModel().getSelectedItem();
         if(worker != null) {
-            if(this.app.showWorkerEditDialog("Edit worker", worker)) refreshWorker(worker);
+            if(this.app.showWorkerEditDialog("Edit worker", worker)) {
+                System.out.println("Worker: " + worker.toString() + " edited");
+
+                // TODO use SQL query UPDATE
+
+                refreshWorker(worker);
+            }
         }
         else {
-            this.app.showWarning("No selection", "First choose worker to edit it");
+            this.app.showWarning("No selection", "You have to select worker to edit it.");
         }
     }
 
     /**
-     * Search for Worker in workerObservableList.
-     * When a worker is found, selects it in ChoiceBox.
-     * Cancels selection in TableView.
+     * Search for Worker using SQL query.
+     * When a worker is found, function refreshes all fxml elements.
      */
     @FXML private void handleSearchWorker() {
+        String trait = this.workerTraitChoiceBox.getValue();
+        String wantedTrait = this.workerTraitTextField.getText();
 
+        // TODO use SQL query to search for worker
+        // SELECT index FROM workers
+        // WHERE [trait] = [wantedTrait]
     }
 
+    /**
+     * Changes WarehouseTableView selection to specific warehouse.
+     * @param warehouse Warehouse
+     */
+    private void refreshWarehouse(Warehouse warehouse) {
+        this.warehouseTableView.refresh();
+        this.warehouseTableView.getSelectionModel().select(warehouse);
+        this.workerChoiceBox.setItems(warehouse.getWorkersObservable());
+        this.workerChoiceBox.getSelectionModel().clearSelection();
+        showWorker(null);
+    }
+
+    /**
+     * Changes WarehouseTableView selection to warehouse that contains specific worker
+     * and WorkerChoiceBox selection to that worker then displays worker's features on Labels.
+     * Used in handleAddWorker, handleEditWorker.
+     * @param worker Worker
+     */
     private void refreshWorker(Worker worker) {
         for(Warehouse warehouse : this.app.getWarehouses()) {
             if(warehouse.getIndex() == worker.getWarehouseIndex()) {
+                this.warehouseTableView.refresh();
                 this.warehouseTableView.getSelectionModel().select(warehouse);
+                this.workerChoiceBox.setItems(warehouse.getWorkersObservable());
                 this.workerChoiceBox.getSelectionModel().select(worker);
             }
         }

@@ -3,6 +3,7 @@ package DatabaseApp;
 import DatabaseApp.helpers.SQLHelper;
 import DatabaseApp.models.*;
 import DatabaseApp.view.*;
+import DatabaseApp.viewExtended.EditWarehouseLayoutController;
 import DatabaseApp.viewExtended.EditWorkerLayoutController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -28,8 +29,8 @@ public class DatabaseApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     private RootLayoutController rootLayoutController;
-    private ObservableList<Warehouse> warehouses;
-    private ObservableList<Worker> workers;
+    private volatile ObservableList<Warehouse> warehouses;
+    private volatile ObservableList<Worker> workers;
 
     /**
      * Starts application. Launches initRootLayout and showStartMenu functions.
@@ -89,6 +90,9 @@ public class DatabaseApp extends Application {
             AnchorPane pane = loader.load();
 
             this.rootLayout.setCenter(pane);
+
+            this.warehouses.clear();
+            this.workers.clear();
 
             StartMenuController controller = loader.getController();
             controller.setApp(this);
@@ -200,18 +204,20 @@ public class DatabaseApp extends Application {
         }
     }
 
+    /**
+     * Displays EditWorkerLayout in new Stage. Sets EditWorkerLayoutController.
+     * @param title String: The title of the stage.
+     * @param worker Worker: New or old worker.
+     * @return Boolean: When worker was edited or created without error, function returns true
+     *     otherwise returns false.
+     */
     public boolean showWorkerEditDialog(String title, Worker worker) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(DatabaseApp.class.getResource("viewExtended/EditWorkerLayout.fxml"));
             SplitPane pane = loader.load();
 
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle(title);
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(this.primaryStage);
-            Scene scene = new Scene(pane);
-            dialogStage.setScene(scene);
+            Stage dialogStage = setDialogStage(title, pane);
 
             EditWorkerLayoutController controller = loader.getController();
             controller.setDialogStage(dialogStage);
@@ -232,6 +238,59 @@ public class DatabaseApp extends Application {
             }
             return false;
         }
+    }
+
+    /**
+     * Displays EditWarehouseLayout in new Stage. Sets EditWarehouseLayoutController.
+     * @param title String: The title of the stage.
+     * @param warehouse Warehouse: New or old warehouse.
+     * @return Boolean: When warehouse was edited or created without error, function returns true
+     *     otherwise returns false.
+     */
+    public boolean showWarehouseDialog(String title, Warehouse warehouse) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DatabaseApp.class.getResource("viewExtended/EditWarehouseLayout.fxml"));
+            SplitPane pane = loader.load();
+
+            Stage dialogStage = setDialogStage(title, pane);
+
+            EditWarehouseLayoutController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setWorker(warehouse);
+
+            dialogStage.showAndWait();
+
+            return controller.isAcceptClicked();
+        } catch (Exception exception) {
+            if(exception instanceof IOException) {
+                String error = "IOException: Couldn't load EditWarehouseDialog";
+                System.out.println(error);
+                showError("IOException", error);
+            }
+            else {
+                System.out.println("Error occurred when loading EditWarehouseDialog");
+                showError("Exception", exception);
+            }
+            return false;
+        }
+    }
+
+    /**
+     * Creates Stage for editing objects.
+     * @param title String
+     * @param pane SplitPane
+     * @return Stage
+     */
+    private Stage setDialogStage(String title, SplitPane pane) {
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle(title);
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(this.primaryStage);
+        Scene scene = new Scene(pane);
+        dialogStage.setScene(scene);
+
+        return dialogStage;
     }
 
     /**
@@ -261,6 +320,11 @@ public class DatabaseApp extends Application {
         alert.showAndWait();
     }
 
+    /**
+     * Show alert.WARNING using title and content
+     * @param title String
+     * @param content String
+     */
     public void showWarning(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(title);

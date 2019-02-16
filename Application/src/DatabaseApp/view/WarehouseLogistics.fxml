@@ -25,7 +25,7 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleAddWarehouse" prefHeight="84.0" prefWidth="189.6" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddWarehouse" prefHeight="84.0" prefWidth="189.6" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
@@ -34,7 +34,7 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#handleDelWarehouse" prefHeight="84.0" prefWidth="189.6" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelWarehouse" prefHeight="84.0" prefWidth="189.6" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
@@ -82,7 +82,7 @@
                         </AnchorPane>
                         <AnchorPane>
                            <children>
-                              <Button mnemonicParsing="false" onAction="#handleSearchWarehouse" prefHeight="84.0" prefWidth="189.6" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchWarehouse" prefHeight="84.0" prefWidth="189.6" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
@@ -117,7 +117,7 @@
                      <items>
                         <AnchorPane>
                            <children>
-                              <Button mnemonicParsing="false" onAction="#handleAddWorker" prefHeight="81.6" prefWidth="189.6" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddWorker" prefHeight="81.6" prefWidth="189.6" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
@@ -126,7 +126,7 @@
                         </AnchorPane>
                         <AnchorPane>
                            <children>
-                              <Button mnemonicParsing="false" onAction="#handleDelWorker" prefHeight="81.6" prefWidth="189.6" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelWorker" prefHeight="81.6" prefWidth="189.6" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
@@ -135,7 +135,7 @@
                         </AnchorPane>
                         <AnchorPane>
                            <children>
-                              <Button mnemonicParsing="false" onAction="#handleEditWorker" prefHeight="81.6" prefWidth="189.6" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditWorker" prefHeight="81.6" prefWidth="189.6" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
@@ -172,37 +172,37 @@
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <Label fx:id="workerIdLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                        <Label fx:id="workerIdLabel" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="workerNameLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                        <Label fx:id="workerNameLabel" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="workerSurnameLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                        <Label fx:id="workerSurnameLabel" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="workerAddressLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                        <Label fx:id="workerAddressLabel" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="workerTelNumLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                        <Label fx:id="workerTelNumLabel" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="workerMailLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                        <Label fx:id="workerMailLabel" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="workerPESELLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                        <Label fx:id="workerPESELLabel" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -252,7 +252,7 @@
                         </AnchorPane>
                         <AnchorPane>
                            <children>
-                              <Button mnemonicParsing="false" onAction="#handleSearchWorker" prefHeight="84.0" prefWidth="189.6" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchWorker" prefHeight="84.0" prefWidth="189.6" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
