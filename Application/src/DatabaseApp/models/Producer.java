@@ -5,149 +5,129 @@ package DatabaseApp.models;
  */
 public class Producer {
 
-    private int idProducer;
+    private int index;
 
-    private String nameProducer;
+    private String name;
 
-    private String addressProducer;
+    private String address;
 
-    private String mailProducer;
+    private String mail;
 
-    private String telNumProducer;
+    private String telNum;
 
-    private String webPageProducer;
+    private String webPage;
 
     /**
-     * Creates Producer object. Sets idProducer and nameProducer
-     * @param idProducer  String
-     * @param nameProducer String
+     * Creates Producer object. Sets index and name
+     * @param index  String
+     * @param name String
      */
-    public Producer(int idProducer, String nameProducer) {
-        this.idProducer = idProducer;
-        this.nameProducer = nameProducer;
+    public Producer(int index, String name) {
+        this.index = index;
+        this.name = name;
     }
 
     /**
-     * Creates Producer object. Sets idProducer, nameProducer, addressProducer,
-     * mailProducer, telNumProducer and webPageProducer.
-     * @param idProducer int
-     * @param nameProducer String
-     * @param addressProducer String
-     * @param mailProducer String
-     * @param telNumProducer String
-     * @param webPageProducer String
+     * Creates Producer object using index, name, address, mail, telNum and webPage.
+     * @param index int
+     * @param name String
+     * @param address String
+     * @param mail String
+     * @param telNum String
+     * @param webPage String
      */
-    public Producer(int idProducer, String nameProducer, String addressProducer,
-                    String mailProducer, String telNumProducer, String webPageProducer) {
-        this.idProducer = idProducer;
-        this.nameProducer = nameProducer;
-        this.addressProducer = addressProducer;
-        this.mailProducer = mailProducer;
-        this.telNumProducer = telNumProducer;
-        this.webPageProducer = webPageProducer;
+    public Producer(int index, String name, String address, String mail, String telNum, String webPage) {
+        this.index = index;
+        this.name = name;
+        this.address = address;
+        this.mail = mail;
+        this.telNum = telNum;
+        this.webPage = webPage;
     }
 
     /**
-     * Returns producer's name which a unique trait.
-     * @return String: nameProducer
+     * Creates Producer object using index, name, address, mail, telNum and webPage
+     * @param index String
+     * @param name String
+     * @param address String
+     * @param mail String
+     * @param telNum String
+     * @param webPage String
+     */
+    public Producer(String index, String name, String address, String mail, String telNum, String webPage) {
+        this.index = Integer.parseInt(index);
+        this.name = name;
+        this.address = address;
+        this.mail = mail;
+        this.telNum = telNum;
+        this.webPage = webPage;
+    }
+
+    /**
+     * Returns producer's name which is a unique trait.
+     * @return String: name
      */
     @Override public String toString() {
-        return this.nameProducer;
+        return this.name;
     }
 
-    /**
-     * Returns producer's ID
-     * @return int
-     */
-    public int getIdProducer() {
-        return idProducer;
+
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
-    /**
-     * Sets producer's ID
-     * @param idProducer int
-     */
-    public void setIdProducer(int idProducer) {
-        this.idProducer = idProducer;
+    public void setIndex(String index) {
+        this.index = Integer.parseInt(index);
     }
 
-    /**
-     * Returns producer's name
-     * @return String
-     */
-    public String getNameProducer() {
-        return nameProducer;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    /**
-     * Sets producer's name
-     * @param nameProducer String
-     */
-    public void setNameProducer(String nameProducer) {
-        this.nameProducer = nameProducer;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    /**
-     * Returns producer's address
-     * @return String
-     */
-    public String getAddressProducer() {
-        return addressProducer;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
-    /**
-     * Sets producer's address
-     * @param addressProducer String
-     */
-    public void setAddressProducer(String addressProducer) {
-        this.addressProducer = addressProducer;
+    public void setTelNum(String telNum) {
+        this.telNum = telNum;
     }
 
-    /**
-     * Returns producer's email address
-     * @return String
-     */
-    public String getMailProducer() {
-        return mailProducer;
+    public void setWebPage(String webPage) {
+        this.webPage = webPage;
     }
 
-    /**
-     * Sets producer's email address
-     * @param mailProducer String
-     */
-    public void setMailProducer(String mailProducer) {
-        this.mailProducer = mailProducer;
+
+
+    public int getIndex() {
+        return index;
     }
 
-    /**
-     * Returns producer's telephone number
-     * @return String
-     */
-    public String getTelNumProducer() {
-        return telNumProducer;
+    public String getIndexString() {
+        return String.valueOf(this.index);
     }
 
-    /**
-     * Sets producer's telephone number
-     * @param telNumProducer String
-     */
-    public void setTelNumProducer(String telNumProducer) {
-        this.telNumProducer = telNumProducer;
+    public String getName() {
+        return name;
     }
 
-    /**
-     * Returns producer's web page address
-     * @return String
-     */
-    public String getWebPageProducer() {
-        return webPageProducer;
+    public String getAddress() {
+        return address;
     }
 
-    /**
-     * Sets producer's web page address
-     * @param webPageProducer String
-     */
-    public void setWebPageProducer(String webPageProducer) {
-        this.webPageProducer = webPageProducer;
+    public String getMail() {
+        return mail;
+    }
+
+    public String getTelNum() {
+        return telNum;
+    }
+
+    public String getWebPage() {
+        return webPage;
     }
 }

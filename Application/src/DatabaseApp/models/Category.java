@@ -5,18 +5,28 @@ package DatabaseApp.models;
  */
 public class Category {
 
-    private int idCategory;
+    private int index;
 
-    private String nameCategory;
+    private String name;
 
     /**
-     * Creates Category object. Sets idCategory and nameCategory.
-     * @param idCategory int
-     * @param nameCategory String
+     * Creates Category object using index and name.
+     * @param index int
+     * @param name String
      */
-    public Category(int idCategory, String nameCategory) {
-        this.idCategory = idCategory;
-        this.nameCategory = nameCategory;
+    public Category(int index, String name) {
+        this.index = index;
+        this.name = name;
+    }
+
+    /**
+     * Creates Category object using index and name.
+     * @param index String
+     * @param name String
+     */
+    public Category(String index, String name) {
+        this.index = Integer.parseInt(index);
+        this.name = name;
     }
 
     /**
@@ -24,38 +34,34 @@ public class Category {
      * @return String
      */
     @Override public String toString() {
-        return this.nameCategory;
+        return this.name;
     }
 
-    /**
-     * Return category's ID
-     * @return String
-     */
-    public int getIdCategory() {
-        return idCategory;
+
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
-    /**
-     * Sets category's ID
-     * @param idCategory String
-     */
-    public void setIdCategory(int idCategory) {
-        this.idCategory = idCategory;
+    public void setIndex(String index) {
+        this.index = Integer.parseInt(index);
     }
 
-    /**
-     * Returns category's name
-     * @return String
-     */
-    public String getNameCategory() {
-        return nameCategory;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    /**
-     * Sets category's name
-     * @param nameCategory String
-     */
-    public void setNameCategory(String nameCategory) {
-        this.nameCategory = nameCategory;
+
+
+    public int getIndex() {
+        return index;
+    }
+
+    public String getIndexString() {
+        return String.valueOf(this.index);
+    }
+
+    public String getName() {
+        return name;
     }
 }

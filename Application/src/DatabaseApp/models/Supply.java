@@ -47,7 +47,7 @@ public class Supply {
 
     /**
      * Creates new Supply object using invoiceNumber, startDate, endDate, supplier.
-     * Preferably used creating new object from application (startDate and endDate are Strings).
+     * Preferably used when creating new object from application (startDate and endDate are Strings).
      * @param invoiceNumber int
      * @param startDate String
      * @param endDate String

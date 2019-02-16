@@ -46,7 +46,7 @@ public class Stock {
      * @return String: New Stock's index
      */
     private String createID(Merchandise merchandise, Warehouse warehouse) {
-        return "#" + merchandise.getNameMerchandise() + "-" + warehouse.getIndexString();
+        return "#" + merchandise.getName() + "-" + warehouse.getIndexString();
     }
 
     /**
