@@ -67,9 +67,9 @@ public class WarehouseBusinessController {
     @FXML private ChoiceBox<String> producerTraitsBox;
     @FXML private Label producerLabel;
     @FXML private Label producerNameLabel;
-    @FXML private Label prodcuerAddressLabel;
+    @FXML private Label producerAddressLabel;
     @FXML private Label producerEmailLabel;
-    @FXML private Label prodcuerTelNumLabel;
+    @FXML private Label producerTelNumLabel;
     @FXML private Label producerWebLabel;
     @FXML private TextField producerSearchField;
     /**
@@ -146,7 +146,52 @@ public class WarehouseBusinessController {
 
     public WarehouseBusinessController() {}
 
-    @FXML private void initialize() {}
+    @FXML private void initialize() {
+
+        this.stockBox.getSelectionModel().selectedItemProperty().addListener(
+                ((observable, oldValue, newValue) -> showStock(newValue))
+        );
+
+        this.packDeliveryBox.getSelectionModel().selectedItemProperty().addListener(
+                ((observable, oldValue, newValue) -> showPackDelivery(newValue))
+        );
+
+        this.packOrderBox.getSelectionModel().selectedItemProperty().addListener(
+                ((observable, oldValue, newValue) -> showPackOrder(newValue))
+        );
+
+        this.merchBox.getSelectionModel().selectedItemProperty().addListener(
+                ((observable, oldValue, newValue) -> showMerchandise(newValue))
+        );
+
+        this.producerBox.getSelectionModel().selectedItemProperty().addListener(
+                ((observable, oldValue, newValue) -> showProducer(newValue))
+        );
+
+        this.categoryBox.getSelectionModel().selectedItemProperty().addListener(
+                ((observable, oldValue, newValue) -> showCategory(newValue))
+        );
+
+        this.supplierBox.getSelectionModel().selectedItemProperty().addListener(
+                ((observable, oldValue, newValue) -> showSupplier(newValue))
+        );
+
+        this.supplyBox.getSelectionModel().selectedItemProperty().addListener(
+                ((observable, oldValue, newValue) -> showSupply(newValue))
+        );
+
+        this.orderBox.getSelectionModel().selectedItemProperty().addListener(
+                ((observable, oldValue, newValue) -> showOrder(newValue))
+        );
+
+        this.courierBox.getSelectionModel().selectedItemProperty().addListener(
+                ((observable, oldValue, newValue) -> showCourier(newValue))
+        );
+
+        this.recipientBox.getSelectionModel().selectedItemProperty().addListener(
+                ((observable, oldValue, newValue) -> showRecipient(newValue))
+        );
+    }
 
     /**
      * Opens window to create new Stock.
@@ -635,10 +680,253 @@ public class WarehouseBusinessController {
     }
 
     /**
+     * Display stock's traits on Labels.
+     * @param stock Stock
+     */
+    private void showStock(Stock stock) {
+        if(stock != null) {
+            this.stockLabel.setText(stock.getIndex());
+            this.stockAmountLabel.setText(stock.getAmountString());
+            this.stockMerchandiseLabel.setText(stock.getMerchandise().getIndexString());
+            this.stockWarehouseLabel.setText(stock.getWarehouse().getIndexString());
+        } else {
+            this.stockLabel.setText("");
+            this.stockAmountLabel.setText("");
+            this.stockMerchandiseLabel.setText("");
+            this.stockWarehouseLabel.setText("");
+        }
+    }
+
+    /**
+     * Displays packDelivery's traits on Labels.
+     * @param packDelivery PackDelivery
+     */
+    private void showPackDelivery(PackDelivery packDelivery) {
+        if(packDelivery != null) {
+            this.packDeliveryNumberLabel.setText(packDelivery.getSupply().getInvoiceNumberString());
+            this.packDeliveryAmountLabel.setText(packDelivery.getAmountString());
+            this.packDeliveryMerchLabel.setText(packDelivery.getStock().getMerchandise().getIndexString());
+            this.packDeliveryWarehouseLabel.setText(packDelivery.getStock().getWarehouse().getIndexString());
+        }
+        else {
+            this.packDeliveryNumberLabel.setText("");
+            this.packDeliveryAmountLabel.setText("");
+            this.packDeliveryMerchLabel.setText("");
+            this.packDeliveryWarehouseLabel.setText("");
+        }
+    }
+
+    /**
+     * Displays packOrder's traits on Labels.
+     * @param packOrder PackOrder
+     */
+    private void showPackOrder(PackOrder packOrder) {
+        if(packOrder != null) {
+            this.packOrderNumberLabel.setText(packOrder.getOrder().getInvoiceString());
+            this.packOrderAmountLabel.setText(packOrder.getAmountString());
+            this.packOrderMerchLabel.setText(packOrder.getStock().getMerchandise().getIndexString());
+            this.packOrderWarehouseLabel.setText(packOrder.getStock().getWarehouse().getIndexString());
+        }
+        else {
+            this.packOrderNumberLabel.setText("");
+            this.packOrderAmountLabel.setText("");
+            this.packOrderMerchLabel.setText("");
+            this.packOrderWarehouseLabel.setText("");
+        }
+    }
+
+    /**
+     * Displays merchandise's traits on Labels.
+     * @param merchandise Merchandise
+     */
+    private void showMerchandise(Merchandise merchandise) {
+        if(merchandise != null) {
+            this.merchLabel.setText(merchandise.getIndexString());
+            this.merchNameLabel.setText(merchandise.getName());
+            this.merchRetailLabel.setText(merchandise.getPriceRetailString());
+            this.merchMarketLabel.setText(merchandise.getPriceMarketString());
+            this.merchProducerLabel.setText(merchandise.getProducer().toString());
+            this.merchCategoryLabel.setText(merchandise.getCategory().toString());
+        }
+        else {
+            this.merchLabel.setText("");
+            this.merchNameLabel.setText("");
+            this.merchRetailLabel.setText("");
+            this.merchMarketLabel.setText("");
+            this.merchProducerLabel.setText("");
+            this.merchCategoryLabel.setText("");
+        }
+    }
+
+    /**
+     * Displays producer's traits on labels.
+     * @param producer Producer
+     */
+    private void showProducer(Producer producer) {
+        if(producer != null) {
+            this.producerLabel.setText(producer.getIndexString());
+            this.producerNameLabel.setText(producer.getName());
+            this.producerAddressLabel.setText(producer.getAddress());
+            this.producerEmailLabel.setText(producer.getMail());
+            this.producerTelNumLabel.setText(producer.getTelNum());
+            this.producerWebLabel.setText(producer.getWebPage());
+        }
+        else {
+            this.producerLabel.setText("");
+            this.producerNameLabel.setText("");
+            this.producerAddressLabel.setText("");
+            this.producerEmailLabel.setText("");
+            this.producerTelNumLabel.setText("");
+            this.producerWebLabel.setText("");
+        }
+    }
+
+    /**
+     * Displays category's traits on Labels.
+     * @param category Category
+     */
+    private void showCategory(Category category) {
+        if(category != null) {
+            this.categoryLabel.setText(category.getIndexString());
+            this.categoryNameLabel.setText(category.getName());
+        }
+        else {
+            this.categoryLabel.setText("");
+            this.categoryNameLabel.setText("");
+        }
+    }
+
+    /**
+     * Displays supplier's traits on Labels.
+     * @param supplier Supplier
+     */
+    private void showSupplier(Supplier supplier) {
+        if(supplier != null) {
+            this.supplierLabel.setText(supplier.getIndexString());
+            this.supplierNameLabel.setText(supplier.getName());
+            this.supplierAddressLabel.setText(supplier.getAddress());
+            this.supplierTelNumLabel.setText(supplier.getTelNum());
+            this.supplierEmailLabel.setText(supplier.getMail());
+        } else {
+            this.supplierLabel.setText("");
+            this.supplierNameLabel.setText("");
+            this.supplierAddressLabel.setText("");
+            this.supplierTelNumLabel.setText("");
+            this.supplierEmailLabel.setText("");
+        }
+    }
+
+    /**
+     * Displays supply's traits on Labels.
+     * @param supply Supply
+     */
+    private void showSupply(Supply supply) {
+        if(supply != null) {
+            this.supplyLabel.setText(supply.getInvoiceNumberString());
+            this.supplyStartLabel.setText(supply.getStartDateString());
+            this.supplyEndLabel.setText(supply.getEndDateString());
+            this.supplySupplierLabel.setText(supply.getSupplier().toString());
+        }
+        else {
+            this.supplyLabel.setText("");
+            this.supplyStartLabel.setText("");
+            this.supplyEndLabel.setText("");
+            this.supplySupplierLabel.setText("");
+        }
+    }
+
+    /**
+     * Displays order's traits on Labels.
+     * @param order Order
+     */
+    private void showOrder(Order order) {
+        if(order != null) {
+            this.orderLabel.setText(order.getInvoiceString());
+            this.orderStartLabel.setText(order.getStartDateString());
+            this.orderEndLabel.setText(order.getEndDateString());
+            this.orderCourierLabel.setText(order.getCourier().getIndexString());
+            this.orderRecipientLabel.setText(order.getRecipient().getIndexString());
+
+            this.orderCourierRightLabel.setText(order.getCourier().getIndexString());
+            this.orderCourierTelNumLabel.setText(order.getCourier().getTelNum());
+
+            this.orderRecipientRightLabel.setText(order.getRecipient().getIndexString());
+            this.orderRecipientNameLabel.setText(order.getRecipient().getName());
+            this.orderRecipientSurnameLabel.setText(order.getRecipient().getSurname());
+            this.orderRecipientAddressLabel.setText(order.getRecipient().getAddress());
+            this.orderRecipientTelNumLabel.setText(order.getRecipient().getTelNum());
+        } else {
+            this.orderLabel.setText("");
+            this.orderStartLabel.setText("");
+            this.orderEndLabel.setText("");
+            this.orderCourierLabel.setText("");
+            this.orderRecipientLabel.setText("");
+
+            this.orderCourierRightLabel.setText("");
+            this.orderCourierTelNumLabel.setText("");
+
+            this.orderRecipientRightLabel.setText("");
+            this.orderRecipientNameLabel.setText("");
+            this.orderRecipientSurnameLabel.setText("");
+            this.orderRecipientAddressLabel.setText("");
+            this.orderRecipientTelNumLabel.setText("");
+        }
+    }
+
+    /**
+     * Displays courier's traits on Labels.
+     * @param courier Courier
+     */
+    private void showCourier(Courier courier) {
+        if(courier != null) {
+            this.courierLabel.setText(courier.getIndexString());
+            this.courierTelNumLabel.setText(courier.getTelNum());
+        } else {
+            this.courierLabel.setText("");
+            this.courierTelNumLabel.setText("");
+        }
+    }
+
+    /**
+     * Displays recipient's traits on Labels
+     * @param recipient Recipient
+     */
+    private void showRecipient(Recipient recipient) {
+        if(recipient != null) {
+            this.recipientLabel.setText(recipient.getIndexString());
+            this.recipientNameLabel.setText(recipient.getName());
+            this.recipientSurnameLabel.setText(recipient.getSurname());
+            this.recipientAddressLabel.setText(recipient.getAddress());
+            this.recipientTelNumLabel.setText(recipient.getTelNum());
+        } else {
+            this.recipientLabel.setText("");
+            this.recipientNameLabel.setText("");
+            this.recipientSurnameLabel.setText("");
+            this.recipientAddressLabel.setText("");
+            this.recipientTelNumLabel.setText("");
+        }
+    }
+
+    /**
      * Sets WarehouseBusinessController's app
      * @param app DatabaseApp
      */
     public void setApp(DatabaseApp app) {
+
         this.app = app;
+
+        this.stockBox.setItems(app.getStocks());
+        this.packDeliveryBox.setItems(app.getPackDeliveries());
+        this.packOrderBox.setItems(app.getPackOrders());
+        this.merchBox.setItems(app.getMerchandise());
+        this.merchCategoryBox.setItems(app.getCategories());
+        this.merchProducerBox.setItems(app.getProducers());
+        this.producerBox.setItems(app.getProducers());
+        this.categoryBox.setItems(app.getCategories());
+        this.supplierBox.setItems(app.getSuppliers());
+        this.supplyBox.setItems(app.getSupplies());
+        this.orderBox.setItems(app.getOrders());
+        this.recipientBox.setItems(app.getRecipients());
+        this.courierBox.setItems(app.getCouriers());
     }
 }

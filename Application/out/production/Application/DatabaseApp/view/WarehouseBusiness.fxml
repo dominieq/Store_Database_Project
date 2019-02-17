@@ -944,7 +944,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <children>
-                                                <Label fx:id="prodcuerAddressLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Label fx:id="producerAddressLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
@@ -962,7 +962,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                              <children>
-                                                <Label fx:id="prodcuerTelNumLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Label fx:id="producerTelNumLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
