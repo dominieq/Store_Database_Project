@@ -158,7 +158,7 @@ public class Order {
         return endDate;
     }
 
-    private String getEndDateString() {
+    public String getEndDateString() {
         DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
         return format.format(this.endDate);
     }

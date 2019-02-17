@@ -27,7 +27,45 @@ public class EditWorkerLayoutController extends EditController {
 
     private Worker worker;
 
+    @Override String fillContent(String content) {
+        if(indexField.getText() == null || indexField.getText().length() == 0) {
+            content += "No valid index\n";
+        }
+
+        if(nameField.getText() == null || nameField.getText().length() == 0) {
+            content += "No valid name\n";
+        }
+
+        if(surnameField.getText() == null || surnameField.getText().length() == 0) {
+            content += "No valid surname\n";
+        }
+
+        if(addressField.getText() == null || addressField.getText().length() == 0) {
+            content += "No valid address";
+        }
+
+        if(telNumField.getText() == null || telNumField.getText().length() == 0) {
+            content += "No valid telephone number\n";
+        }
+
+        if(mailField.getText() == null || mailField.getText().length() == 0) {
+            content += "No valid email address\n";
+        }
+
+        if(PESELField.getText() == null || PESELField.getText().length() == 0) {
+            content += "No valid PESEL\n";
+        }
+
+        if(warehouseIndexBox.getSelectionModel().getSelectedItem() == null) {
+            content += "No warehouse index selected\n";
+        }
+
+        return content;
+
+    }
+
     @Override void fillEditObject() {
+
         worker.setIndex(indexField.getText());
         worker.setName(nameField.getText());
         worker.setSurname(surnameField.getText());
@@ -49,37 +87,13 @@ public class EditWorkerLayoutController extends EditController {
             worker.setWarehouseIndex(newWarehouse.getIndex());
             newWarehouse.addWorker(worker);
         }
+
     }
 
-    @Override String fillContent(String content) {
-        if(indexField.getText() == null || indexField.getText().length() == 0) {
-            content += "No valid index\n";
-        }
-        if(nameField.getText() == null || nameField.getText().length() == 0) {
-            content += "No valid name\n";
-        }
-        if(surnameField.getText() == null || surnameField.getText().length() == 0) {
-            content += "No valid surname\n";
-        }
-        if(addressField.getText() == null || addressField.getText().length() == 0) {
-            content += "No valid address";
-        }
-        if(telNumField.getText() == null || telNumField.getText().length() == 0) {
-            content += "No valid telephone number\n";
-        }
-        if(mailField.getText() == null || mailField.getText().length() == 0) {
-            content += "No valid email address\n";
-        }
-        if(PESELField.getText() == null || PESELField.getText().length() == 0) {
-            content += "No valid PESEL\n";
-        }
-        if(warehouseIndexBox.getSelectionModel().getSelectedItem() == null) {
-            content += "No warehouse index selected\n";
-        }
-        return content;
-    }
+
 
     public void setWorker(Worker worker, ObservableList<Warehouse> warehouses) {
+
         this.worker = worker;
 
         this.indexField.setText(worker.getIndexString());
@@ -96,5 +110,6 @@ public class EditWorkerLayoutController extends EditController {
                 this.warehouseIndexBox.setValue(warehouse);
             }
         }
+
     }
 }

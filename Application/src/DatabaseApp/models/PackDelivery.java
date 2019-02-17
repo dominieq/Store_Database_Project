@@ -67,6 +67,10 @@ public class PackDelivery {
         this.amount = amount;
     }
 
+    public void setAmount(String amount) {
+        this.amount = Integer.parseInt(amount);
+    }
+
     public void setSupply(Supply supply) {
         this.supply = supply;
     }
@@ -83,6 +87,10 @@ public class PackDelivery {
 
     public int getAmount() {
         return amount;
+    }
+
+    public String getAmountString() {
+        return String.valueOf(this.amount);
     }
 
     public Supply getSupply() {

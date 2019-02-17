@@ -59,12 +59,12 @@ public class Stock {
 
 
 
-    public void setIndex(String index) {
-        this.index = index;
-    }
-
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = Integer.parseInt(amount);
     }
 
     public void setMerchandise(Merchandise merchandise) {
@@ -83,6 +83,10 @@ public class Stock {
 
     public int getAmount() {
         return amount;
+    }
+
+    public String getAmountString() {
+        return String.valueOf(this.amount);
     }
 
     public Merchandise getMerchandise() {

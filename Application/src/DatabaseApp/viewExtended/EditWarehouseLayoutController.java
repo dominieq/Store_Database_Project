@@ -12,24 +12,29 @@ public class EditWarehouseLayoutController extends EditController {
 
     private Warehouse warehouse;
 
-    @Override
-    void fillEditObject() {
-        warehouse.setIndex(indexField.getText());
-        warehouse.setAddress(addressField.getText());
-    }
+    @Override String fillContent(String content) {
 
-    @Override
-    String fillContent(String content) {
         if(indexField.getText() == null || indexField.getText().length() == 0) {
             content += "No valid index\n";
         }
+
         if(addressField.getText() == null || addressField.getText().length() == 0) {
             content += "No valid address";
         }
+
         return content;
+
+    }
+
+    @Override void fillEditObject() {
+
+        warehouse.setIndex(indexField.getText());
+        warehouse.setAddress(addressField.getText());
+
     }
 
     public void setWarehouse(Warehouse warehouse) {
+
         this.warehouse = warehouse;
 
         this.indexField.setText(warehouse.getIndexString());

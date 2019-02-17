@@ -67,6 +67,10 @@ public class PackOrder {
         this.amount = amount;
     }
 
+    public void setAmount(String amount) {
+        this.amount = Integer.parseInt(amount);
+    }
+
     public void setOrder(Order order) {
         this.order = order;
     }
@@ -83,6 +87,10 @@ public class PackOrder {
 
     public int getAmount() {
         return amount;
+    }
+
+    public String getAmountString() {
+        return String.valueOf(this.amount);
     }
 
     public Order getOrder() {
