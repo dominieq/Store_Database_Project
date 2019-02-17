@@ -75,6 +75,17 @@ public class DatabaseApp extends Application {
 
             this.warehouses = FXCollections.observableArrayList();
             this.workers = FXCollections.observableArrayList();
+            this.categories = FXCollections.observableArrayList();
+            this.couriers = FXCollections.observableArrayList();
+            this.merchandises = FXCollections.observableArrayList();
+            this.orders = FXCollections.observableArrayList();
+            this.packDeliveries = FXCollections.observableArrayList();
+            this.packOrders = FXCollections.observableArrayList();
+            this.producers = FXCollections.observableArrayList();
+            this.recipients = FXCollections.observableArrayList();
+            this.stocks = FXCollections.observableArrayList();
+            this.suppliers = FXCollections.observableArrayList();
+            this.supplies = FXCollections.observableArrayList();
 
             this.primaryStage.show();
         } catch (Exception exception) {
@@ -106,6 +117,17 @@ public class DatabaseApp extends Application {
 
             this.warehouses.clear();
             this.workers.clear();
+            this.categories.clear();
+            this.couriers.clear();
+            this.merchandises.clear();
+            this.orders.clear();
+            this.packDeliveries.clear();
+            this.packOrders.clear();
+            this.producers.clear();
+            this.recipients.clear();
+            this.stocks.clear();
+            this.suppliers.clear();
+            this.supplies.clear();
 
             StartMenuController controller = loader.getController();
             controller.setApp(this);
@@ -156,34 +178,10 @@ public class DatabaseApp extends Application {
 
         } finally {
             if(!emergencyStart) {
-                handleSQLExceptions(this.sqlhelper.fillWarehouses());
-                handleSQLExceptions(this.sqlhelper.fillWorkers());
+                handleSQLExceptions(this.sqlhelper.fillWarehouses(), "Warehouses");
+                handleSQLExceptions(this.sqlhelper.fillWorkers(), "Workers");
             }
         }
-    }
-
-    /**
-     * Handles some exceptions that may occur when using SQL queries.
-     * @param exception Exception
-     */
-    private void handleSQLExceptions(Exception exception) {
-
-        if(exception instanceof SQLException) {
-            showError("SQLError", "Error while executing SELECT query.");
-            System.out.println("#####--------#####");
-            exception.printStackTrace();
-            System.out.println("#####--------#####");
-        }
-        else if(exception instanceof NullPointerException) {
-            showError("Database empty", "Couldn't select relation from database.");
-            System.out.println("#####--------#####");
-            exception.printStackTrace();
-            System.out.println("#####--------#####");
-        }
-        else if(exception != null) {
-            showError("Error", exception);
-        }
-
     }
 
     /**
@@ -214,7 +212,45 @@ public class DatabaseApp extends Application {
                 System.out.println("Error occurred when loading WarehouseBusiness");
                 showError("Exception", exception);
             }
+        } finally {
+            if(!emergencyStart) {
+                handleSQLExceptions(this.sqlhelper.fillProducers(), "Producers");
+                handleSQLExceptions(this.sqlhelper.fillCategories(), "Categories");
+                handleSQLExceptions(this.sqlhelper.fillMerchandises(), "Merchandises");
+                handleSQLExceptions(this.sqlhelper.fillSuppliers(), "Suppliers");
+                handleSQLExceptions(this.sqlhelper.fillSupplies(), "Supplies");
+                handleSQLExceptions(this.sqlhelper.fillRecipients(), "Recipients");
+                handleSQLExceptions(this.sqlhelper.fillCouriers(), "Couriers");
+                handleSQLExceptions(this.sqlhelper.fillOrders(), "Orders");
+                handleSQLExceptions(this.sqlhelper.fillStocks(), "Stocks");
+                handleSQLExceptions(this.sqlhelper.fillPackDeliveries(), "PackDeliveries");
+                handleSQLExceptions(this.sqlhelper.fillPackOrders(), "PackOrders");
+            }
         }
+    }
+
+    /**
+     * Handles some exceptions that may occur when using SQL queries.
+     * @param exception Exception
+     */
+    private void handleSQLExceptions(Exception exception, String table) {
+
+        if(exception instanceof SQLException) {
+            showError("SQLError", "Error while executing SELECT FROM " + table);
+            System.out.println("#####--------#####");
+            System.out.println(exception.getMessage());
+            System.out.println("#####--------#####");
+        }
+        else if(exception instanceof NullPointerException) {
+            showError("Database empty", "Couldn't select " + table + " from database.");
+            System.out.println("#####--------#####");
+            System.out.println(exception.getMessage());
+            System.out.println("#####--------#####");
+        }
+        else if(exception != null) {
+            showError("Error", exception);
+        }
+
     }
 
     /**

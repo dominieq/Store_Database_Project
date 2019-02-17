@@ -37,6 +37,7 @@ public class SQLHelper {
         } catch (Exception exception) {
             // System.out.println("Couldn't connect with database.");
             System.out.println("Couldn't establish connection. Emergency start.");
+            exception.printStackTrace();
             // System.exit(1);
             this.app.setEmergencyStart(true);
         }
@@ -153,14 +154,14 @@ public class SQLHelper {
      * When an error occurs function returns exception otherwise returns null.
      * @return Exception
      */
-    public Exception fillMerchandisies() {
+    public Exception fillMerchandises() {
         ResultSet rsMerchandise = selectALL("merchandise");
         try{
             while (rsMerchandise.next()) {
                 int t_producer_int = rsMerchandise.getInt(5);
                 Producer t_producer = null;
                 for (Producer producer : this.app.getProducers()) {
-                    if (producer.getIndexString().equals(t_producer_int)) {
+                    if (producer.getIndex() == t_producer_int) {
                         t_producer = producer;
                         break;
                     }
@@ -168,7 +169,7 @@ public class SQLHelper {
                 int t_category_int = rsMerchandise.getInt(6);
                 Category t_category = null;
                 for (Category category : this.app.getCategories()) {
-                    if (category.getIndexString().equals(t_category_int)) {
+                    if (category.getIndex() == t_category_int) {
                         t_category = category;
                         break;
                     }
@@ -196,7 +197,7 @@ public class SQLHelper {
                 int t_recipient_int = rsOrder.getInt(4);
                 Recipient t_recipient = null;
                 for (Recipient recipient : this.app.getRecipients()) {
-                    if (recipient.getIndexString().equals(t_recipient_int)) {
+                    if (recipient.getIndex() == t_recipient_int) {
                         t_recipient = recipient;
                         break;
                     }
@@ -204,7 +205,7 @@ public class SQLHelper {
                 int t_courier_int = rsOrder.getInt(5);
                 Courier t_courier = null;
                 for (Courier courier : this.app.getCouriers()) {
-                    if (courier.getIndexString().equals(t_courier_int)) {
+                    if (courier.getIndex() == t_courier_int) {
                         t_courier = courier;
                         break;
                     }
@@ -332,7 +333,7 @@ public class SQLHelper {
                 int t_merchandise_int = rsStock.getInt(2);
                 Merchandise t_merchandise = null;
                 for (Merchandise merchandise : this.app.getMerchandise()) {
-                    if (merchandise.getIndexString().equals(t_merchandise_int)) {
+                    if (merchandise.getIndex() == t_merchandise_int) {
                         t_merchandise = merchandise;
                         break;
                     }
@@ -340,7 +341,7 @@ public class SQLHelper {
                 int t_warehouse_int = rsStock.getInt(3);
                 Warehouse t_warehouse = null;
                 for (Warehouse warehouse : this.app.getWarehouses()) {
-                    if (warehouse.getIndexString().equals(t_warehouse_int)) {
+                    if (warehouse.getIndex() == t_warehouse_int) {
                         t_warehouse = warehouse;
                         break;
                     }
