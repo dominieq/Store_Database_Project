@@ -19,10 +19,10 @@ public class Stock {
      * @param warehouse Warehouse
      */
     public Stock(Merchandise merchandise, Warehouse warehouse) {
-        this.index = createID(merchandise, warehouse);
         this.amount = 0;
         this.merchandise = merchandise;
         this.warehouse =  warehouse;
+        createID();
     }
 
     /**
@@ -32,21 +32,22 @@ public class Stock {
      * @param warehouse Warehouse
      */
     public Stock(int amount, Merchandise merchandise, Warehouse warehouse)  {
-        this.index = createID(merchandise, warehouse);
         this.amount = amount;
         this.merchandise = merchandise;
         this.warehouse = warehouse;
+        createID();
     }
 
     /**
      * Creates index from merchandise's index and warehouse's index.
      * Adds "#" at the beginning and "-" between those indices.
-     * @param merchandise Merchandise: Index will be used in first part of Stock's index
-     * @param warehouse Warehouse: Index will be used in second part of Stock's index
-     * @return String: New Stock's index
      */
-    private String createID(Merchandise merchandise, Warehouse warehouse) {
-        return "#" + merchandise.getName() + "-" + warehouse.getIndexString();
+    public void createID() {
+        if(this.merchandise != null && this.warehouse != null) {
+            this.index = "#" + this.merchandise.getName() + "-" + this.warehouse.getIndexString();
+        } else {
+            this.index = "";
+        }
     }
 
     /**

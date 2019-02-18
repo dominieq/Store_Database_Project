@@ -75,6 +75,7 @@ public class Order {
                  Courier courier) throws WrongDateError {
         try{
             this.startDate = new DateParser().transformStringToDate(startDate);
+            this.endDate = new DateParser().transformStringToDate("01/01/0001");
         } catch (ParsingError parsingError) {
             throw new WrongDateError(parsingError.getWrongDate());
         } finally {

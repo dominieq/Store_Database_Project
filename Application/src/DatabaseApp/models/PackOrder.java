@@ -19,10 +19,10 @@ public class PackOrder {
      * @param stock Stock
      */
     public PackOrder(Order order, Stock stock) {
-        this.index = createID(order, stock);
         this.amount = 0;
         this.order = order;
         this.stock = stock;
+        createID();
     }
 
     /**
@@ -32,21 +32,23 @@ public class PackOrder {
      * @param stock Stock
      */
     public PackOrder(int amount, Order order, Stock stock) {
-        this.index = createID(order, stock);
         this.amount = amount;
         this.order = order;
         this.stock = stock;
+        createID();
     }
 
     /**
      * Creates index using order's index and stock's index
      * Add "/" between those indices
-     * @param order Order: index will be used in second part of PackOrder's index
-     * @param stock Stock: index will be used in first part of PackOrder's index
-     * @return String: New PackOrder's index
      */
-    private String createID(Order order, Stock stock) {
-        return stock.toString() + "/" + order.toString();
+    public void createID() {
+        if(this.order != null && this.stock != null) {
+            this.index = this.stock.toString() + "/" + this.order.toString();
+        }
+        else {
+            this.index = "";
+        }
     }
 
     /**

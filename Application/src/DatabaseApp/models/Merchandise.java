@@ -6,9 +6,9 @@ public class Merchandise {
 
     private String name;
 
-    private float priceRetail;
+    private double priceRetail;
 
-    private float priceMarket;
+    private double priceMarket;
 
     private Producer producer;
 
@@ -25,6 +25,8 @@ public class Merchandise {
     public Merchandise(int index, String name, Producer producer, Category category) {
         this.index = index;
         this.name = name;
+        this.priceRetail = 0.0;
+        this.priceMarket = 0.0;
         this.producer = producer;
         this.category = category;
     }
@@ -38,7 +40,7 @@ public class Merchandise {
      * @param producer Producer
      * @param category Category
      */
-    public Merchandise(int index, String name, float priceRetail, float priceMarket,
+    public Merchandise(int index, String name, double priceRetail, double priceMarket,
                        Producer producer, Category category) {
         this.index = index;
         this.name = name;
@@ -89,20 +91,20 @@ public class Merchandise {
         this.name = name;
     }
 
-    public void setPriceRetail(float priceRetail) {
+    public void setPriceRetail(double priceRetail) {
         this.priceRetail = priceRetail;
     }
 
     public void setPriceRetail(String priceRetail) {
-        this.priceRetail = Float.parseFloat(priceRetail);
+        this.priceRetail = Double.parseDouble(priceRetail);
     }
 
-    public void setPriceMarket(float priceMarket) {
+    public void setPriceMarket(double priceMarket) {
         this.priceMarket = priceMarket;
     }
 
     public void setPriceMarket(String priceMarket) {
-        this.priceMarket = Float.parseFloat(priceMarket);
+        this.priceMarket = Double.parseDouble(priceMarket);
     }
 
     public void setProducer(Producer producer) {
@@ -127,7 +129,7 @@ public class Merchandise {
         return name;
     }
 
-    public float getPriceRetail() {
+    public double getPriceRetail() {
         return priceRetail;
     }
 
@@ -135,7 +137,7 @@ public class Merchandise {
         return String.valueOf(this.priceRetail);
     }
 
-    public float getPriceMarket() {
+    public double getPriceMarket() {
         return priceMarket;
     }
 

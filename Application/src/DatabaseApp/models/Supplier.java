@@ -24,6 +24,7 @@ public class Supplier {
         this.name = name;
         this.address = address;
         this.telNum = telNum;
+        this.mail = "[email address]";
     }
 
     /**

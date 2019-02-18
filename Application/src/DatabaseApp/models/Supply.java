@@ -25,8 +25,15 @@ public class Supply {
      * @param supplier Supplier
      */
     public Supply(int invoiceNumber, Supplier supplier) {
-        this.invoiceNumber = invoiceNumber;
-        this.supplier = supplier;
+        try {
+            this.startDate = new DateParser().transformStringToDate("01/01/0001");
+            this.endDate = new DateParser().transformStringToDate("01/01/0001");
+        } catch (ParsingError parsingError) {
+            System.out.println("SUPPLY EARLY STATE: Wrong date format");
+        } finally {
+            this.invoiceNumber = invoiceNumber;
+            this.supplier = supplier;
+        }
     }
 
     /**

@@ -18,17 +18,21 @@ public class Producer {
     private String webPage;
 
     /**
-     * Creates Producer object. Sets index and name
+     * Creates new Producer object using index and name
      * @param index  String
      * @param name String
      */
     public Producer(int index, String name) {
         this.index = index;
         this.name = name;
+        this.address = "[address]";
+        this.mail = "[email address]";
+        this.telNum = "[telephone number]";
+        this.webPage = "[web page address]";
     }
 
     /**
-     * Creates Producer object using index, name, address, mail, telNum and webPage.
+     * Creates new Producer object using index, name, address, mail, telNum and webPage.
      * @param index int
      * @param name String
      * @param address String
