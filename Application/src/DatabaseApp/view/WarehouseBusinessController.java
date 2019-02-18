@@ -1,6 +1,7 @@
 package DatabaseApp.view;
 
 import DatabaseApp.DatabaseApp;
+import DatabaseApp.exceptions.WrongDateError;
 import DatabaseApp.models.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -197,18 +198,34 @@ public class WarehouseBusinessController {
      * Opens window to create new Stock.
      */
     @FXML private void handleAddStock() {
+       Stock stock = new Stock(0, null, null);
+       if(this.app.showStockDialog("Add new stock", stock)) {
+           System.out.println("Stock " + stock.toString() + " added");
+           stock.createID();
+           this.app.getStocks().add(stock);
 
-        // TODO open new window to add new Stock
-
+           // TODO SQL INSERT INTO
+           // refresh stocks
+       }
     }
 
     /**
      * Opens window to edit selected Stock.
      */
     @FXML private void handleEditStock() {
+        Stock stock = this.stockBox.getValue();
+        if(stock != null) {
+            if(this.app.showStockDialog("Edit " + stock.toString() + " stock", stock)) {
+                stock.createID();
+                System.out.println("Stock " + stock.toString() + " edited");
 
-        // TODO get selected Stock and open new window to edit selection
-
+                // TODO SQL UPDATE
+                // refresh stocks
+            }
+        }
+        else {
+            this.app.showWarning("No selection", "Select stock to proceed.");
+        }
     }
 
     /**
@@ -220,8 +237,8 @@ public class WarehouseBusinessController {
      */
     @FXML private void handleSearchStock() {
 
-        // TODO get selected trait and text
-        // TODO search observableStockList
+        String trait = this.stockTraitsBox.getValue();
+        String wantedTrait = this.stockSearchField.getText();
         // TODO display stock traits on stockLabels and change stockBox selection
         // TODO or display information alert
 
@@ -231,8 +248,14 @@ public class WarehouseBusinessController {
      * Opens window to create new PackDelivery.
      */
     @FXML private void handleAddPackDelivery() {
+        PackDelivery packDelivery = new PackDelivery(0,  null,  null);
+        if(this.app.showPackDeliveryDialog("Add new package of delivery", packDelivery)) {
+            System.out.println("PackDelivery " + packDelivery.getIndex() + " added");
+            this.app.getPackDeliveries().add(packDelivery);
 
-        // TODO open new window to add new PackDelivery
+            // TODO SQL INSERT INTO
+            // refresh packDeliveries
+        }
 
     }
 
@@ -240,9 +263,16 @@ public class WarehouseBusinessController {
      * Gets selected PackDelivery and deletes it from packDeliveries and Database.
      */
     @FXML private void handleDelPackDelivery() {
+        PackDelivery packDelivery = this.packDeliveryBox.getValue();
+        if(packDelivery != null) {
+            this.app.getPackDeliveries().remove(packDelivery);
 
-        // TODO get selection and delete it from packDeliveries and Database
-        // TODO when no selection display warning alert
+            // TODO SQL DELETE FROM
+            // refresh packDeliveries
+        }
+        else {
+            this.app.showWarning("No selection", "Select package of deliveries to proceed.");
+        }
 
     }
 
@@ -250,8 +280,17 @@ public class WarehouseBusinessController {
      * Opens window to edit selected PackDelivery.
      */
     @FXML private void handleEditPackDelivery() {
+        PackDelivery packDelivery = this.packDeliveryBox.getValue();
+        if(packDelivery != null) {
+            if(this.app.showPackDeliveryDialog("Edit " + packDelivery.getIndex(), packDelivery)) {
+                System.out.println("PackDelivery " + packDelivery.getIndex() + " edited");
 
-        // TODO get selected PackDelivery and open new window to edit selection
+                // TODO SQL UPDATE
+                // refresh packDeliveries
+            }
+        } else {
+            this.app.showWarning("No selection", "Select package of deliveries to proceed.");
+        }
 
     }
 
@@ -263,9 +302,8 @@ public class WarehouseBusinessController {
      * When function couldn't find packDelivery then it displays information alert.
      */
     @FXML private void handleSearchPackDelivery() {
-
-        // TODO get selected trait and text
-        // TODO search packDeliveries
+        String trait = this.packDeliveryTraitsBox.getValue();
+        String wantedTrait = this.packDeliverySearchField.getText();
         // TODO display packDelivery's traits on packDeliveryLabels and change packDeliveryBox selection
         // TODO or display information alert
 
@@ -275,28 +313,49 @@ public class WarehouseBusinessController {
      * Opens window to create new PackOrder.
      */
     @FXML private void handleAddPackOrder() {
+        PackOrder packOrder = new PackOrder(0, null, null);
+        if(this.app.showPackOrderDialog("Add new package of orders", packOrder)) {
+            System.out.println("PackOrder " + packOrder.toString() + " added");
+            this.app.getPackOrders().add(packOrder);
 
-        // TODO open new window to add new PackOrder
-
+            // TODO SQL INSERT INTO
+            // refresh pack of orders
+        }
     }
 
     /**
      * Gets selected PackOrder and deletes it from packOrders and Database.
      */
     @FXML private void handleDelPackOrder() {
+        PackOrder packOrder = this.packOrderBox.getValue();
+        if(packOrder != null) {
+            System.out.println("PackOrder " + packOrder.toString() + " removed");
+            this.app.getPackOrders().remove(packOrder);
 
-        // TODO get selection and delete it from packOrders and Database
-        // TODO when no selection display warning alert
-
+            // TODO SQL DELETE FROM
+            // refresh packOrders
+        }
+        else {
+            this.app.showWarning("No selection", "Select package of orders to proceed.");
+        }
     }
 
     /**
      * Opens window to edit selected PackOrder.
      */
     @FXML private void handleEditPackOrder() {
+        PackOrder packOrder = this.packOrderBox.getValue();
+        if(packOrder != null) {
+            if(this.app.showPackOrderDialog("Edit " + packOrder.toString() + " package of orders", packOrder)) {
+                System.out.println("PackOrder " + packOrder.toString() + " edited");
 
-        // TODO get selected PackOrder and open new window to edit selection
-
+                // TODO SQL UPDATE
+                // refresh packOrders
+            }
+        }
+        else {
+            this.app.showWarning("No selection", "Select package of orders to proceed.");
+        }
     }
 
     /**
@@ -307,40 +366,58 @@ public class WarehouseBusinessController {
      * When function couldn't find packOrder then it displays information alert.
      */
     @FXML private void handleSearchPackOrder() {
+        String trait = this.packOrderTraitsBox.getValue();
+        String wantedTrait = this.packOrderSearchField.getText();
 
-        // TODO get selected trait and text
-        // TODO search packOrders
         // TODO display packOrder's traits on packOrderLabels and change packOrderBox selection
         // TODO or display information alert
-
     }
 
     /**
      * Opens window to create new Merchandise.
      */
     @FXML private void handleAddMerch() {
+        Merchandise merchandise = new Merchandise(0, "[name]", null, null);
+        if(this.app.showMerchandiseDialog("Add new merchandise", merchandise)) {
+            System.out.println("Merchandise " + merchandise.toString() + " added");
+            this.app.getMerchandise().add(merchandise);
 
-        // TODO open new window to add new Merchandise
-
+            // TODO SQL INSERT INTO
+            // refresh merchandises
+        }
     }
 
     /**
      * Gets selected Merchandise and deletes it from merchandises and Database.
      */
     @FXML private void handleDelMerch() {
+        Merchandise merchandise = merchBox.getValue();
+        if(merchandise != null) {
+            System.out.println("Merchandise " + merchandise.toString() + " removed");
+            this.app.getMerchandise().remove(merchandise);
 
-        // TODO get selection and delete it from merchandises and Database
-        // TODO when no selection display warning alert
-
+            // TODO SQL DELETE FROM
+            // refresh merchandises
+        } else {
+            this.app.showWarning("No selection", "Select merchandise to proceed.");
+        }
     }
 
     /**
      * Opens window to edit selected Merchandise.
      */
     @FXML private void handleEditMerch() {
+        Merchandise merchandise = this.merchBox.getValue();
+        if(merchandise != null) {
+            if(this.app.showMerchandiseDialog("Edit " + merchandise.toString() + " merchandise", merchandise)) {
+                System.out.println("Merchandise " + merchandise.toString() + " edited");
 
-        // TODO get selected Merchandise and open new window to edit selection
-
+                // TODO SQL UPDATE
+                // refresh merchandises
+            }
+        } else {
+            this.app.showWarning("No selection", "Select merchandise to proceed.");
+        }
     }
 
     /**
@@ -351,12 +428,11 @@ public class WarehouseBusinessController {
      * When function couldn't find Merchandise then it displays information alert.
      */
     @FXML private void handleSearchMerch() {
+        String trait = this.merchTraitsBox.getValue();
+        String wanted = this.merchSearchField.getText();
 
-        // TODO get selected trait and text
-        // TODO search Merchandise
         // TODO display Merchandise's traits on merchandiseLabels and change merchandiseBox selection
         // TODO or display information alert
-
     }
 
     /**
@@ -375,28 +451,50 @@ public class WarehouseBusinessController {
      * Opens window to create new Category.
      */
     @FXML private void handleAddCategory() {
+        Category category = new Category(0, "[name]");
+        boolean isOkClicked = this.app.showCategoryDialog("Add new category", category);
+        if(isOkClicked) {
+            System.out.println("Category " + category.toString() + " added");
+            this.app.getCategories().add(category);
 
-        // TODO open new window to add new Category
-
+            // TODO SQL INSERT INTO
+            // refresh categories
+        }
     }
 
     /**
      * Gets selected Category and deletes it from categories and Database.
      */
     @FXML private void handleDelCategory() {
+        Category category = this.categoryBox.getValue();
+        if(category != null) {
+            System.out.println("Category " + category.toString() + " removed");
+            this.app.getCategories().remove(category);
 
-        // TODO get selection and delete it from categories and Database
-        // TODO when no selection display warning alert
-
+            // TODO SQL DELETE FROM
+            // refresh categories
+        } else {
+            this.app.showWarning("No selection", "Select category to proceed.");
+        }
     }
 
     /**
      * Opens window to edit selected Category.
      */
     @FXML private void handleEditCategory() {
+        Category category = this.categoryBox.getValue();
+        if(category != null) {
+            boolean isOkClicked = this.app.showCategoryDialog(
+                    "Edit " + category.toString() + " category", category);
+            if(isOkClicked) {
+                System.out.println("Category " + category.toString() + " edited");
 
-        // TODO get selected Category and open new window to edit selection
-
+                // TODO SQL UPDATE
+                // refresh categories
+            }
+        } else {
+            this.app.showWarning("No selection" , "Select category to proceed.");
+        }
     }
 
     /**
@@ -407,40 +505,61 @@ public class WarehouseBusinessController {
      * When function couldn't find Category then it displays information alert.
      */
     @FXML private void handleSearchCategory() {
+        String trait = this.categoryTraitsBox.getValue();
+        String wantedTrait = this.categorySearchField.getText();
 
-        // TODO get selected trait and text
-        // TODO search Category
         // TODO display Category's traits on categoryLabels and change categoryBox selection
         // TODO or display information alert
-
     }
 
     /**
      * Opens window to create new Producer.
      */
     @FXML private void handleAddProducer() {
+        Producer producer = new Producer(0, "[name]");
+        boolean isOkClicked = this.app.showProducerDialog("Add new producer", producer);
+        if(isOkClicked) {
+            System.out.println("Producer " + producer.toString() + " added");
+            this.app.getProducers().add(producer);
 
-        // TODO open new window to add new Producer
-
+            // TODO SQL INSERT INTO
+            // refresh producers
+        }
     }
 
     /**
      * Gets selected Producer and deletes it from producers and Database.
      */
     @FXML private void handleDelProducer() {
+        Producer producer = this.producerBox.getValue();
+        if(producer != null) {
+            System.out.println("Producer " + producer.toString() + " removed");
+            this.app.getProducers().remove(producer);
 
-        // TODO get selection and delete it from producers and Database
-        // TODO when no selection display warning alert
-
+            // TODO SQL DELET FROM
+            // refresh producers
+        } else {
+            this.app.showWarning("No selection", "Select producer to proceed.");
+        }
     }
 
     /**
      * Opens window to edit selected Producer.
      */
     @FXML private void handleEditProducer() {
+        Producer producer = this.producerBox.getValue();
+        if(producer != null) {
+            boolean isOkClicked = this.app.showProducerDialog(
+                    "Edit " + producer.toString() + " producer", producer);
+            if(isOkClicked) {
+                System.out.println("Producer " + producer.toString() + " edited");
 
-        // TODO get selected Producer and open new window to edit selection
-
+                // TODO SQL UPDATE
+                // refresh producers
+            }
+        } else {
+            this.app.showWarning("No selection", "Select producer to proceed");
+        }
     }
 
     /**
@@ -451,40 +570,61 @@ public class WarehouseBusinessController {
      * When function couldn't find Producer then it displays information alert.
      */
     @FXML private void handleSearchProducer() {
+        String trait = this.producerTraitsBox.getValue();
+        String wantedTrait = this.producerSearchField.getText();
 
-        // TODO get selected trait and text
-        // TODO search Producer
         // TODO display Producer's traits on producerLabels and change producerBox selection
         // TODO or display information alert
-
     }
 
     /**
      * Opens window to create new Supplier.
      */
     @FXML private void handleAddSupplier() {
+        Supplier supplier = new Supplier(0,"[name]", "[address]", "[telephone number]");
+        boolean isOkClicked = this.app.showSupplierDialog("Add new supplier", supplier);
+        if(isOkClicked) {
+            System.out.println("Supplier " + supplier.toString() + " added");
+            this.app.getSuppliers().add(supplier);
 
-        // TODO open new window to add new Supplier
-
+            // TODO SQL INSERT INTO
+            // refresh suppliers
+        }
     }
 
     /**
      * Gets selected Supplier and deletes it from suppliers and Database.
      */
     @FXML private void handleDelSupplier() {
+        Supplier supplier = this.supplierBox.getValue();
+        if(supplier != null) {
+            System.out.println("Supplier " + supplier.toString() + " removed");
+            this.app.getSuppliers().remove(supplier);
 
-        // TODO get selection and delete it from suppliers and Database
-        // TODO when no selection display warning alert
-
+            // TODO SQL DELTE FROM
+            // refresh suppliers
+        } else {
+            this.app.showWarning("No selection", "Select supplier to proceed");
+        }
     }
 
     /**
      * Opens window to edit selected Supplier.
      */
     @FXML private void handleEditSupplier() {
+        Supplier supplier = this.supplierBox.getValue();
+        if(supplier != null) {
+            boolean isOkClicked = this.app.showSupplierDialog(
+                    "Edit " + supplier.toString() + " supplier", supplier);
+            if(isOkClicked) {
+                System.out.println("Supplier " + supplier.toString() + " edited");
 
-        // TODO get selected Supplier and open new window to edit selection
-
+                // TODO SQL UPDATE
+                // refresh suppliers
+            }
+        } else {
+            this.app.showWarning("No selection", "Select supplier to proceed.");
+        }
     }
 
     /**
@@ -495,40 +635,61 @@ public class WarehouseBusinessController {
      * When function couldn't find Supplier then it displays information alert.
      */
     @FXML private void handleSearchSupplier() {
+        String trait = this.supplierTraitsBox.getValue();
+        String wantedTrait = this.supplierSearchField.getText();
 
-        // TODO get selected trait and text
-        // TODO search Supplier
         // TODO display Supplier's traits on supplierLabels and change supplierBox selection
         // TODO or display information alert
-
     }
 
     /**
      * Opens window to create new Supply.
      */
     @FXML private void handleAddSupply() {
+        Supply supply = new Supply(0, null);
+        boolean isOkClicked = this.app.showSupplyDialog("Add new supply", supply);
+        if(isOkClicked) {
+            System.out.println("Supply " + supply.toString() + " added");
+            this.app.getSupplies().add(supply);
 
-        // TODO open new window to add new Supply
-
+            // TODO SQL INSERT INTO
+            // refresh supplies
+        }
     }
 
     /**
      * Gets selected Supply and deletes it from supplies and Database.
      */
     @FXML private void handleDelSupply() {
+        Supply supply = this.supplyBox.getValue();
+        if(supply != null) {
+            System.out.println("Supply " + supply.toString() + " removed");
+            this.app.getSupplies().remove(supply);
 
-        // TODO get selection and delete it from supplies and Database
-        // TODO when no selection display warning alert
-
+            // TODO SQL DELETE FROM
+            // refresh supplies
+        } else {
+            this.app.showWarning("No selection", "Select supply to proceed.");
+        }
     }
 
     /**
      * Opens window to edit selected Supply.
      */
     @FXML private void handleEditSupply() {
+        Supply supply = this.supplyBox.getValue();
+        if(supply != null) {
+            boolean isOkClicked = this.app.showSupplyDialog(
+                    "Edit " + supply.toString() + " supply", supply);
+            if(isOkClicked) {
+                System.out.println("Supply " + supply.toString() + " edited");
 
-        // TODO get selected Supply and open new window to edit selection
-
+                // TODO SQL UPDATE
+                // refresh supplies
+            }
+        } else {
+            this.app.showWarning("No selection", "Select supply to proceed");
+        }
     }
 
     /**
@@ -539,40 +700,66 @@ public class WarehouseBusinessController {
      * When function couldn't find Supply then it displays information alert.
      */
     @FXML private void handleSearchSupply() {
+        String trait = this.supplyTraitsBox.getValue();
+        String wantedTrait = this.supplySearchField.getText();
 
-        // TODO get selected trait and text
-        // TODO search Supply
         // TODO display Supply's traits on supplyLabels and change supplyBox selection
         // TODO or display information alert
-
     }
 
     /**
      * Opens window to create new Order.
      */
     @FXML private void handleAddOrder() {
+        Order order;
+        try {
+            order = new Order(0, "01/01/0001", null, null);
+            boolean isOkClicked = this.app.showOrderDialog("Add new order", order);
+            if (isOkClicked) {
+                System.out.println("Order " + order.toString() + " added");
+                this.app.getOrders().add(order);
 
-        // TODO open new window to add new Order
-
+                // TODO SQL INSERT INTO
+                // refresh orders
+            }
+        } catch (WrongDateError ignored) {
+            System.out.println("EARLY STATE: Wrong format when initializing.");
+        }
     }
 
     /**
      * Gets selected Order and deletes it from orders and Database.
      */
     @FXML private void handleDelOrder() {
+        Order order = this.orderBox.getValue();
+        if(order != null) {
+            System.out.println("Order " + order.toString() + " removed");
+            this.app.getOrders().remove(order);
 
-        // TODO get selection and delete it from orders and Database
-        // TODO when no selection display warning alert
-
+            // TODO SQL DELETE FROM
+            // refresh orders
+        } else {
+            this.app.showWarning("No selection",  "Select order to proceed.");
+        }
     }
 
     /**
      * Opens window to edit selected Order.
      */
     @FXML private void handleEditOrder() {
+        Order order = this.orderBox.getValue();
+        if(order != null) {
+            boolean isOkClicked = this.app.showOrderDialog(
+                    "Edit " + order.toString() + " order", order);
+            if(isOkClicked) {
+                System.out.println("Order " + order.toString() + " edited");
 
-        // TODO get selected Order and open new window to edit selection
-
+                // TODO SQL UPDATE
+                // refresh orders
+            }
+        } else {
+            this.app.showWarning("No selection" , "Select order to proceed.");
+        }
     }
 
     /**
@@ -583,39 +770,59 @@ public class WarehouseBusinessController {
      * When function couldn't find Order then it displays information alert.
      */
     @FXML private void handleSearchOrder() {
+        String trait = this.orderTraitsBox.getValue();
+        String wantedTrait = this.orderSearchField.getText();
 
-        // TODO get selected trait and text
-        // TODO search Order
         // TODO display Order's traits on orderLabels and change orderBox selection
         // TODO or display information alert
-
     }
 
     /**
      * Opens window to create new Recipient.
      */
     @FXML private void handleAddRecipient() {
+        Recipient recipient = new Recipient(0, "[name]", "[surname]",
+                "[address]", "[telephone number]");
+        if(this.app.showRecipientDialog("Add new recipient", recipient)) {
+            System.out.println("recipient " + recipient.toString() + " added");
+            this.app.getRecipients().add(recipient);
 
-        // TODO open new window to add new Recipient
-
+            // TODO SQL INSERT INTO
+            // refresh recipients
+        }
     }
 
     /**
      * Gets selected Recipient and deletes it from recipients and Database.
      */
     @FXML private void handleDelRecipient() {
+        Recipient recipient = this.recipientBox.getValue();
+        if(recipient != null) {
+            System.out.println("Recipient " + recipient.toString() + " removed");
+            this.app.getRecipients().remove(recipient);
 
-        // TODO get selection and delete it from recipients and Database
-        // TODO when no selection display warning alert
-
+            // TODO SQL DELETE FROM
+            // refresh recipients
+        } else {
+            this.app.showWarning("No selection", "Select recipient to proceed.");
+        }
     }
 
     /**
      * Opens window to edit selected Recipient.
      */
     @FXML private void handleEditRecipient() {
+        Recipient recipient = this.recipientBox.getValue();
+        if(recipient != null) {
+            if(this.app.showRecipientDialog("Edit " + recipient.toString() + " recipient", recipient)) {
+                System.out.println("Recipient " + recipient.toString() + " edited");
 
-        // TODO get selected Recipient and open new window to edit selection
+                // TODO SQL UPADTE
+                // refresh recipients
+            }
+        } else {
+            this.app.showWarning("No selection", "Select recipient to proceed");
+        }
 
     }
 
@@ -627,40 +834,58 @@ public class WarehouseBusinessController {
      * When function couldn't find Recipient then it displays information alert.
      */
     @FXML private void handleSearchRecipient() {
+        String trait = this.recipientTraitsBox.getValue();
+        String wantedTrait = this.recipientSearchField.getText();
 
-        // TODO get selected trait and text
-        // TODO search Recipient
         // TODO display Recipient's traits on recipientLabels and change recipientBox selection
         // TODO or display information alert
-
     }
 
     /**
      * Opens window to create new Courier.
      */
     @FXML private void handleAddCourier() {
+        Courier courier = new Courier(0, "[telephone number]");
+        if(this.app.showCourier("Add new courier", courier)) {
+            System.out.println("Courier " + courier.toString() + " added");
+            this.app.getCouriers().add(courier);
 
-        // TODO open new window to add new Courier
-
+            // TODO SQL INSERT INTO
+            // refresh couriers
+        }
     }
 
     /**
      * Gets selected Courier and deletes it from couriers and Database.
      */
     @FXML private void handleDelCourier() {
+        Courier courier = this.courierBox.getValue();
+        if(courier != null) {
+            System.out.println("Courier " + courier.toString() + " removed");
+            this.app.getCouriers().remove(courier);
 
-        // TODO get selection and delete it from couriers and Database
-        // TODO when no selection display warning alert
-
+            // TODO SQL DELETE FROM
+            // refresh couriers
+        } else {
+            this.app.showWarning("No selection", "Select courier to proceed.");
+        }
     }
 
     /**
      * Opens window to edit selected Courier.
      */
     @FXML private void handleEditCourier() {
+        Courier courier = this.courierBox.getValue();
+        if(courier != null) {
+            if(this.app.showCourier("Edit " + courier.toString() + " courier", courier)){
+                System.out.println("Courier " + courier.toString() + " edited");
 
-        // TODO get selected Courier and open new window to edit selection
-
+                // TODO SQL UPDATE
+                // refresh
+            }
+        } else {
+            this.app.showWarning("No selection", "Select courier to proceed.");
+        }
     }
 
     /**
@@ -671,12 +896,11 @@ public class WarehouseBusinessController {
      * When function couldn't find Courier then it displays information alert.
      */
     @FXML private void handleSearchCourier() {
+        String trait = this.courierTraitsBox.getValue();
+        String wantedTrait = this.categorySearchField.getText();
 
-        // TODO get selected trait and text
-        // TODO search Courier
         // TODO display Courier's traits on courierLabels and change courierBox selection
         // TODO or display information alert
-
     }
 
     /**

@@ -3,8 +3,7 @@ package DatabaseApp;
 import DatabaseApp.helpers.SQLHelper;
 import DatabaseApp.models.*;
 import DatabaseApp.view.*;
-import DatabaseApp.viewExtended.EditWarehouseLayoutController;
-import DatabaseApp.viewExtended.EditWorkerLayoutController;
+import DatabaseApp.viewExtended.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -276,15 +275,7 @@ public class DatabaseApp extends Application {
 
             return controller.isAcceptClicked();
         } catch (Exception exception) {
-            if(exception instanceof IOException) {
-                String error = "IOException: Couldn't load EditWorkerDialog";
-                System.out.println(error);
-                showError("IOException", error);
-            }
-            else {
-                System.out.println("Error occurred when loading EditWorkerDialog");
-                showError("Exception", exception);
-            }
+            handleEditDialogExceptions(exception, "EditWorkerDialog");
             return false;
         }
     }
@@ -312,15 +303,239 @@ public class DatabaseApp extends Application {
 
             return controller.isAcceptClicked();
         } catch (Exception exception) {
-            if(exception instanceof IOException) {
-                String error = "IOException: Couldn't load EditWarehouseDialog";
-                System.out.println(error);
-                showError("IOException", error);
-            }
-            else {
-                System.out.println("Error occurred when loading EditWarehouseDialog");
-                showError("Exception", exception);
-            }
+            handleEditDialogExceptions(exception, "EditWarehouseDialog");
+            return false;
+        }
+    }
+
+    public boolean showStockDialog(String title, Stock stock) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DatabaseApp.class.getResource("viewExtended/EditStockLayout.fxml"));
+            SplitPane pane = loader.load();
+
+            Stage dialogStage = setDialogStage(title, pane);
+
+            EditStockLayoutController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setStock(stock, this.merchandises, this.warehouses);
+
+            dialogStage.showAndWait();
+
+            return controller.isAcceptClicked();
+        } catch(Exception exception) {
+            handleEditDialogExceptions(exception, "EditStockDialog");
+            return false;
+        }
+    }
+
+    public boolean showPackOrderDialog(String title, PackOrder packOrder) {
+        try {
+            FXMLLoader loader =  new FXMLLoader();
+            loader.setLocation(DatabaseApp.class.getResource("viewExtended/EditPackOrderLayout.fxml"));
+            SplitPane pane = loader.load();
+
+            Stage dialogStage = setDialogStage(title, pane);
+
+            EditPackOrderLayoutController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setPackOrder(packOrder, this.stocks, this.orders);
+
+            dialogStage.showAndWait();
+
+            return controller.isAcceptClicked();
+        } catch (Exception exception) {
+            handleEditDialogExceptions(exception, "EditPackOrderDialog");
+            return false;
+        }
+    }
+
+    public boolean showPackDeliveryDialog(String title, PackDelivery packDelivery) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DatabaseApp.class.getResource("viewExtended/EditPackDeliveryLayout.fxml"));
+            SplitPane pane = loader.load();
+
+            Stage dialogStage = setDialogStage(title, pane);
+
+            EditPackDeliveryLayoutController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setPackDelivery(packDelivery, this.stocks, this.supplies);
+
+            dialogStage.showAndWait();
+
+            return controller.isAcceptClicked();
+        } catch (Exception exception) {
+            handleEditDialogExceptions(exception, "EditPackDeliveryDialog");
+            return false;
+        }
+    }
+
+    public boolean showMerchandiseDialog(String title, Merchandise merchandise) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DatabaseApp.class.getResource("viewExtended/EditMerchandiseLayout.fxml"));
+            SplitPane pane = loader.load();
+
+            Stage dialogStage = setDialogStage(title, pane);
+
+            EditMerchandiseLayoutController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setMerchandise(merchandise, this.producers, this.categories);
+
+            dialogStage.showAndWait();
+
+            return controller.isAcceptClicked();
+        } catch (Exception exception) {
+            handleEditDialogExceptions(exception, "EditMerchandiseDialog");
+            return false;
+        }
+    }
+
+    public boolean showProducerDialog(String title, Producer producer) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DatabaseApp.class.getResource("viewExtended/EditProducerLayout.fxml"));
+            SplitPane pane = loader.load();
+
+            Stage dialogStage = setDialogStage(title, pane);
+
+            EditProducerLayoutController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setProducer(producer);
+
+            dialogStage.showAndWait();
+
+            return controller.isAcceptClicked();
+        } catch (Exception exception) {
+            handleEditDialogExceptions(exception, "EditProducerDialog");
+            return false;
+        }
+    }
+
+    public boolean showCategoryDialog(String title, Category category) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DatabaseApp.class.getResource("viewExtended/EditCategoryLayout.fxml"));
+            SplitPane pane = loader.load();
+
+            Stage dialogStage = setDialogStage(title, pane);
+
+            EditCategoryLayoutController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setCategory(category);
+
+            dialogStage.showAndWait();
+
+            return controller.isAcceptClicked();
+        } catch (Exception exception) {
+            handleEditDialogExceptions(exception, "EditCategoryDialog");
+            return false;
+        }
+    }
+
+    public boolean showSupplierDialog(String title, Supplier supplier) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DatabaseApp.class.getResource("viewExtended/EditSupplierLayout.fxml"));
+            SplitPane pane = loader.load();
+
+            Stage dialogStage = setDialogStage(title, pane);
+
+            EditSupplierLayoutController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setSupplier(supplier);
+
+            dialogStage.showAndWait();
+
+            return controller.isAcceptClicked();
+        } catch (Exception exception) {
+            handleEditDialogExceptions(exception, "EditSupplierDialog");
+            return false;
+        }
+    }
+
+
+    public boolean showSupplyDialog(String title, Supply supply) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DatabaseApp.class.getResource("viewExtended/EditSupplyLayout.fxml"));
+            SplitPane pane = loader.load();
+
+            Stage dialogStage = setDialogStage(title, pane);
+
+            EditSupplyLayoutController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setSupply(supply, this.suppliers);
+
+            dialogStage.showAndWait();
+
+            return controller.isAcceptClicked();
+        } catch (Exception exception) {
+            handleEditDialogExceptions(exception, "EditSupplyDialog");
+            return false;
+        }
+    }
+
+    public boolean showOrderDialog(String title, Order order) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DatabaseApp.class.getResource("viewExtended/EditOrderLayout.fxml"));
+            SplitPane pane = loader.load();
+
+            Stage dialogStage = setDialogStage(title, pane);
+
+            EditOrderLayoutController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setOrder(order, this.couriers, this.recipients);
+
+            dialogStage.showAndWait();
+
+            return controller.isAcceptClicked();
+        } catch (Exception exception) {
+            handleEditDialogExceptions(exception, "EditOrderDialog");
+            return false;
+        }
+    }
+
+    public boolean showRecipientDialog(String title, Recipient recipient) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DatabaseApp.class.getResource("viewExtended/EditRecipientLayout.fxml"));
+            SplitPane pane = loader.load();
+
+            Stage dialogStage = setDialogStage(title, pane);
+
+            EditRecipientLayoutController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setRecipient(recipient);
+
+            dialogStage.showAndWait();
+
+            return controller.isAcceptClicked();
+        } catch (Exception exception) {
+            handleEditDialogExceptions(exception, "EditRecipientDialog");
+            return false;
+        }
+    }
+
+    public boolean showCourier(String title, Courier courier) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DatabaseApp.class.getResource("viewExtended/EditCourierLayout.fxml"));
+            SplitPane pane = loader.load();
+
+            Stage dialogStage = setDialogStage(title, pane);
+
+            EditCourierLayoutController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setCourier(courier);
+
+            dialogStage.showAndWait();
+
+            return controller.isAcceptClicked();
+        } catch (Exception exception) {
+            handleEditDialogExceptions(exception, "EditCourierDialog");
             return false;
         }
     }
@@ -340,6 +555,18 @@ public class DatabaseApp extends Application {
         dialogStage.setScene(scene);
 
         return dialogStage;
+    }
+
+    private void handleEditDialogExceptions(Exception exception, String dialog) {
+        if(exception instanceof IOException) {
+            String error = "IOException: Couldn't load " + dialog;
+            System.out.println(error);
+            showError("IOException", error);
+        }
+        else {
+            System.out.println("Error occurred when loading " + dialog);
+            showError("Exception", exception);
+        }
     }
 
     /**

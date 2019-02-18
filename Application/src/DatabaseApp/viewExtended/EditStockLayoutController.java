@@ -40,6 +40,7 @@ public class EditStockLayoutController extends EditController {
        this.stock.setAmount(this.amountField.getText());
        this.stock.setMerchandise(this.merchandiseChoiceBox.getValue());
        this.stock.setWarehouse(this.warehouseChoiceBox.getValue());
+       this.stock.createID();
 
     }
 

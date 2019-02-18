@@ -39,18 +39,19 @@ public class EditPackOrderLayoutController extends EditController {
        this.packOrder.setAmount(this.amountField.getText());
        this.packOrder.setStock(this.stockChoiceBox.getValue());
        this.packOrder.setOrder(this.orderChoiceBox.getValue());
+       this.packOrder.createID();
 
     }
 
-    public void setPackOrder(PackOrder packOrder, ObservableList<Stock> merchandises,
-                            ObservableList<Order> warehouses) {
+    public void setPackOrder(PackOrder packOrder, ObservableList<Stock> stocks,
+                            ObservableList<Order> orders) {
 
         this.packOrder =  packOrder;
 
         this.amountField.setText(packOrder.getAmountString());
-        this.stockChoiceBox.setItems(merchandises);
+        this.stockChoiceBox.setItems(stocks);
         this.stockChoiceBox.getSelectionModel().select(packOrder.getStock());
-        this.orderChoiceBox.setItems(warehouses);
+        this.orderChoiceBox.setItems(orders);
         this.orderChoiceBox.getSelectionModel().select(packOrder.getOrder());
 
     }

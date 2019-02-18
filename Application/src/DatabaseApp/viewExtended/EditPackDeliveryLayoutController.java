@@ -39,6 +39,7 @@ public class EditPackDeliveryLayoutController extends EditController {
        this.packDelivery.setAmount(this.amountField.getText());
        this.packDelivery.setStock(this.stockChoiceBox.getValue());
        this.packDelivery.setSupply(this.supplyChoiceBox.getValue());
+       this.packDelivery.createID();
 
     }
 
