@@ -1,9 +1,6 @@
 package DatabaseApp.helpers;
 
 import DatabaseApp.DatabaseApp;
-import DatabaseApp.models.Courier;
-import DatabaseApp.models.Warehouse;
-import DatabaseApp.models.Worker;
 import DatabaseApp.models.*;
 
 import java.sql.*;
