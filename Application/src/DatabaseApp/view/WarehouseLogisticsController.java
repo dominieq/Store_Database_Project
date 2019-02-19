@@ -85,6 +85,7 @@ public class WarehouseLogisticsController {
             this.app.getWarehouses().add(warehouse);
 
             // TODO SQL query INSERT INTO
+            this.app.sqldmlinsert("INSERT INTO warehouse (ADDRESS) VALUES('" + warehouse.getAddress() + "')");
 
             refreshWarehouse(warehouse);
         }
@@ -109,6 +110,7 @@ public class WarehouseLogisticsController {
             this.app.getWarehouses().remove(warehouse);
 
             // TODO SQL query DELETE FROM
+            this.app.sqldmldelete("DELETE FROM warehouse WHERE ID = " + warehouse.getIndex());
 
             this.warehouseTableView.refresh();
             this.warehouseTableView.getSelectionModel().selectFirst();
@@ -131,6 +133,7 @@ public class WarehouseLogisticsController {
                 System.out.println("Warehouse: " + warehouse.toString() + " edited");
 
                 // TODO SQL query UPDATE
+                this.app.sqldmlupdate("UPDATE warehouse SET ADDRESS = '" + warehouse.getAddress() + "' WHERE ID = " + warehouse.getIndex());
 
                 refreshWarehouse(warehouse);
             }
@@ -150,6 +153,8 @@ public class WarehouseLogisticsController {
         // TODO use SQL query to search for warehouse
         // SELECT index FROM warehouses
         // WHERE [trait] = [wantedTrait]
+        this.app.sqlselect("SELECT * FROM warehouse WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+
     }
 
     /**
@@ -171,6 +176,8 @@ public class WarehouseLogisticsController {
             }
 
             // TODO SQL query INSERT INTO
+            this.app.sqldmlinsert("INSERT INTO worker (NAME, SURNAME, ADDRESS, TELNUM, MAIL, PESEL, WAREHOUSE) VALUES('" +
+                    worker.getName() + "', '" + worker.getSurname() + "', '" + worker.getAddress() + "', '" + worker.getTelNum() + "', '" + worker.getMail() + "', '" + worker.getPESEL() + "', " + worker.getWarehouseIndex() + ")");
 
             refreshWorker(worker);
         }
@@ -191,6 +198,7 @@ public class WarehouseLogisticsController {
                     this.app.getWorkers().remove(worker);
 
                     // TODO SQL query DELETE FROM
+                    this.app.sqldmldelete("DELETE FROM worker WHERE ID = " + worker.getIndex());
 
                 }
             }
@@ -218,6 +226,14 @@ public class WarehouseLogisticsController {
                 System.out.println("Worker: " + worker.toString() + " edited");
 
                 // TODO use SQL query UPDATE
+                this.app.sqldmlupdate("UPDATE worker SET NAME = '" + worker.getName() +
+                        "', SURNAME = '" + worker.getSurname() +
+                        "', ADDRESS = '" + worker.getAddress() +
+                        "', TELNUM = '" + worker.getTelNum() +
+                        "', MAIL = '" + worker.getMail() +
+                        "', PESEL = '" + worker.getPESEL() +
+                        "', WAREHOUSE = " + worker.getWarehouseIndex() +
+                        " WHERE ID = " + worker.getIndex());
 
                 refreshWorker(worker);
             }
@@ -238,6 +254,7 @@ public class WarehouseLogisticsController {
         // TODO use SQL query to search for worker
         // SELECT index FROM workers
         // WHERE [trait] = [wantedTrait]
+        this.app.sqlselect("SELECT * FROM worker WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
     }
 
     /**

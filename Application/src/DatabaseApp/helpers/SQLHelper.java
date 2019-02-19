@@ -191,7 +191,7 @@ public class SQLHelper {
         ResultSet rsOrder = selectALL("w_order");
         try{
             while (rsOrder.next()) {
-                int t_recipient_int = rsOrder.getInt(4);
+                int t_recipient_int = rsOrder.getInt(5);
                 Recipient t_recipient = null;
                 for (Recipient recipient : this.app.getRecipients()) {
                     if (recipient.getIndex() == t_recipient_int) {
@@ -199,7 +199,7 @@ public class SQLHelper {
                         break;
                     }
                 }
-                int t_courier_int = rsOrder.getInt(5);
+                int t_courier_int = rsOrder.getInt(4);
                 Courier t_courier = null;
                 for (Courier courier : this.app.getCouriers()) {
                     if (courier.getIndex() == t_courier_int) {
@@ -235,8 +235,7 @@ public class SQLHelper {
                         break;
                     }
                 }
-
-                Stock t_stock = this.create_temp_ID(rsPackDelivery.getInt(2), rsPackDelivery.getInt(3));
+                Stock t_stock = this.getThisStock(rsPackDelivery.getInt(2), rsPackDelivery.getInt(3));
 
                 this.app.getPackDeliveries().add(new PackDelivery(
                         rsPackDelivery.getInt(4), t_supply,
@@ -267,7 +266,8 @@ public class SQLHelper {
                     }
                 }
 
-                Stock t_stock = this.create_temp_ID(rsPackOrder.getInt(2), rsPackOrder.getInt(3));
+                Stock t_stock = this.getThisStock(rsPackOrder.getInt(2), rsPackOrder.getInt(3));
+
 
                 this.app.getPackOrders().add(new PackOrder(
                         rsPackOrder.getInt(4), t_order,
@@ -400,33 +400,83 @@ public class SQLHelper {
     }
 
     /*
-     * for Stock key
+     * for Stock
      */
-    private Stock create_temp_ID(int merchandise_int, int warehouse_int) {
-        Merchandise t_merchandise = null;
-        for (Merchandise merchandise : this.app.getMerchandise()) {
-            if (merchandise.getIndex() == merchandise_int) {
-                t_merchandise = merchandise;
-                break;
-            }
-        }
-        Warehouse t_warehouse = null;
-        for (Warehouse warehouse : this.app.getWarehouses()) {
-            if (warehouse.getIndex() == warehouse_int) {
-                t_warehouse = warehouse;
-                break;
-            }
-        }
-
-        String stock_int = "#" + t_merchandise.getName() + "-" + t_warehouse.getIndexString();
-        Stock t_stock = null;
+    private Stock getThisStock(int merchandise_int, int warehouse_int) {
         for (Stock stock : this.app.getStocks()) {
-            if (stock.getIndex().equals(stock_int)) {
-                t_stock = stock;
-                break;
+            if (stock.getMerchandise().getIndex() == merchandise_int && stock.getWarehouse().getIndex() == warehouse_int) {
+                return stock;
             }
         }
+        System.out.println(7);
+        return null;
+    }
 
-        return t_stock;
+    public void insertInto (String sqldmlinsertcode){
+
+        Statement stmt;
+        int rows;
+        try {
+            stmt = conn.createStatement();
+            System.out.println(sqldmlinsertcode);
+            rows = stmt.executeUpdate(sqldmlinsertcode);
+            System.out.println(rows + " for 'INSERT'");
+        } catch (SQLException exception) {
+            System.out.println("Couldn't execute INSERT INTO query.");
+            System.out.println("Error Code: " + exception.getErrorCode());
+            System.out.println("SQLState: " + exception.getSQLState());
+        }
+
+    }
+
+    public void deleteFrom (String sqldmldeletecode){
+
+        Statement stmt;
+        int rows;
+        try {
+            stmt = conn.createStatement();
+            System.out.println(sqldmldeletecode);
+            rows = stmt.executeUpdate(sqldmldeletecode);
+            System.out.println(rows + " for 'DELETE'");
+        } catch (SQLException exception) {
+            System.out.println("Couldn't execute DELETE FROM query.");
+            System.out.println("Error Code: " + exception.getErrorCode());
+            System.out.println("SQLState: " + exception.getSQLState());
+        }
+
+    }
+
+    public void updateWhere (String sqldmlupdatecode){
+
+        Statement stmt;
+        int rows;
+        try {
+            stmt = conn.createStatement();
+            System.out.println(sqldmlupdatecode);
+            rows = stmt.executeUpdate(sqldmlupdatecode);
+            System.out.println(rows + " for 'UPDATE'");
+        } catch (SQLException exception) {
+            System.out.println("Couldn't execute UPDATE WHERE query.");
+            System.out.println("Error Code: " + exception.getErrorCode());
+            System.out.println("SQLState: " + exception.getSQLState());
+        }
+
+    }
+
+    public void searchWhere (String sqlselectcode){
+
+        Statement stmt;
+        int rows;
+        try {
+            stmt = conn.createStatement();
+            System.out.println(sqlselectcode);
+            rows = stmt.executeUpdate(sqlselectcode);
+            System.out.println(rows + " for 'SELECT'");
+        } catch (SQLException exception) {
+            System.out.println("Couldn't execute SELECT WHERE query.");
+            System.out.println("Error Code: " + exception.getErrorCode());
+            System.out.println("SQLState: " + exception.getSQLState());
+        }
+
     }
 }
