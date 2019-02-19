@@ -206,6 +206,10 @@ public class WarehouseBusinessController {
 
            // TODO SQL INSERT INTO
            // refresh stocks
+           this.app.sqldmlinsert("INSERT INTO stock (AMOUNT, MERCHANDISE, WAREHOUSE) VALUES(" +
+                   stock.getAmount() + ", " +
+                   stock.getMerchandise().getIndex() + ", " +
+                   stock.getWarehouse().getIndex() + ")");
        }
     }
 
@@ -221,6 +225,10 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh stocks
+                this.app.sqldmlupdate("UPDATE STOCK SET AMOUNT = " +
+                        stock.getAmount() +
+                        " WHERE MERCHANDISE = " + stock.getMerchandise().getIndex() +
+                        " AND WAREHOUSE = " + stock.getWarehouse().getIndex());
             }
         }
         else {
@@ -241,6 +249,7 @@ public class WarehouseBusinessController {
         String wantedTrait = this.stockSearchField.getText();
         // TODO display stock traits on stockLabels and change stockBox selection
         // TODO or display information alert
+        this.app.sqlselect("SELECT * FROM stock WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -255,6 +264,11 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh packDeliveries
+            this.app.sqldmlinsert("INSERT INTO packdelivery (INVOICENUMBER, MERCHANDISE, WAREHOUSE, AMOUNT) VALUES(" +
+                    packDelivery.getSupply().getInvoiceNumber() + ", " +
+                    packDelivery.getStock().getMerchandise().getIndex() + ", " +
+                    packDelivery.getStock().getWarehouse().getIndex() + ", " +
+                    packDelivery.getAmount() + ")");
         }
 
     }
@@ -269,6 +283,10 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh packDeliveries
+            this.app.sqldmldelete("DELETE FROM packdelivery WHERE INVOICENUMBER = " +
+                    packDelivery.getSupply().getInvoiceNumber() + " AND MERCHANDISE = " +
+                    packDelivery.getStock().getMerchandise().getIndex() + " AND WAREHOUSE = " +
+                    packDelivery.getStock().getWarehouse().getIndex());
         }
         else {
             this.app.showWarning("No selection", "Select package of deliveries to proceed.");
@@ -287,6 +305,11 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh packDeliveries
+                this.app.sqldmlupdate("UPDATE packdelivery SET AMOUNT = " +
+                        packDelivery.getAmount() + " WHERE INVOICENUMBER = " +
+                        packDelivery.getSupply().getInvoiceNumber() + " AND MERCHANDISE = " +
+                        packDelivery.getStock().getMerchandise().getIndex() + " AND WAREHOUSE = " +
+                        packDelivery.getStock().getWarehouse().getIndex());
             }
         } else {
             this.app.showWarning("No selection", "Select package of deliveries to proceed.");
@@ -306,6 +329,7 @@ public class WarehouseBusinessController {
         String wantedTrait = this.packDeliverySearchField.getText();
         // TODO display packDelivery's traits on packDeliveryLabels and change packDeliveryBox selection
         // TODO or display information alert
+        this.app.sqlselect("SELECT * FROM packdelivery WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -320,6 +344,11 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh pack of orders
+            this.app.sqldmlinsert("INSERT INTO packorder (INVOICENUMBER, MERCHANDISE, WAREHOUSE, AMOUNT) VALUES(" +
+                    packOrder.getOrder().getInvoiceNumber() + ", " +
+                    packOrder.getStock().getMerchandise().getIndex() + ", " +
+                    packOrder.getStock().getWarehouse().getIndex() + ", " +
+                    packOrder.getAmount() + ")");
         }
     }
 
@@ -334,6 +363,10 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh packOrders
+            this.app.sqldmldelete("DELETE FROM packprder WHERE INVOICENUMBER = " +
+                    packOrder.getOrder().getInvoiceNumber() + " AND MERCHANDISE = " +
+                    packOrder.getStock().getMerchandise().getIndex() + " AND WAREHOUSE = " +
+                    packOrder.getStock().getWarehouse().getIndex());
         }
         else {
             this.app.showWarning("No selection", "Select package of orders to proceed.");
@@ -351,6 +384,11 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh packOrders
+                this.app.sqldmlupdate("UPDATE packorder SET AMOUNT = " +
+                        packOrder.getAmount() + " WHERE INVOICENUMBER = " +
+                        packOrder.getOrder().getInvoiceNumber() + " AND MERCHANDISE = " +
+                        packOrder.getStock().getMerchandise().getIndex() + " AND WAREHOUSE = " +
+                        packOrder.getStock().getWarehouse().getIndex());
             }
         }
         else {
@@ -371,6 +409,8 @@ public class WarehouseBusinessController {
 
         // TODO display packOrder's traits on packOrderLabels and change packOrderBox selection
         // TODO or display information alert
+        this.app.sqlselect("SELECT * FROM packorder WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+
     }
 
     /**
@@ -384,6 +424,12 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh merchandises
+            this.app.sqldmlinsert("INSERT INTO merchandise (NAME, PRICERETAIL, PRICEMARKET, PRODUCER, CATEGORY) VALUES('" +
+                    merchandise.getName() + "', " +
+                    merchandise.getPriceRetail() + ", " +
+                    merchandise.getPriceMarket() + ", " +
+                    merchandise.getProducer().getIndex() + ", " +
+                    merchandise.getCategory().getIndex() + ")");
         }
     }
 
@@ -398,6 +444,8 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh merchandises
+            this.app.sqldmldelete("DELETE FROM merchandise WHERE ID = " + merchandise.getIndex());
+
         } else {
             this.app.showWarning("No selection", "Select merchandise to proceed.");
         }
@@ -414,6 +462,13 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh merchandises
+                this.app.sqldmlupdate("UPDATE merchandise SET NAME = '" + merchandise.getName() +
+                        "', PRICERETAIL = " + merchandise.getPriceRetail() +
+                        ", PRICEMARKET = " + merchandise.getPriceMarket() +
+                        ", PRODUCER = " + merchandise.getProducer().getIndex() +
+                        ", CATEGORY = " + merchandise.getCategory().getIndex() +
+                        " WHERE ID = " + merchandise.getIndex());
+
             }
         } else {
             this.app.showWarning("No selection", "Select merchandise to proceed.");
@@ -433,6 +488,8 @@ public class WarehouseBusinessController {
 
         // TODO display Merchandise's traits on merchandiseLabels and change merchandiseBox selection
         // TODO or display information alert
+        this.app.sqlselect("SELECT * FROM merchandise WHERE LOWER(" + trait + ") like lower('%" + wanted + "%')");
+
     }
 
     /**
@@ -459,6 +516,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh categories
+            this.app.sqldmlinsert("INSERT INTO category (NAME) VALUES('" + category.getName() + "')");
         }
     }
 
@@ -473,6 +531,8 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh categories
+            this.app.sqldmldelete("DELETE FROM category WHERE ID = " + category.getIndex());
+
         } else {
             this.app.showWarning("No selection", "Select category to proceed.");
         }
@@ -491,6 +551,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh categories
+                this.app.sqldmlupdate("UPDATE category SET NAME = '" + category.getName() + "' WHERE ID = " + category.getIndex());
             }
         } else {
             this.app.showWarning("No selection" , "Select category to proceed.");
@@ -510,6 +571,8 @@ public class WarehouseBusinessController {
 
         // TODO display Category's traits on categoryLabels and change categoryBox selection
         // TODO or display information alert
+        this.app.sqlselect("SELECT * FROM category WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+
     }
 
     /**
@@ -524,6 +587,12 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh producers
+            this.app.sqldmlinsert("INSERT INTO producer (NAME, ADDRESS, MAIL, TELNUM, WEBPAGE) VALUES('" +
+                    producer.getName() + "', " +
+                    producer.getAddress() + "', " +
+                    producer.getMail() + "', " +
+                    producer.getTelNum() + "', " +
+                    producer.getWebPage() + "')");
         }
     }
 
@@ -538,6 +607,8 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELET FROM
             // refresh producers
+            this.app.sqldmldelete("DELETE FROM producer WHERE ID = " + producer.getIndex());
+
         } else {
             this.app.showWarning("No selection", "Select producer to proceed.");
         }
@@ -556,6 +627,13 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh producers
+                this.app.sqldmlupdate("UPDATE producer SET NAME = '" +
+                        producer.getName() + "', ADDRESS = '" +
+                        producer.getAddress() + "', MAIL = '" +
+                        producer.getMail() + "', TELNUM = '" +
+                        producer.getTelNum() + "', WEBPAGE = '" +
+                        producer.getWebPage() + "' WHERE ID = " +
+                        producer.getIndex());
             }
         } else {
             this.app.showWarning("No selection", "Select producer to proceed");
@@ -575,6 +653,8 @@ public class WarehouseBusinessController {
 
         // TODO display Producer's traits on producerLabels and change producerBox selection
         // TODO or display information alert
+        this.app.sqlselect("SELECT * FROM producer WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+
     }
 
     /**
@@ -589,6 +669,12 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh suppliers
+            this.app.sqldmlinsert("INSERT INTO supplier (NAME, ADDRESS, TELNUM, MAIL) VALUES('" +
+                    supplier.getName() + "', '" +
+                    supplier.getAddress() + "', '" +
+                    supplier.getTelNum() + "', '" +
+                    supplier.getMail() + "')");
+
         }
     }
 
@@ -603,6 +689,8 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELTE FROM
             // refresh suppliers
+            this.app.sqldmldelete("DELETE FROM supplier WHERE ID = " + supplier.getIndex());
+
         } else {
             this.app.showWarning("No selection", "Select supplier to proceed");
         }
@@ -621,6 +709,12 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh suppliers
+                this.app.sqldmlupdate("UPDATE supplier SET NAME = '" +
+                        supplier.getName() + "', ADDRESS = '" +
+                        supplier.getAddress() + "', TELNUM = '" +
+                        supplier.getTelNum() + "', MAIL = '" +
+                        supplier.getMail() + "' WHERE ID = " + supplier.getIndex());
+
             }
         } else {
             this.app.showWarning("No selection", "Select supplier to proceed.");
@@ -640,6 +734,8 @@ public class WarehouseBusinessController {
 
         // TODO display Supplier's traits on supplierLabels and change supplierBox selection
         // TODO or display information alert
+        this.app.sqlselect("SELECT * FROM supplier WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+
     }
 
     /**
@@ -654,6 +750,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh supplies
+            //this.app.sqldmlinsert("INSERT INTO supply (STARTDATE, ENDDATE, SUPPLIER) VALUES(");
         }
     }
 
@@ -668,6 +765,8 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh supplies
+            this.app.sqldmldelete("DELETE FROM supply WHERE INVOICENUMBER = " + supply.getInvoiceNumber());
+
         } else {
             this.app.showWarning("No selection", "Select supply to proceed.");
         }
@@ -705,6 +804,9 @@ public class WarehouseBusinessController {
 
         // TODO display Supply's traits on supplyLabels and change supplyBox selection
         // TODO or display information alert
+
+        this.app.sqlselect("SELECT * FROM supply WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+
     }
 
     /**
@@ -738,6 +840,8 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh orders
+            this.app.sqldmldelete("DELETE FROM w_order WHERE INVOICENUMBER = " + order.getInvoiceNumber());
+
         } else {
             this.app.showWarning("No selection",  "Select order to proceed.");
         }
@@ -775,6 +879,9 @@ public class WarehouseBusinessController {
 
         // TODO display Order's traits on orderLabels and change orderBox selection
         // TODO or display information alert
+
+        this.app.sqlselect("SELECT * FROM w_order WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+
     }
 
     /**
@@ -789,6 +896,11 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh recipients
+            this.app.sqldmlinsert("INSERT INTO recipient (NAME, SURNAME, ADDRESS, TELNUM) VALUES('" +
+                    recipient.getName() + "', '" +
+                    recipient.getSurname() + "', '" +
+                    recipient.getAddress() + "', '" +
+                    recipient.getTelNum() + "')");
         }
     }
 
@@ -803,6 +915,8 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh recipients
+            this.app.sqldmldelete("SELETE FROM recipient WHERE ID = " + recipient.getIndex());
+
         } else {
             this.app.showWarning("No selection", "Select recipient to proceed.");
         }
@@ -819,6 +933,12 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPADTE
                 // refresh recipients
+                this.app.sqldmlupdate("UPDATE recipient SET NAME = '" +
+                        recipient.getName() + "', SURNAME = '" +
+                        recipient.getSurname() + "', ADDRESS = '" +
+                        recipient.getAddress() + "', TELNUM = '" +
+                        recipient.getTelNum() + "' WHERE ID = " + recipient.getIndex());
+
             }
         } else {
             this.app.showWarning("No selection", "Select recipient to proceed");
@@ -839,6 +959,8 @@ public class WarehouseBusinessController {
 
         // TODO display Recipient's traits on recipientLabels and change recipientBox selection
         // TODO or display information alert
+        this.app.sqlselect("SELECT * FROM recipient WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+
     }
 
     /**
@@ -852,6 +974,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh couriers
+            this.app.sqldmlinsert("INSEERT INTO courier (TELNUM) VALUES('" + courier.getTelNum() + "')");
         }
     }
 
@@ -866,6 +989,8 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh couriers
+            this.app.sqldmldelete("DELETE FROM courier WHERE ID = " + courier.getIndex());
+
         } else {
             this.app.showWarning("No selection", "Select courier to proceed.");
         }
@@ -882,6 +1007,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh
+                this.app.sqldmlupdate("UPDATE courier SET TELNUM = '" + courier.getTelNum() + "' WHERE ID = " + courier.getIndex());
             }
         } else {
             this.app.showWarning("No selection", "Select courier to proceed.");
@@ -901,6 +1027,8 @@ public class WarehouseBusinessController {
 
         // TODO display Courier's traits on courierLabels and change courierBox selection
         // TODO or display information alert
+        this.app.sqlselect("SELECT * FROM courier WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+
     }
 
     /**

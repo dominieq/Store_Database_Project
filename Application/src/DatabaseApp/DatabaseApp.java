@@ -213,6 +213,7 @@ public class DatabaseApp extends Application {
             }
         } finally {
             if(!emergencyStart) {
+                handleSQLExceptions(this.sqlhelper.fillWarehouses(), "Warehouse");
                 handleSQLExceptions(this.sqlhelper.fillProducers(), "Producers");
                 handleSQLExceptions(this.sqlhelper.fillCategories(), "Categories");
                 handleSQLExceptions(this.sqlhelper.fillMerchandises(), "Merchandises");
@@ -676,5 +677,21 @@ public class DatabaseApp extends Application {
 
     public ObservableList<Supply> getSupplies() {
         return supplies;
+    }
+
+    public void sqldmlinsert(String sqlmdlinsertcode) {
+        this.sqlhelper.insertInto(sqlmdlinsertcode);
+    }
+
+    public void sqldmldelete(String sqldmldeletecode) {
+        this.sqlhelper.deleteFrom(sqldmldeletecode);
+    }
+
+    public void sqldmlupdate(String sqldmlupdatecode) {
+        this.sqlhelper.updateWhere(sqldmlupdatecode);
+    }
+
+    public void sqlselect(String sqlselectcode) {
+        this.sqlhelper.searchWhere(sqlselectcode);
     }
 }
