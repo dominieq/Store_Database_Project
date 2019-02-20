@@ -606,10 +606,10 @@ public class WarehouseBusinessController {
             // refresh producers
             this.app.sqldmlinsert("INSERT INTO producer (ID, NAME, ADDRESS, MAIL, TELNUM, WEBPAGE) VALUES(" +
                     producer.getIndex() + ", '" +
-                    producer.getName() + "', " +
-                    producer.getAddress() + "', " +
-                    producer.getMail() + "', " +
-                    producer.getTelNum() + "', " +
+                    producer.getName() + "', '" +
+                    producer.getAddress() + "', '" +
+                    producer.getMail() + "', '" +
+                    producer.getTelNum() + "', '" +
                     producer.getWebPage() + "')");
         }
     }
@@ -773,7 +773,11 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh supplies
-            //this.app.sqldmlinsert("INSERT INTO supply (STARTDATE, ENDDATE, SUPPLIER) VALUES(");
+            this.app.sqldmlinsert("INSERT INTO supply (INVOICENUMBER, STARTDATE, ENDDATE, SUPPLIER) VALUES(" +
+                    supply.getInvoiceNumber() + ", DATE '" +
+                    supply.getStartDate().toString() + "', DATE '" +
+                    supply.getEndDate().toString() + "', " +
+                    supply.getSupplier().getIndex() + ")");
         }
     }
 
@@ -801,6 +805,7 @@ public class WarehouseBusinessController {
     @FXML private void handleEditSupply() {
         Supply supply = this.supplyBox.getValue();
         if(supply != null) {
+            int old_invoicenumber = supply.getInvoiceNumber();
             boolean isOkClicked = this.app.showSupplyDialog(
                     "Edit " + supply.toString() + " supply", supply);
             if(isOkClicked) {
@@ -808,6 +813,11 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh supplies
+                this.app.sqldmlupdate("UPDATE supply SET INVOICENUMBER = " + supply.getInvoiceNumber() +
+                        ", STARTDATE = DATE '" + supply.getStartDate().toString() +
+                        "', ENDDATE = DATE '" + supply.getEndDate().toString() +
+                        "', SUPPLIER = " + supply.getSupplier().getIndex() +
+                        " WHERE INVOICENUMBER = " + old_invoicenumber);
             }
         } else {
             this.app.showWarning("No selection", "Select supply to proceed");
@@ -828,7 +838,7 @@ public class WarehouseBusinessController {
         // TODO display Supply's traits on supplyLabels and change supplyBox selection
         // TODO or display information alert
 
-        this.app.sqlselect("SELECT * FROM supply WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlselect("SELECT INVOICENUMBER FROM supply WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -846,6 +856,12 @@ public class WarehouseBusinessController {
 
                 // TODO SQL INSERT INTO
                 // refresh orders
+                this.app.sqldmlinsert("INSERT INTO w_order (INVOICENUMBER, STARTTADE, ENDDATE, COURIER, RECIPIENT) VALUES(" +
+                        order.getInvoiceNumber() + ", DATE '" +
+                        order.getStartDate().toString() + "', DATE '" +
+                        order.getEndDate().toString() + "', " +
+                        order.getCourier().getIndex() + ", " +
+                        order.getRecipient().getIndex() + ")");
             }
         } catch (WrongDateError ignored) {
             System.out.println("EARLY STATE: Wrong format when initializing.");
@@ -876,6 +892,7 @@ public class WarehouseBusinessController {
     @FXML private void handleEditOrder() {
         Order order = this.orderBox.getValue();
         if(order != null) {
+            int old_invoicenumber = order.getInvoiceNumber();
             boolean isOkClicked = this.app.showOrderDialog(
                     "Edit " + order.toString() + " order", order);
             if(isOkClicked) {
@@ -883,6 +900,12 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh orders
+                this.app.sqldmlupdate("UPDATE w_order SET INVOICENUMBER = " + order.getInvoiceNumber() +
+                        ", STARTDATE = DATE '" + order.getStartDate().toString() +
+                        "', ENDDATE = DATE '" + order.getEndDate().toString() +
+                        "', COURIER = " + order.getCourier().getIndex() +
+                        ", RECIPIENT = " + order.getRecipient().getIndex() +
+                        " WHERE INVOICENUMBER = " + old_invoicenumber);
             }
         } else {
             this.app.showWarning("No selection" , "Select order to proceed.");
@@ -903,7 +926,7 @@ public class WarehouseBusinessController {
         // TODO display Order's traits on orderLabels and change orderBox selection
         // TODO or display information alert
 
-        this.app.sqlselect("SELECT * FROM w_order WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlselect("SELECT INVOICENUMBER FROM w_order WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
