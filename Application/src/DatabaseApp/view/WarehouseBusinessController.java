@@ -856,7 +856,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL INSERT INTO
                 // refresh orders
-                this.app.sqldmlinsert("INSERT INTO w_order (INVOICENUMBER, STARTTADE, ENDDATE, COURIER, RECIPIENT) VALUES(" +
+                this.app.sqldmlinsert("INSERT INTO w_order (INVOICENUMBER, STARTDATE, ENDDATE, COURIER, RECIPIENT) VALUES(" +
                         order.getInvoiceNumber() + ", DATE '" +
                         order.getStartDate().toString() + "', DATE '" +
                         order.getEndDate().toString() + "', " +

@@ -151,7 +151,7 @@ public class Order {
     }
 
     public String getStartDateString() {
-        DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         return format.format(this.startDate);
     }
 
@@ -160,7 +160,7 @@ public class Order {
     }
 
     public String getEndDateString() {
-        DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         return format.format(this.endDate);
     }
 
