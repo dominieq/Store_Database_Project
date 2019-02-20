@@ -85,7 +85,7 @@ public class WarehouseLogisticsController {
             this.app.getWarehouses().add(warehouse);
 
             // TODO SQL query INSERT INTO
-            this.app.sqldmlinsert("INSERT INTO warehouse (ADDRESS) VALUES('" + warehouse.getAddress() + "')");
+            this.app.sqldmlinsert("INSERT INTO warehouse (ID, ADDRESS) VALUES(" + warehouse.getIndex() + ", '" + warehouse.getAddress() + "')");
 
             refreshWarehouse(warehouse);
         }
@@ -128,12 +128,13 @@ public class WarehouseLogisticsController {
      */
     @FXML private void handleEditWarehouse() {
         Warehouse warehouse = this.warehouseTableView.getSelectionModel().getSelectedItem();
+        int old_id = warehouse.getIndex();
         if(warehouse != null) {
             if(this.app.showWarehouseDialog("Edit warehouse", warehouse)) {
                 System.out.println("Warehouse: " + warehouse.toString() + " edited");
 
                 // TODO SQL query UPDATE
-                this.app.sqldmlupdate("UPDATE warehouse SET ADDRESS = '" + warehouse.getAddress() + "' WHERE ID = " + warehouse.getIndex());
+                this.app.sqldmlupdate("UPDATE warehouse SET ID = " + warehouse.getIndex() + ", ADDRESS = '" + warehouse.getAddress() + "' WHERE ID = " + old_id);
 
                 refreshWarehouse(warehouse);
             }
@@ -153,7 +154,7 @@ public class WarehouseLogisticsController {
         // TODO use SQL query to search for warehouse
         // SELECT index FROM warehouses
         // WHERE [trait] = [wantedTrait]
-        this.app.sqlselect("SELECT * FROM warehouse WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlselect("SELECT ID FROM warehouse WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -176,7 +177,7 @@ public class WarehouseLogisticsController {
             }
 
             // TODO SQL query INSERT INTO
-            this.app.sqldmlinsert("INSERT INTO worker (NAME, SURNAME, ADDRESS, TELNUM, MAIL, PESEL, WAREHOUSE) VALUES('" +
+            this.app.sqldmlinsert("INSERT INTO worker (ID, NAME, SURNAME, ADDRESS, TELNUM, MAIL, PESEL, WAREHOUSE) VALUES(" + worker.getIndex() + ", '" +
                     worker.getName() + "', '" + worker.getSurname() + "', '" + worker.getAddress() + "', '" + worker.getTelNum() + "', '" + worker.getMail() + "', '" + worker.getPESEL() + "', " + worker.getWarehouseIndex() + ")");
 
             refreshWorker(worker);
@@ -221,19 +222,21 @@ public class WarehouseLogisticsController {
      */
     @FXML private void handleEditWorker() {
         Worker worker = this.workerChoiceBox.getSelectionModel().getSelectedItem();
+        int old_id = worker.getIndex();
         if(worker != null) {
             if(this.app.showWorkerEditDialog("Edit worker", worker)) {
                 System.out.println("Worker: " + worker.toString() + " edited");
 
                 // TODO use SQL query UPDATE
-                this.app.sqldmlupdate("UPDATE worker SET NAME = '" + worker.getName() +
+                this.app.sqldmlupdate("UPDATE worker SET ID = " + worker.getIndex() +
+                        ", NAME = '" + worker.getName() +
                         "', SURNAME = '" + worker.getSurname() +
                         "', ADDRESS = '" + worker.getAddress() +
                         "', TELNUM = '" + worker.getTelNum() +
                         "', MAIL = '" + worker.getMail() +
                         "', PESEL = '" + worker.getPESEL() +
                         "', WAREHOUSE = " + worker.getWarehouseIndex() +
-                        " WHERE ID = " + worker.getIndex());
+                        " WHERE ID = " + old_id);
 
                 refreshWorker(worker);
             }
@@ -254,7 +257,7 @@ public class WarehouseLogisticsController {
         // TODO use SQL query to search for worker
         // SELECT index FROM workers
         // WHERE [trait] = [wantedTrait]
-        this.app.sqlselect("SELECT * FROM worker WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlselect("SELECT ID FROM worker WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
     }
 
     /**

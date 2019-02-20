@@ -219,16 +219,19 @@ public class WarehouseBusinessController {
     @FXML private void handleEditStock() {
         Stock stock = this.stockBox.getValue();
         if(stock != null) {
+            int old_merchandise = stock.getMerchandise().getIndex();
+            int old_warehouse = stock.getWarehouse().getIndex();
             if(this.app.showStockDialog("Edit " + stock.toString() + " stock", stock)) {
                 stock.createID();
                 System.out.println("Stock " + stock.toString() + " edited");
 
                 // TODO SQL UPDATE
                 // refresh stocks
-                this.app.sqldmlupdate("UPDATE STOCK SET AMOUNT = " +
-                        stock.getAmount() +
-                        " WHERE MERCHANDISE = " + stock.getMerchandise().getIndex() +
-                        " AND WAREHOUSE = " + stock.getWarehouse().getIndex());
+                this.app.sqldmlupdate("UPDATE STOCK SET AMOUNT = " + stock.getAmount() +
+                        ", MERCHANDISE = " + stock.getMerchandise().getIndex() +
+                        ", WAREHOUSE = " + stock.getWarehouse().getIndex() +
+                        " WHERE MERCHANDISE = " + old_merchandise +
+                        " AND WAREHOUSE = " + old_warehouse);
             }
         }
         else {
@@ -300,16 +303,21 @@ public class WarehouseBusinessController {
     @FXML private void handleEditPackDelivery() {
         PackDelivery packDelivery = this.packDeliveryBox.getValue();
         if(packDelivery != null) {
+            int old_invoicenumber = packDelivery.getSupply().getInvoiceNumber();
+            int old_merchandise = packDelivery.getStock().getMerchandise().getIndex();
+            int old_warehouse = packDelivery.getStock().getWarehouse().getIndex();
             if(this.app.showPackDeliveryDialog("Edit " + packDelivery.getIndex(), packDelivery)) {
                 System.out.println("PackDelivery " + packDelivery.getIndex() + " edited");
 
                 // TODO SQL UPDATE
                 // refresh packDeliveries
-                this.app.sqldmlupdate("UPDATE packdelivery SET AMOUNT = " +
-                        packDelivery.getAmount() + " WHERE INVOICENUMBER = " +
-                        packDelivery.getSupply().getInvoiceNumber() + " AND MERCHANDISE = " +
-                        packDelivery.getStock().getMerchandise().getIndex() + " AND WAREHOUSE = " +
-                        packDelivery.getStock().getWarehouse().getIndex());
+                this.app.sqldmlupdate("UPDATE packdelivery SET AMOUNT = " + packDelivery.getAmount() +
+                        ", INVOICENUMBER = " + packDelivery.getSupply().getInvoiceNumber() +
+                        ", MERCHANDISE = " + packDelivery.getStock().getMerchandise().getIndex() +
+                        ", WAREHOUSE = " + packDelivery.getStock().getWarehouse().getIndex() +
+                        " WHERE INVOICENUMBER = " + old_invoicenumber +
+                        " AND MERCHANDISE = " + old_merchandise +
+                        " AND WAREHOUSE = " + old_warehouse);
             }
         } else {
             this.app.showWarning("No selection", "Select package of deliveries to proceed.");
@@ -363,7 +371,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh packOrders
-            this.app.sqldmldelete("DELETE FROM packprder WHERE INVOICENUMBER = " +
+            this.app.sqldmldelete("DELETE FROM packorder WHERE INVOICENUMBER = " +
                     packOrder.getOrder().getInvoiceNumber() + " AND MERCHANDISE = " +
                     packOrder.getStock().getMerchandise().getIndex() + " AND WAREHOUSE = " +
                     packOrder.getStock().getWarehouse().getIndex());
@@ -379,16 +387,21 @@ public class WarehouseBusinessController {
     @FXML private void handleEditPackOrder() {
         PackOrder packOrder = this.packOrderBox.getValue();
         if(packOrder != null) {
+            int old_invoicenumber = packOrder.getOrder().getInvoiceNumber();
+            int old_merchandise = packOrder.getStock().getMerchandise().getIndex();
+            int old_warehouse = packOrder.getStock().getWarehouse().getIndex();
             if(this.app.showPackOrderDialog("Edit " + packOrder.toString() + " package of orders", packOrder)) {
                 System.out.println("PackOrder " + packOrder.toString() + " edited");
 
                 // TODO SQL UPDATE
                 // refresh packOrders
-                this.app.sqldmlupdate("UPDATE packorder SET AMOUNT = " +
-                        packOrder.getAmount() + " WHERE INVOICENUMBER = " +
-                        packOrder.getOrder().getInvoiceNumber() + " AND MERCHANDISE = " +
-                        packOrder.getStock().getMerchandise().getIndex() + " AND WAREHOUSE = " +
-                        packOrder.getStock().getWarehouse().getIndex());
+                this.app.sqldmlupdate("UPDATE packorder SET AMOUNT = " + packOrder.getAmount() +
+                        ", INVOICENUMBER = " + packOrder.getOrder().getInvoiceNumber() +
+                        ", MERCHANDISE = " + packOrder.getStock().getMerchandise().getIndex() +
+                        ", WAREHOUSE = " + packOrder.getStock().getWarehouse().getIndex() +
+                        " WHERE INVOICENUMBER = " + old_invoicenumber +
+                        " AND MERCHANDISE = " + old_merchandise +
+                        " AND WAREHOUSE = " + old_warehouse);
             }
         }
         else {
@@ -424,7 +437,8 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh merchandises
-            this.app.sqldmlinsert("INSERT INTO merchandise (NAME, PRICERETAIL, PRICEMARKET, PRODUCER, CATEGORY) VALUES('" +
+            this.app.sqldmlinsert("INSERT INTO merchandise (ID, NAME, PRICERETAIL, PRICEMARKET, PRODUCER, CATEGORY) VALUES(" +
+                    merchandise.getIndex() + ", '" +
                     merchandise.getName() + "', " +
                     merchandise.getPriceRetail() + ", " +
                     merchandise.getPriceMarket() + ", " +
@@ -457,17 +471,19 @@ public class WarehouseBusinessController {
     @FXML private void handleEditMerch() {
         Merchandise merchandise = this.merchBox.getValue();
         if(merchandise != null) {
+            int old_id = merchandise.getIndex();
             if(this.app.showMerchandiseDialog("Edit " + merchandise.toString() + " merchandise", merchandise)) {
                 System.out.println("Merchandise " + merchandise.toString() + " edited");
 
                 // TODO SQL UPDATE
                 // refresh merchandises
-                this.app.sqldmlupdate("UPDATE merchandise SET NAME = '" + merchandise.getName() +
+                this.app.sqldmlupdate("UPDATE merchandise SET ID = " + merchandise.getIndex() +
+                        ", NAME = '" + merchandise.getName() +
                         "', PRICERETAIL = " + merchandise.getPriceRetail() +
                         ", PRICEMARKET = " + merchandise.getPriceMarket() +
                         ", PRODUCER = " + merchandise.getProducer().getIndex() +
                         ", CATEGORY = " + merchandise.getCategory().getIndex() +
-                        " WHERE ID = " + merchandise.getIndex());
+                        " WHERE ID = " + old_id);
 
             }
         } else {
@@ -488,7 +504,7 @@ public class WarehouseBusinessController {
 
         // TODO display Merchandise's traits on merchandiseLabels and change merchandiseBox selection
         // TODO or display information alert
-        this.app.sqlselect("SELECT * FROM merchandise WHERE LOWER(" + trait + ") like lower('%" + wanted + "%')");
+        this.app.sqlselect("SELECT ID FROM merchandise WHERE LOWER(" + trait + ") like lower('%" + wanted + "%')");
 
     }
 
@@ -516,7 +532,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh categories
-            this.app.sqldmlinsert("INSERT INTO category (NAME) VALUES('" + category.getName() + "')");
+            this.app.sqldmlinsert("INSERT INTO category (ID, NAME) VALUES(" + category.getIndex() + ", '" + category.getName() + "')");
         }
     }
 
@@ -544,6 +560,7 @@ public class WarehouseBusinessController {
     @FXML private void handleEditCategory() {
         Category category = this.categoryBox.getValue();
         if(category != null) {
+            int old_id = category.getIndex();
             boolean isOkClicked = this.app.showCategoryDialog(
                     "Edit " + category.toString() + " category", category);
             if(isOkClicked) {
@@ -551,7 +568,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh categories
-                this.app.sqldmlupdate("UPDATE category SET NAME = '" + category.getName() + "' WHERE ID = " + category.getIndex());
+                this.app.sqldmlupdate("UPDATE category SET ID = " + category.getIndex() + ", NAME = '" + category.getName() + "' WHERE ID = " + old_id);
             }
         } else {
             this.app.showWarning("No selection" , "Select category to proceed.");
@@ -571,7 +588,7 @@ public class WarehouseBusinessController {
 
         // TODO display Category's traits on categoryLabels and change categoryBox selection
         // TODO or display information alert
-        this.app.sqlselect("SELECT * FROM category WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlselect("SELECT ID FROM category WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -587,7 +604,8 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh producers
-            this.app.sqldmlinsert("INSERT INTO producer (NAME, ADDRESS, MAIL, TELNUM, WEBPAGE) VALUES('" +
+            this.app.sqldmlinsert("INSERT INTO producer (ID, NAME, ADDRESS, MAIL, TELNUM, WEBPAGE) VALUES(" +
+                    producer.getIndex() + ", '" +
                     producer.getName() + "', " +
                     producer.getAddress() + "', " +
                     producer.getMail() + "', " +
@@ -620,6 +638,7 @@ public class WarehouseBusinessController {
     @FXML private void handleEditProducer() {
         Producer producer = this.producerBox.getValue();
         if(producer != null) {
+            int old_id = producer.getIndex();
             boolean isOkClicked = this.app.showProducerDialog(
                     "Edit " + producer.toString() + " producer", producer);
             if(isOkClicked) {
@@ -627,13 +646,14 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh producers
-                this.app.sqldmlupdate("UPDATE producer SET NAME = '" +
+                this.app.sqldmlupdate("UPDATE producer SET ID = " +
+                        producer.getIndex() + ", NAME = '" +
                         producer.getName() + "', ADDRESS = '" +
                         producer.getAddress() + "', MAIL = '" +
                         producer.getMail() + "', TELNUM = '" +
                         producer.getTelNum() + "', WEBPAGE = '" +
                         producer.getWebPage() + "' WHERE ID = " +
-                        producer.getIndex());
+                        old_id);
             }
         } else {
             this.app.showWarning("No selection", "Select producer to proceed");
@@ -653,7 +673,7 @@ public class WarehouseBusinessController {
 
         // TODO display Producer's traits on producerLabels and change producerBox selection
         // TODO or display information alert
-        this.app.sqlselect("SELECT * FROM producer WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlselect("SELECT ID FROM producer WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -669,7 +689,8 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh suppliers
-            this.app.sqldmlinsert("INSERT INTO supplier (NAME, ADDRESS, TELNUM, MAIL) VALUES('" +
+            this.app.sqldmlinsert("INSERT INTO supplier (ID, NAME, ADDRESS, TELNUM, MAIL) VALUES(" +
+                    supplier.getIndex() + ", '" +
                     supplier.getName() + "', '" +
                     supplier.getAddress() + "', '" +
                     supplier.getTelNum() + "', '" +
@@ -702,6 +723,7 @@ public class WarehouseBusinessController {
     @FXML private void handleEditSupplier() {
         Supplier supplier = this.supplierBox.getValue();
         if(supplier != null) {
+            int old_id = supplier.getIndex();
             boolean isOkClicked = this.app.showSupplierDialog(
                     "Edit " + supplier.toString() + " supplier", supplier);
             if(isOkClicked) {
@@ -709,11 +731,12 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh suppliers
-                this.app.sqldmlupdate("UPDATE supplier SET NAME = '" +
+                this.app.sqldmlupdate("UPDATE supplier SET ID = " +
+                        supplier.getIndex() + ", NAME = '" +
                         supplier.getName() + "', ADDRESS = '" +
                         supplier.getAddress() + "', TELNUM = '" +
                         supplier.getTelNum() + "', MAIL = '" +
-                        supplier.getMail() + "' WHERE ID = " + supplier.getIndex());
+                        supplier.getMail() + "' WHERE ID = " + old_id);
 
             }
         } else {
@@ -734,7 +757,7 @@ public class WarehouseBusinessController {
 
         // TODO display Supplier's traits on supplierLabels and change supplierBox selection
         // TODO or display information alert
-        this.app.sqlselect("SELECT * FROM supplier WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlselect("SELECT ID FROM supplier WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -896,7 +919,8 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh recipients
-            this.app.sqldmlinsert("INSERT INTO recipient (NAME, SURNAME, ADDRESS, TELNUM) VALUES('" +
+            this.app.sqldmlinsert("INSERT INTO recipient (ID, NAME, SURNAME, ADDRESS, TELNUM) VALUES(" +
+                    recipient.getIndex() + ", '" +
                     recipient.getName() + "', '" +
                     recipient.getSurname() + "', '" +
                     recipient.getAddress() + "', '" +
@@ -915,7 +939,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh recipients
-            this.app.sqldmldelete("SELETE FROM recipient WHERE ID = " + recipient.getIndex());
+            this.app.sqldmldelete("DELETE FROM recipient WHERE ID = " + recipient.getIndex());
 
         } else {
             this.app.showWarning("No selection", "Select recipient to proceed.");
@@ -928,16 +952,18 @@ public class WarehouseBusinessController {
     @FXML private void handleEditRecipient() {
         Recipient recipient = this.recipientBox.getValue();
         if(recipient != null) {
+            int old_id = recipient.getIndex();
             if(this.app.showRecipientDialog("Edit " + recipient.toString() + " recipient", recipient)) {
                 System.out.println("Recipient " + recipient.toString() + " edited");
 
                 // TODO SQL UPADTE
                 // refresh recipients
-                this.app.sqldmlupdate("UPDATE recipient SET NAME = '" +
+                this.app.sqldmlupdate("UPDATE recipient SET ID = " +
+                        recipient.getIndex() + ", NAME = '" +
                         recipient.getName() + "', SURNAME = '" +
                         recipient.getSurname() + "', ADDRESS = '" +
                         recipient.getAddress() + "', TELNUM = '" +
-                        recipient.getTelNum() + "' WHERE ID = " + recipient.getIndex());
+                        recipient.getTelNum() + "' WHERE ID = " + old_id);
 
             }
         } else {
@@ -959,7 +985,7 @@ public class WarehouseBusinessController {
 
         // TODO display Recipient's traits on recipientLabels and change recipientBox selection
         // TODO or display information alert
-        this.app.sqlselect("SELECT * FROM recipient WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlselect("SELECT ID FROM recipient WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -974,7 +1000,9 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh couriers
-            this.app.sqldmlinsert("INSEERT INTO courier (TELNUM) VALUES('" + courier.getTelNum() + "')");
+            this.app.sqldmlinsert("INSERT INTO courier (ID, TELNUM) VALUES(" +
+                    courier.getIndex() + ", '" +
+                    courier.getTelNum() + "')");
         }
     }
 
@@ -1002,12 +1030,16 @@ public class WarehouseBusinessController {
     @FXML private void handleEditCourier() {
         Courier courier = this.courierBox.getValue();
         if(courier != null) {
+            int old_id = courier.getIndex();
             if(this.app.showCourier("Edit " + courier.toString() + " courier", courier)){
                 System.out.println("Courier " + courier.toString() + " edited");
 
                 // TODO SQL UPDATE
                 // refresh
-                this.app.sqldmlupdate("UPDATE courier SET TELNUM = '" + courier.getTelNum() + "' WHERE ID = " + courier.getIndex());
+                this.app.sqldmlupdate("UPDATE courier SET ID = " +
+                        courier.getIndex() + ", TELNUM = '" +
+                        courier.getTelNum() + "' WHERE ID = " + 
+                        old_id);
             }
         } else {
             this.app.showWarning("No selection", "Select courier to proceed.");
@@ -1027,7 +1059,7 @@ public class WarehouseBusinessController {
 
         // TODO display Courier's traits on courierLabels and change courierBox selection
         // TODO or display information alert
-        this.app.sqlselect("SELECT * FROM courier WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlselect("SELECT ID FROM courier WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
