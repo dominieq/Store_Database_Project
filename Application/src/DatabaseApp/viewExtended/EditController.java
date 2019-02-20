@@ -32,7 +32,7 @@ public abstract class EditController {
         content = fillContent(content);
 
         if(content.length() == 0) {
-            return true;
+            return checkSQL();
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -48,6 +48,8 @@ public abstract class EditController {
     abstract void fillEditObject();
 
     abstract String fillContent(String content);
+
+    abstract boolean checkSQL();
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
