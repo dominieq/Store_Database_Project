@@ -34,6 +34,13 @@ public class EditProducerLayoutController extends EditController {
 
     }
 
+    @Override boolean checkSQL() {
+
+        // TODO SQL FUNCTION
+
+        return true;
+    }
+
     @Override void fillEditObject() {
 
         this.producer.setIndex(this.indexField.getText());

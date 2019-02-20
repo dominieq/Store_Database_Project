@@ -56,6 +56,14 @@ public class EditMerchandiseLayoutController extends EditController {
         return content;
 
     }
+
+    @Override boolean checkSQL() {
+
+        // TODO SQL FUNCTION
+
+        return true;
+    }
+
     @Override void fillEditObject() {
 
         this.merchandise.setIndex(indexField.getText());

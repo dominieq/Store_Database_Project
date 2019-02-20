@@ -26,6 +26,13 @@ public class EditWarehouseLayoutController extends EditController {
 
     }
 
+    @Override boolean checkSQL() {
+
+        // TODO SQL FUNCTION
+
+        return true;
+    }
+
     @Override void fillEditObject() {
 
         warehouse.setIndex(indexField.getText());

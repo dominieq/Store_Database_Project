@@ -64,6 +64,13 @@ public class EditWorkerLayoutController extends EditController {
 
     }
 
+    @Override boolean checkSQL() {
+
+        // TODO SQL FUNCTION
+
+        return true;
+    }
+
     @Override void fillEditObject() {
 
         worker.setIndex(indexField.getText());
@@ -89,8 +96,6 @@ public class EditWorkerLayoutController extends EditController {
         }
 
     }
-
-
 
     public void setWorker(Worker worker, ObservableList<Warehouse> warehouses) {
 

@@ -34,6 +34,13 @@ public class EditPackDeliveryLayoutController extends EditController {
 
     }
 
+    @Override boolean checkSQL() {
+
+        // TODO SQL FUNCTION
+
+        return true;
+    }
+
     @Override void fillEditObject() {
 
        this.packDelivery.setAmount(this.amountField.getText());

@@ -34,6 +34,13 @@ public class EditPackOrderLayoutController extends EditController {
 
     }
 
+    @Override boolean checkSQL() {
+
+        // TODO SQL FUNCTION
+
+        return true;
+    }
+
     @Override void fillEditObject() {
 
        this.packOrder.setAmount(this.amountField.getText());

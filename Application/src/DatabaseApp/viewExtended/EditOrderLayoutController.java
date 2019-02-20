@@ -55,6 +55,13 @@ public class EditOrderLayoutController extends EditController {
 
     }
 
+    @Override boolean checkSQL() {
+
+        // TODO SQL FUNCTION
+
+        return true;
+    }
+
     @Override void fillEditObject() {
 
        this.order.setInvoiceNumber(this.numberField.getText());
