@@ -16,7 +16,6 @@ public class WarehouseBusinessController {
      */
     @FXML private ChoiceBox<Stock> stockBox;
     @FXML private ChoiceBox<String> stockTraitsBox;
-    @FXML private Label stockLabel;
     @FXML private Label stockAmountLabel;
     @FXML private Label stockWarehouseLabel;
     @FXML private Label stockMerchandiseLabel;
@@ -1092,12 +1091,10 @@ public class WarehouseBusinessController {
      */
     private void showStock(Stock stock) {
         if(stock != null) {
-            this.stockLabel.setText(stock.getIndex());
             this.stockAmountLabel.setText(stock.getAmountString());
             this.stockMerchandiseLabel.setText(stock.getMerchandise().getIndexString());
             this.stockWarehouseLabel.setText(stock.getWarehouse().getIndexString());
         } else {
-            this.stockLabel.setText("");
             this.stockAmountLabel.setText("");
             this.stockMerchandiseLabel.setText("");
             this.stockWarehouseLabel.setText("");
@@ -1251,8 +1248,8 @@ public class WarehouseBusinessController {
             this.orderLabel.setText(order.getInvoiceString());
             this.orderStartLabel.setText(order.getStartDateString());
             this.orderEndLabel.setText(order.getEndDateString());
-            this.orderCourierLabel.setText(order.getCourier().getIndexString());
-            this.orderRecipientLabel.setText(order.getRecipient().getIndexString());
+            this.orderCourierLabel.setText(order.getCourier().toString());
+            this.orderRecipientLabel.setText(order.getRecipient().toString());
 
             this.orderCourierRightLabel.setText(order.getCourier().getIndexString());
             this.orderCourierTelNumLabel.setText(order.getCourier().getTelNum());

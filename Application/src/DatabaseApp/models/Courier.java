@@ -21,7 +21,7 @@ public class Courier {
      * @return String: Courier's PESEL
      */
     @Override public String toString() {
-        return String.valueOf(index);
+        return this.telNum;
     }
 
 

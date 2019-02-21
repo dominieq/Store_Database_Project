@@ -78,7 +78,7 @@ public class Supply {
      * @return String: Supply's index
      */
     @Override public String toString() {
-        return String.valueOf(this.invoiceNumber);
+        return this.invoiceNumber + " DELIVERED BY: " + this.supplier.getName();
     }
 
 

@@ -44,7 +44,7 @@ public class PackOrder {
      */
     public void createID() {
         if(this.order != null && this.stock != null) {
-            this.index = this.stock.toString() + "/" + this.order.toString();
+            this.index = "ORDER SENT ON: " + this.order.toString() + "\n" + this.stock.toString();
         }
         else {
             this.index = "";

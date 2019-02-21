@@ -33,7 +33,7 @@ public class Recipient {
      * @return String: Recipient's PESEL
      */
     @Override public String toString() {
-        return String.valueOf(this.index);
+        return this.name + " " + this.surname + " (" + this.index + ")";
     }
 
 

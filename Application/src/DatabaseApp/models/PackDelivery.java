@@ -44,7 +44,7 @@ public class PackDelivery {
      */
     public void createID() {
         if(this.supply != null && this.stock != null) {
-            this.index = this.stock.toString() + "/" + this.supply.toString();
+            this.index = "SUPPLY: " + this.supply.toString() + "\n" + this.stock.toString();
         }
         else {
             this.index = "";

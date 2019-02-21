@@ -48,7 +48,7 @@ public class Supplier {
      * @return String: Supplier's index
      */
     @Override public String toString() {
-        return String.valueOf(this.index);
+        return this.index + " // " + this.name;
     }
 
 

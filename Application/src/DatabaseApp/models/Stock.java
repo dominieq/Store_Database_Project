@@ -44,7 +44,7 @@ public class Stock {
      */
     public void createID() {
         if(this.merchandise != null && this.warehouse != null) {
-            this.index = "#" + this.merchandise.getName() + "-" + this.warehouse.getIndexString();
+            this.index = this.merchandise.getName() + "\nIN: " + this.warehouse.getAddress();
         } else {
             this.index = "";
         }

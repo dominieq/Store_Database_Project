@@ -90,7 +90,7 @@ public class Order {
      * @return String: Order's index
      */
     @Override public String toString() {
-        return String.valueOf(this.invoiceNumber);
+        return this.startDate + " TO: " + this.recipient.toString();
     }
 
 
