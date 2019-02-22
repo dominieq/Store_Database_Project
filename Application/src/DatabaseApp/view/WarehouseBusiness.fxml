@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
+
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="870.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DatabaseApp.view.WarehouseBusinessController">
   <tabs>
     <Tab text="STOCK">
@@ -475,7 +476,8 @@
                   </Accordion>
                </items>
             </SplitPane>
-         </content></Tab>
+         </content>
+      </Tab>
     <Tab text="MERCHANDISE">
          <content>
             <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
@@ -1475,7 +1477,8 @@
                   </SplitPane>
                </items>
             </SplitPane>
-         </content></Tab>
+         </content>
+      </Tab>
     <Tab text="ORDERS">
          <content>
             <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
@@ -2150,6 +2153,7 @@
                   </Accordion>
                </items>
             </SplitPane>
-         </content></Tab>
+         </content>
+      </Tab>
   </tabs>
 </TabPane>

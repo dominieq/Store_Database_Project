@@ -16,6 +16,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.awt.*;
 import java.sql.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,6 +32,8 @@ public class DatabaseApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     private RootLayoutController rootLayoutController;
+    private int width;
+    private int height;
     private volatile ObservableList<Warehouse> warehouses;
     private volatile ObservableList<Worker> workers;
     private volatile ObservableList<Category> categories;
@@ -51,6 +55,17 @@ public class DatabaseApp extends Application {
      */
     @Override public void start(Stage primaryStage) {
         this.sqlhelper = new SQLHelper(this);
+        GraphicsDevice graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        if(graphicsDevice.getDisplayMode().getWidth() < 1200) {
+            this.width = graphicsDevice.getDisplayMode().getWidth();
+        } else {
+            this.width = 1200;
+        }
+        if(graphicsDevice.getDisplayMode().getHeight() < 900) {
+            this.height = graphicsDevice.getDisplayMode().getHeight();
+        } else {
+            this.height = 900;
+        }
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Database Project");
         initRootLayout();
@@ -66,8 +81,7 @@ public class DatabaseApp extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(DatabaseApp.class.getResource("view/RootLayout.fxml"));
             this.rootLayout = loader.load();
-
-            Scene scene =  new Scene(this.rootLayout);
+            Scene scene =  new Scene(this.rootLayout, this.width, this.height);
             this.primaryStage.setScene(scene);
 
             this.rootLayoutController = loader.getController();
@@ -156,7 +170,7 @@ public class DatabaseApp extends Application {
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(DatabaseApp.class.getResource("view/WarehouseLogistics.fxml"));
-            AnchorPane pane = loader.load();
+            SplitPane pane = loader.load();
 
             this.rootLayout.setCenter(pane);
 
