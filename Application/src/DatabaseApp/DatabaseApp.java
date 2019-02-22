@@ -18,6 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.sql.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * TODO comments
@@ -575,7 +576,7 @@ public class DatabaseApp extends Application {
      * @param title String
      * @param content String
      */
-    private void showError(String title, String content) {
+    public void showError(String title, String content) {
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -679,19 +680,19 @@ public class DatabaseApp extends Application {
         return supplies;
     }
 
-    public void sqldmlinsert(String sqlmdlinsertcode) {
-        this.sqlhelper.insertInto(sqlmdlinsertcode);
+    public void sqlDMLInsert(String sqlDLMInsertCode) {
+        this.sqlhelper.insertInto(sqlDLMInsertCode);
     }
 
-    public void sqldmldelete(String sqldmldeletecode) {
-        this.sqlhelper.deleteFrom(sqldmldeletecode);
+    public void sqlDMLDelete(String sqlDMLDeleteCode) {
+        this.sqlhelper.deleteFrom(sqlDMLDeleteCode);
     }
 
-    public void sqldmlupdate(String sqldmlupdatecode) {
-        this.sqlhelper.updateWhere(sqldmlupdatecode);
+    public void sqlDMLUpdate(String sqlDMLUpdateCode) {
+        this.sqlhelper.updateWhere(sqlDMLUpdateCode);
     }
 
-    public void sqlselect(String sqlselectcode) {
-        this.sqlhelper.searchWhere(sqlselectcode);
+    public ArrayList<Integer> sqlSelect(String sqlSelectCode) {
+        return this.sqlhelper.searchWhere(sqlSelectCode);
     }
 }

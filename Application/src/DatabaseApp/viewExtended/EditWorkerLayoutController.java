@@ -44,14 +44,6 @@ public class EditWorkerLayoutController extends EditController {
             content += "No valid address";
         }
 
-        if(telNumField.getText() == null || telNumField.getText().length() == 0) {
-            content += "No valid telephone number\n";
-        }
-
-        if(mailField.getText() == null || mailField.getText().length() == 0) {
-            content += "No valid email address\n";
-        }
-
         if(PESELField.getText() == null || PESELField.getText().length() == 0) {
             content += "No valid PESEL\n";
         }

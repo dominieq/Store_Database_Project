@@ -205,7 +205,7 @@ public class WarehouseBusinessController {
 
            // TODO SQL INSERT INTO
            // refresh stocks
-           this.app.sqldmlinsert("INSERT INTO stock (AMOUNT, MERCHANDISE, WAREHOUSE) VALUES(" +
+           this.app.sqlDMLInsert("INSERT INTO stock (AMOUNT, MERCHANDISE, WAREHOUSE) VALUES(" +
                    stock.getAmount() + ", " +
                    stock.getMerchandise().getIndex() + ", " +
                    stock.getWarehouse().getIndex() + ")");
@@ -226,7 +226,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh stocks
-                this.app.sqldmlupdate("UPDATE STOCK SET AMOUNT = " + stock.getAmount() +
+                this.app.sqlDMLUpdate("UPDATE STOCK SET AMOUNT = " + stock.getAmount() +
                         ", MERCHANDISE = " + stock.getMerchandise().getIndex() +
                         ", WAREHOUSE = " + stock.getWarehouse().getIndex() +
                         " WHERE MERCHANDISE = " + old_merchandise +
@@ -251,7 +251,7 @@ public class WarehouseBusinessController {
         String wantedTrait = this.stockSearchField.getText();
         // TODO display stock traits on stockLabels and change stockBox selection
         // TODO or display information alert
-        this.app.sqlselect("SELECT * FROM stock WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlSelect("SELECT * FROM stock WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -266,7 +266,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh packDeliveries
-            this.app.sqldmlinsert("INSERT INTO packdelivery (INVOICENUMBER, MERCHANDISE, WAREHOUSE, AMOUNT) VALUES(" +
+            this.app.sqlDMLInsert("INSERT INTO packdelivery (INVOICENUMBER, MERCHANDISE, WAREHOUSE, AMOUNT) VALUES(" +
                     packDelivery.getSupply().getInvoiceNumber() + ", " +
                     packDelivery.getStock().getMerchandise().getIndex() + ", " +
                     packDelivery.getStock().getWarehouse().getIndex() + ", " +
@@ -285,7 +285,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh packDeliveries
-            this.app.sqldmldelete("DELETE FROM packdelivery WHERE INVOICENUMBER = " +
+            this.app.sqlDMLDelete("DELETE FROM packdelivery WHERE INVOICENUMBER = " +
                     packDelivery.getSupply().getInvoiceNumber() + " AND MERCHANDISE = " +
                     packDelivery.getStock().getMerchandise().getIndex() + " AND WAREHOUSE = " +
                     packDelivery.getStock().getWarehouse().getIndex());
@@ -310,7 +310,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh packDeliveries
-                this.app.sqldmlupdate("UPDATE packdelivery SET AMOUNT = " + packDelivery.getAmount() +
+                this.app.sqlDMLUpdate("UPDATE packdelivery SET AMOUNT = " + packDelivery.getAmount() +
                         ", INVOICENUMBER = " + packDelivery.getSupply().getInvoiceNumber() +
                         ", MERCHANDISE = " + packDelivery.getStock().getMerchandise().getIndex() +
                         ", WAREHOUSE = " + packDelivery.getStock().getWarehouse().getIndex() +
@@ -336,7 +336,7 @@ public class WarehouseBusinessController {
         String wantedTrait = this.packDeliverySearchField.getText();
         // TODO display packDelivery's traits on packDeliveryLabels and change packDeliveryBox selection
         // TODO or display information alert
-        this.app.sqlselect("SELECT * FROM packdelivery WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlSelect("SELECT * FROM packdelivery WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -351,7 +351,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh pack of orders
-            this.app.sqldmlinsert("INSERT INTO packorder (INVOICENUMBER, MERCHANDISE, WAREHOUSE, AMOUNT) VALUES(" +
+            this.app.sqlDMLInsert("INSERT INTO packorder (INVOICENUMBER, MERCHANDISE, WAREHOUSE, AMOUNT) VALUES(" +
                     packOrder.getOrder().getInvoiceNumber() + ", " +
                     packOrder.getStock().getMerchandise().getIndex() + ", " +
                     packOrder.getStock().getWarehouse().getIndex() + ", " +
@@ -370,7 +370,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh packOrders
-            this.app.sqldmldelete("DELETE FROM packorder WHERE INVOICENUMBER = " +
+            this.app.sqlDMLDelete("DELETE FROM packorder WHERE INVOICENUMBER = " +
                     packOrder.getOrder().getInvoiceNumber() + " AND MERCHANDISE = " +
                     packOrder.getStock().getMerchandise().getIndex() + " AND WAREHOUSE = " +
                     packOrder.getStock().getWarehouse().getIndex());
@@ -394,7 +394,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh packOrders
-                this.app.sqldmlupdate("UPDATE packorder SET AMOUNT = " + packOrder.getAmount() +
+                this.app.sqlDMLUpdate("UPDATE packorder SET AMOUNT = " + packOrder.getAmount() +
                         ", INVOICENUMBER = " + packOrder.getOrder().getInvoiceNumber() +
                         ", MERCHANDISE = " + packOrder.getStock().getMerchandise().getIndex() +
                         ", WAREHOUSE = " + packOrder.getStock().getWarehouse().getIndex() +
@@ -421,7 +421,7 @@ public class WarehouseBusinessController {
 
         // TODO display packOrder's traits on packOrderLabels and change packOrderBox selection
         // TODO or display information alert
-        this.app.sqlselect("SELECT * FROM packorder WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlSelect("SELECT * FROM packorder WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -436,7 +436,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh merchandises
-            this.app.sqldmlinsert("INSERT INTO merchandise (ID, NAME, PRICERETAIL, PRICEMARKET, PRODUCER, CATEGORY) VALUES(" +
+            this.app.sqlDMLInsert("INSERT INTO merchandise (ID, NAME, PRICERETAIL, PRICEMARKET, PRODUCER, CATEGORY) VALUES(" +
                     merchandise.getIndex() + ", '" +
                     merchandise.getName() + "', " +
                     merchandise.getPriceRetail() + ", " +
@@ -457,7 +457,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh merchandises
-            this.app.sqldmldelete("DELETE FROM merchandise WHERE ID = " + merchandise.getIndex());
+            this.app.sqlDMLDelete("DELETE FROM merchandise WHERE ID = " + merchandise.getIndex());
 
         } else {
             this.app.showWarning("No selection", "Select merchandise to proceed.");
@@ -476,7 +476,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh merchandises
-                this.app.sqldmlupdate("UPDATE merchandise SET ID = " + merchandise.getIndex() +
+                this.app.sqlDMLUpdate("UPDATE merchandise SET ID = " + merchandise.getIndex() +
                         ", NAME = '" + merchandise.getName() +
                         "', PRICERETAIL = " + merchandise.getPriceRetail() +
                         ", PRICEMARKET = " + merchandise.getPriceMarket() +
@@ -503,7 +503,7 @@ public class WarehouseBusinessController {
 
         // TODO display Merchandise's traits on merchandiseLabels and change merchandiseBox selection
         // TODO or display information alert
-        this.app.sqlselect("SELECT ID FROM merchandise WHERE LOWER(" + trait + ") like lower('%" + wanted + "%')");
+        this.app.sqlSelect("SELECT ID FROM merchandise WHERE LOWER(" + trait + ") like lower('%" + wanted + "%')");
 
     }
 
@@ -531,7 +531,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh categories
-            this.app.sqldmlinsert("INSERT INTO category (ID, NAME) VALUES(" + category.getIndex() + ", '" + category.getName() + "')");
+            this.app.sqlDMLInsert("INSERT INTO category (ID, NAME) VALUES(" + category.getIndex() + ", '" + category.getName() + "')");
         }
     }
 
@@ -546,7 +546,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh categories
-            this.app.sqldmldelete("DELETE FROM category WHERE ID = " + category.getIndex());
+            this.app.sqlDMLDelete("DELETE FROM category WHERE ID = " + category.getIndex());
 
         } else {
             this.app.showWarning("No selection", "Select category to proceed.");
@@ -567,7 +567,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh categories
-                this.app.sqldmlupdate("UPDATE category SET ID = " + category.getIndex() + ", NAME = '" + category.getName() + "' WHERE ID = " + old_id);
+                this.app.sqlDMLUpdate("UPDATE category SET ID = " + category.getIndex() + ", NAME = '" + category.getName() + "' WHERE ID = " + old_id);
             }
         } else {
             this.app.showWarning("No selection" , "Select category to proceed.");
@@ -587,7 +587,7 @@ public class WarehouseBusinessController {
 
         // TODO display Category's traits on categoryLabels and change categoryBox selection
         // TODO or display information alert
-        this.app.sqlselect("SELECT ID FROM category WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlSelect("SELECT ID FROM category WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -603,7 +603,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh producers
-            this.app.sqldmlinsert("INSERT INTO producer (ID, NAME, ADDRESS, MAIL, TELNUM, WEBPAGE) VALUES(" +
+            this.app.sqlDMLInsert("INSERT INTO producer (ID, NAME, ADDRESS, MAIL, TELNUM, WEBPAGE) VALUES(" +
                     producer.getIndex() + ", '" +
                     producer.getName() + "', '" +
                     producer.getAddress() + "', '" +
@@ -624,7 +624,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELET FROM
             // refresh producers
-            this.app.sqldmldelete("DELETE FROM producer WHERE ID = " + producer.getIndex());
+            this.app.sqlDMLDelete("DELETE FROM producer WHERE ID = " + producer.getIndex());
 
         } else {
             this.app.showWarning("No selection", "Select producer to proceed.");
@@ -645,7 +645,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh producers
-                this.app.sqldmlupdate("UPDATE producer SET ID = " +
+                this.app.sqlDMLUpdate("UPDATE producer SET ID = " +
                         producer.getIndex() + ", NAME = '" +
                         producer.getName() + "', ADDRESS = '" +
                         producer.getAddress() + "', MAIL = '" +
@@ -672,7 +672,7 @@ public class WarehouseBusinessController {
 
         // TODO display Producer's traits on producerLabels and change producerBox selection
         // TODO or display information alert
-        this.app.sqlselect("SELECT ID FROM producer WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlSelect("SELECT ID FROM producer WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -688,7 +688,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh suppliers
-            this.app.sqldmlinsert("INSERT INTO supplier (ID, NAME, ADDRESS, TELNUM, MAIL) VALUES(" +
+            this.app.sqlDMLInsert("INSERT INTO supplier (ID, NAME, ADDRESS, TELNUM, MAIL) VALUES(" +
                     supplier.getIndex() + ", '" +
                     supplier.getName() + "', '" +
                     supplier.getAddress() + "', '" +
@@ -709,7 +709,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELTE FROM
             // refresh suppliers
-            this.app.sqldmldelete("DELETE FROM supplier WHERE ID = " + supplier.getIndex());
+            this.app.sqlDMLDelete("DELETE FROM supplier WHERE ID = " + supplier.getIndex());
 
         } else {
             this.app.showWarning("No selection", "Select supplier to proceed");
@@ -730,7 +730,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh suppliers
-                this.app.sqldmlupdate("UPDATE supplier SET ID = " +
+                this.app.sqlDMLUpdate("UPDATE supplier SET ID = " +
                         supplier.getIndex() + ", NAME = '" +
                         supplier.getName() + "', ADDRESS = '" +
                         supplier.getAddress() + "', TELNUM = '" +
@@ -756,7 +756,7 @@ public class WarehouseBusinessController {
 
         // TODO display Supplier's traits on supplierLabels and change supplierBox selection
         // TODO or display information alert
-        this.app.sqlselect("SELECT ID FROM supplier WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlSelect("SELECT ID FROM supplier WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -772,7 +772,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh supplies
-            this.app.sqldmlinsert("INSERT INTO supply (INVOICENUMBER, STARTDATE, ENDDATE, SUPPLIER) VALUES(" +
+            this.app.sqlDMLInsert("INSERT INTO supply (INVOICENUMBER, STARTDATE, ENDDATE, SUPPLIER) VALUES(" +
                     supply.getInvoiceNumber() + ", DATE '" +
                     supply.getStartDate().toString() + "', DATE '" +
                     supply.getEndDate().toString() + "', " +
@@ -791,7 +791,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh supplies
-            this.app.sqldmldelete("DELETE FROM supply WHERE INVOICENUMBER = " + supply.getInvoiceNumber());
+            this.app.sqlDMLDelete("DELETE FROM supply WHERE INVOICENUMBER = " + supply.getInvoiceNumber());
 
         } else {
             this.app.showWarning("No selection", "Select supply to proceed.");
@@ -812,7 +812,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh supplies
-                this.app.sqldmlupdate("UPDATE supply SET INVOICENUMBER = " + supply.getInvoiceNumber() +
+                this.app.sqlDMLUpdate("UPDATE supply SET INVOICENUMBER = " + supply.getInvoiceNumber() +
                         ", STARTDATE = DATE '" + supply.getStartDate().toString() +
                         "', ENDDATE = DATE '" + supply.getEndDate().toString() +
                         "', SUPPLIER = " + supply.getSupplier().getIndex() +
@@ -837,7 +837,7 @@ public class WarehouseBusinessController {
         // TODO display Supply's traits on supplyLabels and change supplyBox selection
         // TODO or display information alert
 
-        this.app.sqlselect("SELECT INVOICENUMBER FROM supply WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlSelect("SELECT INVOICENUMBER FROM supply WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -855,7 +855,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL INSERT INTO
                 // refresh orders
-                this.app.sqldmlinsert("INSERT INTO w_order (INVOICENUMBER, STARTDATE, ENDDATE, COURIER, RECIPIENT) VALUES(" +
+                this.app.sqlDMLInsert("INSERT INTO w_order (INVOICENUMBER, STARTDATE, ENDDATE, COURIER, RECIPIENT) VALUES(" +
                         order.getInvoiceNumber() + ", DATE '" +
                         order.getStartDate().toString() + "', DATE '" +
                         order.getEndDate().toString() + "', " +
@@ -878,7 +878,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh orders
-            this.app.sqldmldelete("DELETE FROM w_order WHERE INVOICENUMBER = " + order.getInvoiceNumber());
+            this.app.sqlDMLDelete("DELETE FROM w_order WHERE INVOICENUMBER = " + order.getInvoiceNumber());
 
         } else {
             this.app.showWarning("No selection",  "Select order to proceed.");
@@ -899,7 +899,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh orders
-                this.app.sqldmlupdate("UPDATE w_order SET INVOICENUMBER = " + order.getInvoiceNumber() +
+                this.app.sqlDMLUpdate("UPDATE w_order SET INVOICENUMBER = " + order.getInvoiceNumber() +
                         ", STARTDATE = DATE '" + order.getStartDate().toString() +
                         "', ENDDATE = DATE '" + order.getEndDate().toString() +
                         "', COURIER = " + order.getCourier().getIndex() +
@@ -925,7 +925,7 @@ public class WarehouseBusinessController {
         // TODO display Order's traits on orderLabels and change orderBox selection
         // TODO or display information alert
 
-        this.app.sqlselect("SELECT INVOICENUMBER FROM w_order WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlSelect("SELECT INVOICENUMBER FROM w_order WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -941,7 +941,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh recipients
-            this.app.sqldmlinsert("INSERT INTO recipient (ID, NAME, SURNAME, ADDRESS, TELNUM) VALUES(" +
+            this.app.sqlDMLInsert("INSERT INTO recipient (ID, NAME, SURNAME, ADDRESS, TELNUM) VALUES(" +
                     recipient.getIndex() + ", '" +
                     recipient.getName() + "', '" +
                     recipient.getSurname() + "', '" +
@@ -961,7 +961,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh recipients
-            this.app.sqldmldelete("DELETE FROM recipient WHERE ID = " + recipient.getIndex());
+            this.app.sqlDMLDelete("DELETE FROM recipient WHERE ID = " + recipient.getIndex());
 
         } else {
             this.app.showWarning("No selection", "Select recipient to proceed.");
@@ -980,7 +980,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPADTE
                 // refresh recipients
-                this.app.sqldmlupdate("UPDATE recipient SET ID = " +
+                this.app.sqlDMLUpdate("UPDATE recipient SET ID = " +
                         recipient.getIndex() + ", NAME = '" +
                         recipient.getName() + "', SURNAME = '" +
                         recipient.getSurname() + "', ADDRESS = '" +
@@ -1007,7 +1007,7 @@ public class WarehouseBusinessController {
 
         // TODO display Recipient's traits on recipientLabels and change recipientBox selection
         // TODO or display information alert
-        this.app.sqlselect("SELECT ID FROM recipient WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlSelect("SELECT ID FROM recipient WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -1022,7 +1022,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL INSERT INTO
             // refresh couriers
-            this.app.sqldmlinsert("INSERT INTO courier (ID, TELNUM) VALUES(" +
+            this.app.sqlDMLInsert("INSERT INTO courier (ID, TELNUM) VALUES(" +
                     courier.getIndex() + ", '" +
                     courier.getTelNum() + "')");
         }
@@ -1039,7 +1039,7 @@ public class WarehouseBusinessController {
 
             // TODO SQL DELETE FROM
             // refresh couriers
-            this.app.sqldmldelete("DELETE FROM courier WHERE ID = " + courier.getIndex());
+            this.app.sqlDMLDelete("DELETE FROM courier WHERE ID = " + courier.getIndex());
 
         } else {
             this.app.showWarning("No selection", "Select courier to proceed.");
@@ -1058,7 +1058,7 @@ public class WarehouseBusinessController {
 
                 // TODO SQL UPDATE
                 // refresh
-                this.app.sqldmlupdate("UPDATE courier SET ID = " +
+                this.app.sqlDMLUpdate("UPDATE courier SET ID = " +
                         courier.getIndex() + ", TELNUM = '" +
                         courier.getTelNum() + "' WHERE ID = " + 
                         old_id);
@@ -1081,7 +1081,7 @@ public class WarehouseBusinessController {
 
         // TODO display Courier's traits on courierLabels and change courierBox selection
         // TODO or display information alert
-        this.app.sqlselect("SELECT ID FROM courier WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlSelect("SELECT ID FROM courier WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
 
     }
 

@@ -47,8 +47,8 @@ public class WarehouseLogisticsController {
                 ((observable, oldValue, newValue) -> {
                     if(newValue != null) {
                         this.workerChoiceBox.setItems(newValue.getWorkersObservable());
-                        this.informationLabel.setText("Workers from: " + newValue.toString() +
-                                ".\n Double click on warehouse to cancel selection.");
+                        this.informationLabel.setText("Workers from selected warehouse. " +
+                                "Double click on warehouse to cancel selection.");
                     }
                 })
         );
@@ -84,8 +84,8 @@ public class WarehouseLogisticsController {
             System.out.println("Warehouse: " + warehouse.toString() + " added");
             this.app.getWarehouses().add(warehouse);
 
-            // TODO SQL query INSERT INTO
-            this.app.sqldmlinsert("INSERT INTO warehouse (ID, ADDRESS) VALUES(" + warehouse.getIndex() + ", '" + warehouse.getAddress() + "')");
+            this.app.sqlDMLInsert("INSERT INTO warehouse (ID, ADDRESS) " +
+                    "VALUES(" + warehouse.getIndex() + ", '" + warehouse.getAddress() + "')");
 
             refreshWarehouse(warehouse);
         }
@@ -109,8 +109,7 @@ public class WarehouseLogisticsController {
             this.app.getWorkers().removeAll(toRemove);
             this.app.getWarehouses().remove(warehouse);
 
-            // TODO SQL query DELETE FROM
-            this.app.sqldmldelete("DELETE FROM warehouse WHERE ID = " + warehouse.getIndex());
+            this.app.sqlDMLDelete("DELETE FROM warehouse WHERE ID = " + warehouse.getIndex());
 
             this.warehouseTableView.refresh();
             this.warehouseTableView.getSelectionModel().selectFirst();
@@ -128,13 +127,14 @@ public class WarehouseLogisticsController {
      */
     @FXML private void handleEditWarehouse() {
         Warehouse warehouse = this.warehouseTableView.getSelectionModel().getSelectedItem();
-        int old_id = warehouse.getIndex();
         if(warehouse != null) {
+            int old_id = warehouse.getIndex();
+
             if(this.app.showWarehouseDialog("Edit warehouse", warehouse)) {
                 System.out.println("Warehouse: " + warehouse.toString() + " edited");
 
-                // TODO SQL query UPDATE
-                this.app.sqldmlupdate("UPDATE warehouse SET ID = " + warehouse.getIndex() + ", ADDRESS = '" + warehouse.getAddress() + "' WHERE ID = " + old_id);
+                this.app.sqlDMLUpdate("UPDATE warehouse SET ID = " + warehouse.getIndex() +
+                        ", ADDRESS = '" + warehouse.getAddress() + "' WHERE ID = " + old_id);
 
                 refreshWarehouse(warehouse);
             }
@@ -151,10 +151,8 @@ public class WarehouseLogisticsController {
         String trait = this.warehouseTraitChoiceBox.getValue();
         String wantedTrait = this.warehouseTraitTextField.getText();
 
-        // TODO use SQL query to search for warehouse
-        // SELECT index FROM warehouses
-        // WHERE [trait] = [wantedTrait]
-        this.app.sqlselect("SELECT ID FROM warehouse WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        this.app.sqlSelect("SELECT ID FROM warehouse WHERE LOWER(" + trait + ") " +
+                "like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -167,21 +165,25 @@ public class WarehouseLogisticsController {
         Worker worker = new Worker(100, "[name]", "[surname]", "[address]",
                 "[telephone number]", "[email address]", "00000000000",
                 this.app.getWarehouses().get(0).getIndex());
-        if(this.app.showWorkerEditDialog("Add Worker", worker)){
-            for(Warehouse warehouse : this.app.getWarehouses()) {
-                if(warehouse.getIndex() == worker.getWarehouseIndex()) {
-                    System.out.println("Worker: " + worker.toString() + " added");
-                    warehouse.addWorker(worker);
-                    this.app.getWorkers().add(worker);
-                }
-            }
+        boolean isOkClicked = this.app.showWorkerEditDialog("Add Worker", worker);
 
-            // TODO SQL query INSERT INTO
-            this.app.sqldmlinsert("INSERT INTO worker (ID, NAME, SURNAME, ADDRESS, TELNUM, MAIL, PESEL, WAREHOUSE) VALUES(" + worker.getIndex() + ", '" +
-                    worker.getName() + "', '" + worker.getSurname() + "', '" + worker.getAddress() + "', '" + worker.getTelNum() + "', '" + worker.getMail() + "', '" + worker.getPESEL() + "', " + worker.getWarehouseIndex() + ")");
-
-            refreshWorker(worker);
+        if(isOkClicked){
+            System.out.println("Worker: " + worker.toString() + " added");
+            this.app.getWorkers().add(worker);
         }
+
+        this.app.sqlDMLInsert(
+                "INSERT INTO worker (ID, NAME, SURNAME, ADDRESS, TELNUM, MAIL, PESEL, WAREHOUSE) " +
+                        "VALUES(" + worker.getIndex() + ", '" +
+                        worker.getName() + "', '" +
+                        worker.getSurname() + "', '" +
+                        worker.getAddress() + "', '" +
+                        worker.getTelNum() + "', '" +
+                        worker.getMail() + "', '" +
+                        worker.getPESEL() + "', " +
+                        worker.getWarehouseIndex() + ")");
+
+        refreshWorker(worker);
     }
 
     /**
@@ -198,16 +200,16 @@ public class WarehouseLogisticsController {
                     warehouse.deleteWorker(worker);
                     this.app.getWorkers().remove(worker);
 
-                    // TODO SQL query DELETE FROM
-                    this.app.sqldmldelete("DELETE FROM worker WHERE ID = " + worker.getIndex());
+                    this.app.sqlDMLDelete("DELETE FROM worker WHERE ID = " + worker.getIndex());
 
                 }
             }
             showWorker(null);
-            this.warehouseTableView.refresh();
-            this.workerChoiceBox.getSelectionModel().clearSelection();
-            this.workerChoiceBox.setItems(
-                    this.warehouseTableView.getSelectionModel().getSelectedItem().getWorkersObservable());
+            Warehouse warehouse = this.warehouseTableView.getSelectionModel().getSelectedItem();
+            if(warehouse !=  null) {
+                this.workerChoiceBox.getSelectionModel().clearSelection();
+                this.workerChoiceBox.setItems(warehouse.getWorkersObservable());
+            }
             this.workerChoiceBox.getSelectionModel().selectFirst();
 
         }
@@ -222,13 +224,13 @@ public class WarehouseLogisticsController {
      */
     @FXML private void handleEditWorker() {
         Worker worker = this.workerChoiceBox.getSelectionModel().getSelectedItem();
-        int old_id = worker.getIndex();
         if(worker != null) {
+            int old_id = worker.getIndex();
+
             if(this.app.showWorkerEditDialog("Edit worker", worker)) {
                 System.out.println("Worker: " + worker.toString() + " edited");
 
-                // TODO use SQL query UPDATE
-                this.app.sqldmlupdate("UPDATE worker SET ID = " + worker.getIndex() +
+                this.app.sqlDMLUpdate("UPDATE worker SET ID = " + worker.getIndex() +
                         ", NAME = '" + worker.getName() +
                         "', SURNAME = '" + worker.getSurname() +
                         "', ADDRESS = '" + worker.getAddress() +
@@ -251,13 +253,31 @@ public class WarehouseLogisticsController {
      * When a worker is found, function refreshes all fxml elements.
      */
     @FXML private void handleSearchWorker() {
-        String trait = this.workerTraitChoiceBox.getValue();
+        String trait = this.workerTraitChoiceBox.getValue().toLowerCase();
         String wantedTrait = this.workerTraitTextField.getText();
+        ArrayList<Integer> results = this.app.sqlSelect("SELECT ID FROM worker " +
+                "WHERE " + trait + " like '%" + wantedTrait + "%'");
+        if(results != null) {
 
-        // TODO use SQL query to search for worker
-        // SELECT index FROM workers
-        // WHERE [trait] = [wantedTrait]
-        this.app.sqlselect("SELECT ID FROM worker WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+            ObservableList<Worker> toShow = FXCollections.observableArrayList();
+            for(Worker worker : this.app.getWorkers()) {
+                for(Integer index : results) {
+                    if(index == worker.getIndex()) {
+                        System.out.println(worker.getIndexString());
+                        toShow.add(worker);
+                    }
+                }
+            }
+
+            if(!toShow.isEmpty()){
+                this.warehouseTableView.getSelectionModel().clearSelection();
+                this.workerChoiceBox.getSelectionModel().clearSelection();
+                this.workerChoiceBox.getItems().clear();
+                this.workerChoiceBox.setItems(toShow);
+            }
+
+        }
+        System.out.println("End of search");
     }
 
     /**
@@ -279,9 +299,12 @@ public class WarehouseLogisticsController {
      * @param worker Worker
      */
     private void refreshWorker(Worker worker) {
+        this.warehouseTableView.getSelectionModel().clearSelection();
+        this.workerChoiceBox.getItems().clear();
+        this.workerChoiceBox.getSelectionModel().clearSelection();
+
         for(Warehouse warehouse : this.app.getWarehouses()) {
             if(warehouse.getIndex() == worker.getWarehouseIndex()) {
-                this.warehouseTableView.refresh();
                 this.warehouseTableView.getSelectionModel().select(warehouse);
                 this.workerChoiceBox.setItems(warehouse.getWorkersObservable());
                 this.workerChoiceBox.getSelectionModel().select(worker);

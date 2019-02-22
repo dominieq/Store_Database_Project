@@ -4,6 +4,7 @@ import DatabaseApp.DatabaseApp;
 import DatabaseApp.models.*;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Properties;
 
 /**
@@ -309,7 +310,11 @@ public class SQLHelper {
         try{
             while (rsRecipient.next()) {
                 this.app.getRecipients().add(new Recipient(
-                        rsRecipient.getInt(1), rsRecipient.getString(2), rsRecipient.getString(3), rsRecipient.getString(4), rsRecipient.getString(5)));
+                        rsRecipient.getInt(1),
+                        rsRecipient.getString(2),
+                        rsRecipient.getString(3),
+                        rsRecipient.getString(4),
+                        rsRecipient.getString(5)));
             }
         } catch (Exception exception) {
             return exception;
@@ -463,20 +468,29 @@ public class SQLHelper {
 
     }
 
-    public void searchWhere (String sqlselectcode){
-
-        Statement stmt;
-        int rows;
+    /**
+     * TODO comments
+     * @param sqlSelectCode String
+     */
+    public ArrayList<Integer> searchWhere (String sqlSelectCode){
         try {
-            stmt = conn.createStatement();
-            System.out.println(sqlselectcode);
-            rows = stmt.executeUpdate(sqlselectcode);
-            System.out.println(rows + " for 'SELECT'");
+            Statement stmt = conn.createStatement();
+            System.out.println(sqlSelectCode);
+            ResultSet resultSet = stmt.executeQuery(sqlSelectCode);
+            ArrayList<Integer> results = new ArrayList<>();
+            while (resultSet.next()) {
+                results.add(resultSet.getInt(0));
+                System.out.println(results.get(results.size() - 1));
+            }
+            return results;
         } catch (SQLException exception) {
-            System.out.println("Couldn't execute SELECT WHERE query.");
-            System.out.println("Error Code: " + exception.getErrorCode());
-            System.out.println("SQLState: " + exception.getSQLState());
+            String title = "SQLException";
+            String content = "Couldn't execute SELECT WHERE query.\n" +
+                    "Error Code: " + exception.getErrorCode() + "\n" +
+                    "SQLState: " + exception.getSQLState();
+            System.out.println(content);
+            this.app.showError(title, content);
+            return null;
         }
-
     }
 }

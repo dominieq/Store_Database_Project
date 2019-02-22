@@ -45,7 +45,7 @@ public class Warehouse {
      * @return String: index + "@" + address
      */
     @Override public String toString() {
-        return this.index + "@" + this.address;
+        return this.address + " (" + this.index + ")";
     }
 
 
