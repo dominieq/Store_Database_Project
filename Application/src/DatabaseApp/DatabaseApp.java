@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.sql.*;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * TODO comments
@@ -706,7 +706,7 @@ public class DatabaseApp extends Application {
         this.sqlhelper.updateWhere(sqlDMLUpdateCode);
     }
 
-    public ArrayList<Integer> sqlSelect(String sqlSelectCode) {
+    public List<Integer> sqlSelect(String sqlSelectCode) {
         return this.sqlhelper.searchWhere(sqlSelectCode);
     }
 }

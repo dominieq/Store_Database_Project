@@ -2,9 +2,16 @@ package DatabaseApp.view;
 
 import DatabaseApp.DatabaseApp;
 import DatabaseApp.exceptions.WrongDateError;
+import DatabaseApp.helpers.DQLHelper;
 import DatabaseApp.models.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class WarehouseBusinessController {
 
@@ -20,6 +27,7 @@ public class WarehouseBusinessController {
     @FXML private Label stockWarehouseLabel;
     @FXML private Label stockMerchandiseLabel;
     @FXML private TextField stockSearchField;
+    private DQLHelper stockTraitArg;
     /**
      *     PackDelivery attributes:
      */
@@ -30,6 +38,7 @@ public class WarehouseBusinessController {
     @FXML private Label packDeliveryMerchLabel;
     @FXML private Label packDeliveryWarehouseLabel;
     @FXML private TextField packDeliverySearchField;
+    private DQLHelper packDeliveryTraitArg;
     /**
      *     Order attributes:
      */
@@ -40,6 +49,7 @@ public class WarehouseBusinessController {
     @FXML private Label packOrderMerchLabel;
     @FXML private Label packOrderWarehouseLabel;
     @FXML private TextField packOrderSearchField;
+    private DQLHelper packOrderTraitArg;
 
     /**
      * Fields that refer to Tab MERCHANDISE:
@@ -72,6 +82,7 @@ public class WarehouseBusinessController {
     @FXML private Label producerTelNumLabel;
     @FXML private Label producerWebLabel;
     @FXML private TextField producerSearchField;
+    private DQLHelper producerTraitArg;
     /**
      *     Category attributes:
      */
@@ -80,6 +91,7 @@ public class WarehouseBusinessController {
     @FXML private Label categoryLabel;
     @FXML private Label categoryNameLabel;
     @FXML private TextField categorySearchField;
+    private DQLHelper categoryTraitArg;
 
     /**
      * Fields that refer to Tab SUPPLIERS & SUPPLIES:
@@ -93,6 +105,7 @@ public class WarehouseBusinessController {
     @FXML private Label supplierTelNumLabel;
     @FXML private Label supplierEmailLabel;
     @FXML private TextField supplierSearchField;
+    private DQLHelper supplierTraitArg;
     /**
      *     Supply attributes:
      */
@@ -103,6 +116,7 @@ public class WarehouseBusinessController {
     @FXML private Label supplyEndLabel;
     @FXML private Label supplySupplierLabel;
     @FXML private TextField supplySearchField;
+    private DQLHelper supplyTraitArg;
 
     /**
      * Fields that refer to Tab ORDERS:
@@ -123,6 +137,7 @@ public class WarehouseBusinessController {
     @FXML private Label orderCourierRightLabel;
     @FXML private Label orderCourierTelNumLabel;
     @FXML private TextField orderSearchField;
+    private DQLHelper orderTraitArg;
     /**
      *     Recipient attributes:
      */
@@ -134,6 +149,7 @@ public class WarehouseBusinessController {
     @FXML private Label recipientAddressLabel;
     @FXML private Label recipientTelNumLabel;
     @FXML private TextField recipientSearchField;
+    private DQLHelper recipientTraitArg;
     /**
      *     Courier attributes:
      */
@@ -142,6 +158,7 @@ public class WarehouseBusinessController {
     @FXML private Label courierLabel;
     @FXML private Label courierTelNumLabel;
     @FXML private TextField courierSearchField;
+    private DQLHelper courierTraitArg;
 
 
     public WarehouseBusinessController() {}
@@ -1332,5 +1349,72 @@ public class WarehouseBusinessController {
         this.orderBox.setItems(app.getOrders());
         this.recipientBox.setItems(app.getRecipients());
         this.courierBox.setItems(app.getCouriers());
+
+
+        //stock
+        ObservableList<String> stockTraits = FXCollections.observableArrayList();
+        List<String> stockTraitsList = new ArrayList<>(Arrays.asList("Amount", "Merchandise Id", "Warehouse Id"));
+        stockTraits.addAll(stockTraitsList);
+        this.stockTraitsBox.setItems(stockTraits);
+        this.stockTraitArg = new DQLHelper(stockTraitsList, Arrays.asList("AMOUNT,", "MERCHANDISE", "WAREHOUSE"));
+
+        //packDelivery
+        ObservableList<String> packDeliveryTraits = FXCollections.observableArrayList();
+        List<String> packDeliveryTraitsList = new ArrayList<>(Arrays.asList("InvoiceNumber", "Merchandise Id", "Warehouse Id", "Amount"));
+        packDeliveryTraits.addAll(packDeliveryTraitsList);
+        this.packDeliveryTraitsBox.setItems(packDeliveryTraits);
+        this.packDeliveryTraitArg = new DQLHelper(packDeliveryTraitsList, Arrays.asList("INVOICENUMBER", "MERCHANDISE", "WAREHOUSE", "AMOUNT"));
+
+        //packOrder
+        ObservableList<String> packOrderTraits = FXCollections.observableArrayList();
+        List<String> packOrderTraitsList = new ArrayList<>(Arrays.asList("Invoice Number", "Merchandise Id", "Warehouse Id", "Amount"));
+        packOrderTraits.addAll(packOrderTraitsList);
+        this.packOrderTraitsBox.setItems(packOrderTraits);
+        this.packOrderTraitArg = new DQLHelper(packOrderTraitsList, Arrays.asList("INVOICENUMBER", "MERCHANDISE", "WAREHOUSE", "AMOUNT"));
+
+        //category
+        ObservableList<String> categoryTraits = FXCollections.observableArrayList();
+        List<String> categoryTraitsList = new ArrayList<>(Arrays.asList("Id", "Name"));
+        categoryTraits.addAll(categoryTraitsList);
+        this.categoryTraitsBox.setItems(categoryTraits);
+        this.categoryTraitArg = new DQLHelper(categoryTraitsList, Arrays.asList("ID", "NAME"));
+        
+        //supplier
+        ObservableList<String> supplierTraits = FXCollections.observableArrayList();
+        List<String> supplierTraitsList = new ArrayList<>(Arrays.asList("Id", "Name", "Address", "Telephone Number", "Mail Address"));
+        supplierTraits.addAll(supplierTraitsList);
+        this.supplierTraitsBox.setItems(supplierTraits);
+        this.supplierTraitArg = new DQLHelper(supplierTraitsList, Arrays.asList("ID", "NAME", "ADDRESS", "TELNUM", "MAIL"));
+
+        //supply
+        ObservableList<String> supplyTraits = FXCollections.observableArrayList();
+        List<String> supplyTraitsList = new ArrayList<>(Arrays.asList("Invoice Number", "Start Date", "End Date", "Supplier Id"));
+        supplyTraits.addAll(supplyTraitsList);
+        this.supplyTraitsBox.setItems(supplyTraits);
+        this.supplyTraitArg = new DQLHelper(supplyTraitsList, Arrays.asList("INVOICENUMBER", "STARTDATE", "ENDDATE", "SUPPLIER"));
+
+        //order
+        ObservableList<String> orderTraits = FXCollections.observableArrayList();
+        List<String> orderTraitsList = new ArrayList<>(Arrays.asList("Invoice Number", "Start Date", "End Date", "Courier Id", "Recipient Id"));
+        orderTraits.addAll(orderTraitsList);
+        this.orderTraitsBox.setItems(orderTraits);
+        this.orderTraitArg = new DQLHelper(orderTraitsList, Arrays.asList("INVOICENUMBER", "STARTDATE", "ENDDATE", "COURIER", "RECIPIENT"));
+        
+        //recipient
+        ObservableList<String> recipientTraits = FXCollections.observableArrayList();
+        List<String> recipientTraitsList = new ArrayList<>(Arrays.asList("Id", "Name", "Surname", "Address", "Telephone Number"));
+        recipientTraits.addAll(recipientTraitsList);
+        this.recipientTraitsBox.setItems(recipientTraits);
+        this.recipientTraitArg = new DQLHelper(recipientTraitsList, Arrays.asList("ID", "NAME", "SURNAME", "ADDRESS", "TELNUM"));
+        
+        //courier
+        ObservableList<String> courierTraits = FXCollections.observableArrayList();
+        List<String> courierTraitsList = new ArrayList<>(Arrays.asList("Id", "Telephone Number"));
+        courierTraits.addAll(courierTraitsList);
+        this.courierTraitsBox.setItems(courierTraits);
+        this.courierTraitArg = new DQLHelper(courierTraitsList, Arrays.asList("ID", "TELNUM"));
+
+//        merch
+
     }
 }

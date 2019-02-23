@@ -3,12 +3,15 @@ package DatabaseApp.view;
 import DatabaseApp.DatabaseApp;
 import DatabaseApp.models.Warehouse;
 import DatabaseApp.models.Worker;
+import DatabaseApp.helpers.DQLHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class WarehouseLogisticsController {
 
@@ -18,6 +21,7 @@ public class WarehouseLogisticsController {
     @FXML private TableColumn<Warehouse, String> warehouseAddressTableColumn;
     @FXML private ChoiceBox<String> warehouseTraitChoiceBox;
     @FXML private TextField warehouseTraitTextField;
+    private DQLHelper warehouseTraitArg;
 
     @FXML private ChoiceBox<Worker> workerChoiceBox;
     @FXML private Label workerIdLabel;
@@ -29,6 +33,7 @@ public class WarehouseLogisticsController {
     @FXML private Label workerPESELLabel;
     @FXML private ChoiceBox<String> workerTraitChoiceBox;
     @FXML private TextField workerTraitTextField;
+    private DQLHelper workerTraitArg;
 
     @FXML private Label informationLabel;
 
@@ -151,7 +156,9 @@ public class WarehouseLogisticsController {
         String trait = this.warehouseTraitChoiceBox.getValue();
         String wantedTrait = this.warehouseTraitTextField.getText();
 
-        this.app.sqlSelect("SELECT ID FROM warehouse WHERE LOWER(" + trait + ") " +
+        String trait_patern = this.warehouseTraitArg.getAskValue(trait);
+
+        this.app.sqlSelect("SELECT ID FROM warehouse WHERE LOWER(" + trait_patern + ") " +
                 "like lower('%" + wantedTrait + "%')");
 
     }
@@ -253,12 +260,15 @@ public class WarehouseLogisticsController {
      * When a worker is found, function refreshes all fxml elements.
      */
     @FXML private void handleSearchWorker() {
-        String trait = this.workerTraitChoiceBox.getValue().toLowerCase();
+        String trait = this.workerTraitChoiceBox.getValue();
         String wantedTrait = this.workerTraitTextField.getText();
-        ArrayList<Integer> results = this.app.sqlSelect("SELECT ID FROM worker " +
-                "WHERE " + trait + " like '%" + wantedTrait + "%'");
-        if(results != null) {
 
+        String trait_patern = this.workerTraitArg.getAskValue(trait);
+
+        List<Integer> results = this.app.sqlSelect("SELECT ID FROM worker " +
+                "WHERE " + trait_patern + " like lower('%" + wantedTrait + "%')");
+
+        if(results != null) {
             ObservableList<Worker> toShow = FXCollections.observableArrayList();
             for(Worker worker : this.app.getWorkers()) {
                 for(Integer index : results) {
@@ -350,9 +360,16 @@ public class WarehouseLogisticsController {
         this.workerChoiceBox.setItems(this.app.getWorkers());
         ObservableList<String> warehouseTraits = FXCollections.observableArrayList();
         warehouseTraits.addAll("Address", "Id");
+
+        this.warehouseTraitArg = new DQLHelper(Arrays.asList("Address", "Id"), Arrays.asList("ADDRESS", "ID"));
+
         ObservableList<String> workerTraits = FXCollections.observableArrayList();
         workerTraits.addAll("Id", "Name", "Surname", "Address",
-                "Telephone Number", "Mail Address", "PESEL");
+                "Telephone Number", "Mail Address", "PESEL", "Warehouse Id");
+
+        this.workerTraitArg = new DQLHelper(Arrays.asList("Id", "Name", "Surname", "Address",
+                "Telephone Number", "Mail Address", "PESEL", "Warehouse Id"), Arrays.asList("ID", "NAME", "SURNAME", "ADDRESS", "TELNUM", "MAIL", "PESEL", "WAREHOUSE"));
+
         this.warehouseTraitChoiceBox.setItems(warehouseTraits);
         this.workerTraitChoiceBox.setItems(workerTraits);
     }

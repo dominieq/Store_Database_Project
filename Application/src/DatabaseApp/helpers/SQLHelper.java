@@ -6,6 +6,7 @@ import DatabaseApp.models.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.List;
 
 /**
  * TODO comments
@@ -472,14 +473,14 @@ public class SQLHelper {
      * TODO comments
      * @param sqlSelectCode String
      */
-    public ArrayList<Integer> searchWhere (String sqlSelectCode){
+    public List<Integer> searchWhere (String sqlSelectCode){
         try {
             Statement stmt = conn.createStatement();
             System.out.println(sqlSelectCode);
             ResultSet resultSet = stmt.executeQuery(sqlSelectCode);
-            ArrayList<Integer> results = new ArrayList<>();
+            List<Integer> results = new ArrayList<>();
             while (resultSet.next()) {
-                results.add(resultSet.getInt(0));
+                results.add(resultSet.getInt(1));
                 System.out.println(results.get(results.size() - 1));
             }
             return results;
