@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 
 public class WarehouseBusinessController {
 
@@ -70,6 +71,7 @@ public class WarehouseBusinessController {
     @FXML private ChoiceBox<String> merchProducerTraitsBox;
     @FXML private TextField merchCategorySearchField;
     @FXML private TextField merchProducerSearchField;
+    private DQLHelper merchTraitArg;
     /**
      *     Producer attributes:
      */
@@ -216,9 +218,6 @@ public class WarehouseBusinessController {
     @FXML private void handleAddStock() {
        Stock stock = new Stock(0, null, null);
        if(this.app.showStockDialog("Add new stock", stock)) {
-           System.out.println("Stock " + stock.toString() + " added");
-           stock.createID();
-           this.app.getStocks().add(stock);
 
            // TODO SQL INSERT INTO
            // refresh stocks
@@ -226,6 +225,12 @@ public class WarehouseBusinessController {
                    stock.getAmount() + ", " +
                    stock.getMerchandise().getIndex() + ", " +
                    stock.getWarehouse().getIndex() + ")");
+
+           this.app.getStocks().add(stock);
+           System.out.println("Stock " + stock.toString() + " added");
+           stock.createID();
+
+           refreshStock(stock);
        }
     }
 
@@ -238,8 +243,6 @@ public class WarehouseBusinessController {
             int old_merchandise = stock.getMerchandise().getIndex();
             int old_warehouse = stock.getWarehouse().getIndex();
             if(this.app.showStockDialog("Edit " + stock.toString() + " stock", stock)) {
-                stock.createID();
-                System.out.println("Stock " + stock.toString() + " edited");
 
                 // TODO SQL UPDATE
                 // refresh stocks
@@ -248,11 +251,21 @@ public class WarehouseBusinessController {
                         ", WAREHOUSE = " + stock.getWarehouse().getIndex() +
                         " WHERE MERCHANDISE = " + old_merchandise +
                         " AND WAREHOUSE = " + old_warehouse);
+
+                stock.createID();
+                System.out.println("Stock " + stock.toString() + " edited");
+
+                refreshStock(stock);
             }
         }
         else {
             this.app.showWarning("No selection", "Select stock to proceed.");
         }
+    }
+
+    private void refreshStock(Stock stock) {
+        this.stockBox.getSelectionModel().select(stock);
+        showStock(stock);
     }
 
     /**
@@ -266,9 +279,43 @@ public class WarehouseBusinessController {
 
         String trait = this.stockTraitsBox.getValue();
         String wantedTrait = this.stockSearchField.getText();
-        // TODO display stock traits on stockLabels and change stockBox selection
-        // TODO or display information alert
-        this.app.sqlSelect("SELECT * FROM stock WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        try{
+            if (wantedTrait.isEmpty()) {
+                System.out.println("null");
+                this.stockBox.setItems(this.app.getStocks());
+            }
+            else {
+                int wantedTraitInt = Integer.parseInt(wantedTrait);
+                System.out.println(wantedTraitInt);
+
+                String trait_patern = this.stockTraitArg.getAskValue(trait);
+
+                // TODO display stock traits on stockLabels and change stockBox selection
+                // TODO or display information alert
+                List<Vector<Integer>> results = this.app.sqlSelectMore("SELECT MERCHANDISE, WAREHOUSE FROM stock WHERE LOWER(" + trait_patern + ") = " + wantedTraitInt, 2);
+
+                if(results != null) {
+                    System.out.println("res " + results);
+                    ObservableList<Stock> toShow = FXCollections.observableArrayList();
+                    for(Stock stock : this.app.getStocks()) {
+                        for(Vector<Integer> vector : results) {
+                            if((vector.get(0) == stock.getMerchandise().getIndex()) &&
+                                    (vector.get(1) == stock.getWarehouse().getIndex())) {
+                                toShow.add(stock);
+                            }
+                        }
+                    }
+                    this.stockBox.setItems(toShow);
+                }
+            }
+        }
+        catch (NumberFormatException exception) {
+            String title = "NumberFormatException";
+            String content = "Couldn't parseInt from TexField.\n";
+            System.out.println(content);
+            this.app.showError(title, content);
+        }
+
 
     }
 
@@ -278,8 +325,6 @@ public class WarehouseBusinessController {
     @FXML private void handleAddPackDelivery() {
         PackDelivery packDelivery = new PackDelivery(0,  null,  null);
         if(this.app.showPackDeliveryDialog("Add new package of delivery", packDelivery)) {
-            System.out.println("PackDelivery " + packDelivery.getIndex() + " added");
-            this.app.getPackDeliveries().add(packDelivery);
 
             // TODO SQL INSERT INTO
             // refresh packDeliveries
@@ -288,6 +333,11 @@ public class WarehouseBusinessController {
                     packDelivery.getStock().getMerchandise().getIndex() + ", " +
                     packDelivery.getStock().getWarehouse().getIndex() + ", " +
                     packDelivery.getAmount() + ")");
+
+            this.app.getPackDeliveries().add(packDelivery);
+            System.out.println("PackDelivery " + packDelivery.getIndex() + " added");
+
+            refreshPackDelivery(packDelivery);
         }
 
     }
@@ -298,7 +348,6 @@ public class WarehouseBusinessController {
     @FXML private void handleDelPackDelivery() {
         PackDelivery packDelivery = this.packDeliveryBox.getValue();
         if(packDelivery != null) {
-            this.app.getPackDeliveries().remove(packDelivery);
 
             // TODO SQL DELETE FROM
             // refresh packDeliveries
@@ -306,6 +355,9 @@ public class WarehouseBusinessController {
                     packDelivery.getSupply().getInvoiceNumber() + " AND MERCHANDISE = " +
                     packDelivery.getStock().getMerchandise().getIndex() + " AND WAREHOUSE = " +
                     packDelivery.getStock().getWarehouse().getIndex());
+
+            this.app.getPackDeliveries().remove(packDelivery);
+            System.out.println("PackDelivery " + packDelivery.toString() + " removed");
         }
         else {
             this.app.showWarning("No selection", "Select package of deliveries to proceed.");
@@ -323,7 +375,6 @@ public class WarehouseBusinessController {
             int old_merchandise = packDelivery.getStock().getMerchandise().getIndex();
             int old_warehouse = packDelivery.getStock().getWarehouse().getIndex();
             if(this.app.showPackDeliveryDialog("Edit " + packDelivery.getIndex(), packDelivery)) {
-                System.out.println("PackDelivery " + packDelivery.getIndex() + " edited");
 
                 // TODO SQL UPDATE
                 // refresh packDeliveries
@@ -334,11 +385,20 @@ public class WarehouseBusinessController {
                         " WHERE INVOICENUMBER = " + old_invoicenumber +
                         " AND MERCHANDISE = " + old_merchandise +
                         " AND WAREHOUSE = " + old_warehouse);
+
+                System.out.println("PackDelivery " + packDelivery.getIndex() + " edited");
+
+                refreshPackDelivery(packDelivery);
             }
         } else {
             this.app.showWarning("No selection", "Select package of deliveries to proceed.");
         }
 
+    }
+
+    private void refreshPackDelivery(PackDelivery packDelivery) {
+        this.packDeliveryBox.getSelectionModel().select(packDelivery);
+        showPackDelivery(packDelivery);
     }
 
     /**
@@ -351,9 +411,42 @@ public class WarehouseBusinessController {
     @FXML private void handleSearchPackDelivery() {
         String trait = this.packDeliveryTraitsBox.getValue();
         String wantedTrait = this.packDeliverySearchField.getText();
-        // TODO display packDelivery's traits on packDeliveryLabels and change packDeliveryBox selection
-        // TODO or display information alert
-        this.app.sqlSelect("SELECT * FROM packdelivery WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+
+        try{
+            if (wantedTrait.isEmpty()) {
+                System.out.println("null");
+                this.packDeliveryBox.setItems(this.app.getPackDeliveries());
+            }
+            else {
+                int wantedTraitInt = Integer.parseInt(wantedTrait);
+                System.out.println(wantedTraitInt);
+
+                String trait_patern = this.packDeliveryTraitArg.getAskValue(trait);
+
+                // TODO display packDelivery's traits on packDeliveryLabels and change packDeliveryBox selection
+                // TODO or display information alert
+                List<Integer> results = this.app.sqlSelect("SELECT INVOICENUMBER FROM packdelivery WHERE LOWER(" + trait_patern + ") = " + wantedTraitInt);
+
+                if(results != null) {
+                    System.out.println("res " + results);
+                    ObservableList<PackDelivery> toShow = FXCollections.observableArrayList();
+                    for(PackDelivery packDelivery : this.app.getPackDeliveries()) {
+                        for(Integer invoicenumber : results) {
+                            if(invoicenumber == packDelivery.getSupply().getInvoiceNumber()) {
+                                toShow.add(packDelivery);
+                            }
+                        }
+                    }
+                    this.packDeliveryBox.setItems(toShow);
+                }
+            }
+        }
+        catch (NumberFormatException exception) {
+            String title = "NumberFormatException";
+            String content = "Couldn't parseInt from TexField or for string in app base.\n";
+            System.out.println(content);
+            this.app.showError(title, content);
+        }
 
     }
 
@@ -363,8 +456,6 @@ public class WarehouseBusinessController {
     @FXML private void handleAddPackOrder() {
         PackOrder packOrder = new PackOrder(0, null, null);
         if(this.app.showPackOrderDialog("Add new package of orders", packOrder)) {
-            System.out.println("PackOrder " + packOrder.toString() + " added");
-            this.app.getPackOrders().add(packOrder);
 
             // TODO SQL INSERT INTO
             // refresh pack of orders
@@ -373,6 +464,11 @@ public class WarehouseBusinessController {
                     packOrder.getStock().getMerchandise().getIndex() + ", " +
                     packOrder.getStock().getWarehouse().getIndex() + ", " +
                     packOrder.getAmount() + ")");
+
+            System.out.println("PackOrder " + packOrder.toString() + " added");
+            this.app.getPackOrders().add(packOrder);
+
+            refreshPackOrder(packOrder);
         }
     }
 
@@ -382,8 +478,6 @@ public class WarehouseBusinessController {
     @FXML private void handleDelPackOrder() {
         PackOrder packOrder = this.packOrderBox.getValue();
         if(packOrder != null) {
-            System.out.println("PackOrder " + packOrder.toString() + " removed");
-            this.app.getPackOrders().remove(packOrder);
 
             // TODO SQL DELETE FROM
             // refresh packOrders
@@ -391,6 +485,9 @@ public class WarehouseBusinessController {
                     packOrder.getOrder().getInvoiceNumber() + " AND MERCHANDISE = " +
                     packOrder.getStock().getMerchandise().getIndex() + " AND WAREHOUSE = " +
                     packOrder.getStock().getWarehouse().getIndex());
+
+            this.app.getPackOrders().remove(packOrder);
+            System.out.println("PackOrder " + packOrder.toString() + " removed");
         }
         else {
             this.app.showWarning("No selection", "Select package of orders to proceed.");
@@ -407,7 +504,6 @@ public class WarehouseBusinessController {
             int old_merchandise = packOrder.getStock().getMerchandise().getIndex();
             int old_warehouse = packOrder.getStock().getWarehouse().getIndex();
             if(this.app.showPackOrderDialog("Edit " + packOrder.toString() + " package of orders", packOrder)) {
-                System.out.println("PackOrder " + packOrder.toString() + " edited");
 
                 // TODO SQL UPDATE
                 // refresh packOrders
@@ -418,6 +514,10 @@ public class WarehouseBusinessController {
                         " WHERE INVOICENUMBER = " + old_invoicenumber +
                         " AND MERCHANDISE = " + old_merchandise +
                         " AND WAREHOUSE = " + old_warehouse);
+
+                System.out.println("PackOrder " + packOrder.toString() + " edited");
+
+                refreshPackOrder(packOrder);
             }
         }
         else {
@@ -425,20 +525,57 @@ public class WarehouseBusinessController {
         }
     }
 
+    private void refreshPackOrder(PackOrder packOrder) {
+        this.packOrderBox.getSelectionModel().select(packOrder);
+        showPackOrder(packOrder);
+    }
+
     /**
      * Gets selected trait from packOrderTraitsBox and text from packOrderSearchField.
      * Then looks for a packOrder with specific values.
      * When a packOrder is found displays it's features on packOrderLabels and changes packOrderBox
-     * selection to found packDelivery.
+     * selection to found packOelivery.
      * When function couldn't find packOrder then it displays information alert.
      */
     @FXML private void handleSearchPackOrder() {
         String trait = this.packOrderTraitsBox.getValue();
         String wantedTrait = this.packOrderSearchField.getText();
 
-        // TODO display packOrder's traits on packOrderLabels and change packOrderBox selection
-        // TODO or display information alert
-        this.app.sqlSelect("SELECT * FROM packorder WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        try{
+            if (wantedTrait.isEmpty()) {
+                System.out.println("null");
+                this.packOrderBox.setItems(this.app.getPackOrders());
+            }
+            else {
+                int wantedTraitInt = Integer.parseInt(wantedTrait);
+                System.out.println(wantedTraitInt);
+
+                String trait_patern = this.packOrderTraitArg.getAskValue(trait);
+
+                // TODO display packOrder's traits on packOrderLabels and change packOrderBox selection
+                // TODO or display information alert
+                List<Integer> results = this.app.sqlSelect("SELECT INVOICENUMBER FROM packorder WHERE LOWER(" + trait_patern + ") = " + wantedTraitInt);
+
+                if(results != null) {
+                    System.out.println("res " + results);
+                    ObservableList<PackOrder> toShow = FXCollections.observableArrayList();
+                    for(PackOrder packOrder : this.app.getPackOrders()) {
+                        for(Integer invoicenumber : results) {
+                            if(invoicenumber == packOrder.getOrder().getInvoiceNumber()) {
+                                toShow.add(packOrder);
+                            }
+                        }
+                    }
+                    this.packOrderBox.setItems(toShow);
+                }
+            }
+        }
+        catch (NumberFormatException exception) {
+            String title = "NumberFormatException";
+            String content = "Couldn't parseInt from TexField or for string in app base.\n";
+            System.out.println(content);
+            this.app.showError(title, content);
+        }
 
     }
 
@@ -448,8 +585,6 @@ public class WarehouseBusinessController {
     @FXML private void handleAddMerch() {
         Merchandise merchandise = new Merchandise(0, "[name]", null, null);
         if(this.app.showMerchandiseDialog("Add new merchandise", merchandise)) {
-            System.out.println("Merchandise " + merchandise.toString() + " added");
-            this.app.getMerchandise().add(merchandise);
 
             // TODO SQL INSERT INTO
             // refresh merchandises
@@ -460,6 +595,11 @@ public class WarehouseBusinessController {
                     merchandise.getPriceMarket() + ", " +
                     merchandise.getProducer().getIndex() + ", " +
                     merchandise.getCategory().getIndex() + ")");
+
+            this.app.getMerchandise().add(merchandise);
+            System.out.println("Merchandise " + merchandise.toString() + " added");
+
+            refreshMerchandise(merchandise);
         }
     }
 
@@ -469,12 +609,13 @@ public class WarehouseBusinessController {
     @FXML private void handleDelMerch() {
         Merchandise merchandise = merchBox.getValue();
         if(merchandise != null) {
-            System.out.println("Merchandise " + merchandise.toString() + " removed");
-            this.app.getMerchandise().remove(merchandise);
 
             // TODO SQL DELETE FROM
             // refresh merchandises
             this.app.sqlDMLDelete("DELETE FROM merchandise WHERE ID = " + merchandise.getIndex());
+
+            this.app.getMerchandise().remove(merchandise);
+            System.out.println("Merchandise " + merchandise.toString() + " removed");
 
         } else {
             this.app.showWarning("No selection", "Select merchandise to proceed.");
@@ -489,7 +630,6 @@ public class WarehouseBusinessController {
         if(merchandise != null) {
             int old_id = merchandise.getIndex();
             if(this.app.showMerchandiseDialog("Edit " + merchandise.toString() + " merchandise", merchandise)) {
-                System.out.println("Merchandise " + merchandise.toString() + " edited");
 
                 // TODO SQL UPDATE
                 // refresh merchandises
@@ -501,10 +641,18 @@ public class WarehouseBusinessController {
                         ", CATEGORY = " + merchandise.getCategory().getIndex() +
                         " WHERE ID = " + old_id);
 
+                System.out.println("Merchandise " + merchandise.toString() + " edited");
+
+                refreshMerchandise(merchandise);
             }
         } else {
             this.app.showWarning("No selection", "Select merchandise to proceed.");
         }
+    }
+
+    private void refreshMerchandise(Merchandise merchandise) {
+        this.merchBox.getSelectionModel().select(merchandise);
+        showMerchandise(merchandise);
     }
 
     /**
@@ -516,12 +664,35 @@ public class WarehouseBusinessController {
      */
     @FXML private void handleSearchMerch() {
         String trait = this.merchTraitsBox.getValue();
-        String wanted = this.merchSearchField.getText();
+        String wantedTrait = this.merchSearchField.getText();
 
-        // TODO display Merchandise's traits on merchandiseLabels and change merchandiseBox selection
-        // TODO or display information alert
-        this.app.sqlSelect("SELECT ID FROM merchandise WHERE LOWER(" + trait + ") like lower('%" + wanted + "%')");
+        String trait_patern = this.merchTraitArg.getAskValue(trait);
 
+        if (wantedTrait.isEmpty()) {
+            System.out.println("null");
+            this.merchBox.setItems(this.app.getMerchandise());
+        }
+        else {
+
+            // TODO display Merchandise's traits on merchandiseLabels and change merchandiseBox selection
+            // TODO or display information alert
+            List<Integer> results = this.app.sqlSelect("SELECT ID FROM merchandise " +
+                    "WHERE lower(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+
+            if(results != null) {
+                System.out.println("res " + results);
+                ObservableList<Merchandise> toShow = FXCollections.observableArrayList();
+                for(Merchandise merchandise : this.app.getMerchandise()) {
+                    for(Integer index : results) {
+                        if(index == merchandise.getIndex()) {
+                            toShow.add(merchandise);
+                        }
+                    }
+                }
+                this.merchBox.setItems(toShow);
+            }
+        }
+        System.out.println("End of search");
     }
 
     /**
@@ -543,12 +714,15 @@ public class WarehouseBusinessController {
         Category category = new Category(0, "[name]");
         boolean isOkClicked = this.app.showCategoryDialog("Add new category", category);
         if(isOkClicked) {
-            System.out.println("Category " + category.toString() + " added");
-            this.app.getCategories().add(category);
 
             // TODO SQL INSERT INTO
             // refresh categories
             this.app.sqlDMLInsert("INSERT INTO category (ID, NAME) VALUES(" + category.getIndex() + ", '" + category.getName() + "')");
+
+            this.app.getCategories().add(category);
+            System.out.println("Category " + category.toString() + " added");
+
+            refreshCategory(category);
         }
     }
 
@@ -558,13 +732,13 @@ public class WarehouseBusinessController {
     @FXML private void handleDelCategory() {
         Category category = this.categoryBox.getValue();
         if(category != null) {
-            System.out.println("Category " + category.toString() + " removed");
-            this.app.getCategories().remove(category);
 
             // TODO SQL DELETE FROM
             // refresh categories
             this.app.sqlDMLDelete("DELETE FROM category WHERE ID = " + category.getIndex());
 
+            this.app.getCategories().remove(category);
+            System.out.println("Category " + category.toString() + " removed");
         } else {
             this.app.showWarning("No selection", "Select category to proceed.");
         }
@@ -580,15 +754,23 @@ public class WarehouseBusinessController {
             boolean isOkClicked = this.app.showCategoryDialog(
                     "Edit " + category.toString() + " category", category);
             if(isOkClicked) {
-                System.out.println("Category " + category.toString() + " edited");
 
                 // TODO SQL UPDATE
                 // refresh categories
                 this.app.sqlDMLUpdate("UPDATE category SET ID = " + category.getIndex() + ", NAME = '" + category.getName() + "' WHERE ID = " + old_id);
+
+                System.out.println("Category " + category.toString() + " edited");
+
+                refreshCategory(category);
             }
         } else {
             this.app.showWarning("No selection" , "Select category to proceed.");
         }
+    }
+
+    private void refreshCategory(Category category) {
+        this.categoryBox.getSelectionModel().select(category);
+        showCategory(category);
     }
 
     /**
@@ -602,10 +784,30 @@ public class WarehouseBusinessController {
         String trait = this.categoryTraitsBox.getValue();
         String wantedTrait = this.categorySearchField.getText();
 
-        // TODO display Category's traits on categoryLabels and change categoryBox selection
-        // TODO or display information alert
-        this.app.sqlSelect("SELECT ID FROM category WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        if (wantedTrait.isEmpty()) {
+            System.out.println("null");
+            this.categoryBox.setItems(this.app.getCategories());
+        }
+        else {
+            String trait_patern = this.categoryTraitArg.getAskValue(trait);
 
+            // TODO display Category's traits on categoryLabels and change categoryBox selection
+            // TODO or display information alert
+            List<Integer> results = this.app.sqlSelect("SELECT ID FROM category WHERE LOWER(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+
+            if(results != null) {
+                System.out.println("res " + results);
+                ObservableList<Category> toShow = FXCollections.observableArrayList();
+                for (Category category : this.app.getCategories()) {
+                    for (Integer index : results) {
+                        if (index == category.getIndex()) {
+                            toShow.add(category);
+                        }
+                    }
+                }
+                this.categoryBox.setItems(toShow);
+            }
+        }
     }
 
     /**
@@ -615,8 +817,6 @@ public class WarehouseBusinessController {
         Producer producer = new Producer(0, "[name]");
         boolean isOkClicked = this.app.showProducerDialog("Add new producer", producer);
         if(isOkClicked) {
-            System.out.println("Producer " + producer.toString() + " added");
-            this.app.getProducers().add(producer);
 
             // TODO SQL INSERT INTO
             // refresh producers
@@ -627,6 +827,11 @@ public class WarehouseBusinessController {
                     producer.getMail() + "', '" +
                     producer.getTelNum() + "', '" +
                     producer.getWebPage() + "')");
+
+            this.app.getProducers().add(producer);
+            System.out.println("Producer " + producer.toString() + " added");
+            
+            refreshProducer(producer);
         }
     }
 
@@ -636,12 +841,12 @@ public class WarehouseBusinessController {
     @FXML private void handleDelProducer() {
         Producer producer = this.producerBox.getValue();
         if(producer != null) {
-            System.out.println("Producer " + producer.toString() + " removed");
-            this.app.getProducers().remove(producer);
-
             // TODO SQL DELET FROM
             // refresh producers
             this.app.sqlDMLDelete("DELETE FROM producer WHERE ID = " + producer.getIndex());
+
+            this.app.getProducers().remove(producer);
+            System.out.println("Producer " + producer.toString() + " removed");
 
         } else {
             this.app.showWarning("No selection", "Select producer to proceed.");
@@ -658,7 +863,6 @@ public class WarehouseBusinessController {
             boolean isOkClicked = this.app.showProducerDialog(
                     "Edit " + producer.toString() + " producer", producer);
             if(isOkClicked) {
-                System.out.println("Producer " + producer.toString() + " edited");
 
                 // TODO SQL UPDATE
                 // refresh producers
@@ -670,10 +874,19 @@ public class WarehouseBusinessController {
                         producer.getTelNum() + "', WEBPAGE = '" +
                         producer.getWebPage() + "' WHERE ID = " +
                         old_id);
+                
+                System.out.println("Producer " + producer.toString() + " edited");
+                
+                refreshProducer(producer);
             }
         } else {
             this.app.showWarning("No selection", "Select producer to proceed");
         }
+    }
+
+    private void refreshProducer(Producer producer) {
+        this.producerBox.getSelectionModel().select(producer);
+        showProducer(producer);
     }
 
     /**
@@ -687,10 +900,33 @@ public class WarehouseBusinessController {
         String trait = this.producerTraitsBox.getValue();
         String wantedTrait = this.producerSearchField.getText();
 
-        // TODO display Producer's traits on producerLabels and change producerBox selection
-        // TODO or display information alert
-        this.app.sqlSelect("SELECT ID FROM producer WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        String trait_patern = this.producerTraitArg.getAskValue(trait);
 
+        if (wantedTrait.isEmpty()) {
+            System.out.println("null");
+            this.producerBox.setItems(this.app.getProducers());
+        }
+        else {
+
+            // TODO display Producer's traits on producerLabels and change producerBox selection
+            // TODO or display information alert
+            List<Integer> results = this.app.sqlSelect("SELECT ID FROM producer " +
+                    "WHERE lower(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+
+            if(results != null) {
+                System.out.println("res " + results);
+                ObservableList<Producer> toShow = FXCollections.observableArrayList();
+                for(Producer producer : this.app.getProducers()) {
+                    for(Integer index : results) {
+                        if(index == producer.getIndex()) {
+                            toShow.add(producer);
+                        }
+                    }
+                }
+                this.producerBox.setItems(toShow);
+            }
+        }
+        System.out.println("End of search");
     }
 
     /**
@@ -700,9 +936,6 @@ public class WarehouseBusinessController {
         Supplier supplier = new Supplier(0,"[name]", "[address]", "[telephone number]");
         boolean isOkClicked = this.app.showSupplierDialog("Add new supplier", supplier);
         if(isOkClicked) {
-            System.out.println("Supplier " + supplier.toString() + " added");
-            this.app.getSuppliers().add(supplier);
-
             // TODO SQL INSERT INTO
             // refresh suppliers
             this.app.sqlDMLInsert("INSERT INTO supplier (ID, NAME, ADDRESS, TELNUM, MAIL) VALUES(" +
@@ -712,6 +945,10 @@ public class WarehouseBusinessController {
                     supplier.getTelNum() + "', '" +
                     supplier.getMail() + "')");
 
+            this.app.getSuppliers().add(supplier);
+            System.out.println("Supplier " + supplier.toString() + " added");
+
+            refreshSupplier(supplier);
         }
     }
 
@@ -721,13 +958,12 @@ public class WarehouseBusinessController {
     @FXML private void handleDelSupplier() {
         Supplier supplier = this.supplierBox.getValue();
         if(supplier != null) {
-            System.out.println("Supplier " + supplier.toString() + " removed");
-            this.app.getSuppliers().remove(supplier);
-
             // TODO SQL DELTE FROM
             // refresh suppliers
             this.app.sqlDMLDelete("DELETE FROM supplier WHERE ID = " + supplier.getIndex());
 
+            this.app.getSuppliers().remove(supplier);
+            System.out.println("Supplier " + supplier.toString() + " removed");
         } else {
             this.app.showWarning("No selection", "Select supplier to proceed");
         }
@@ -743,7 +979,6 @@ public class WarehouseBusinessController {
             boolean isOkClicked = this.app.showSupplierDialog(
                     "Edit " + supplier.toString() + " supplier", supplier);
             if(isOkClicked) {
-                System.out.println("Supplier " + supplier.toString() + " edited");
 
                 // TODO SQL UPDATE
                 // refresh suppliers
@@ -754,10 +989,18 @@ public class WarehouseBusinessController {
                         supplier.getTelNum() + "', MAIL = '" +
                         supplier.getMail() + "' WHERE ID = " + old_id);
 
+                System.out.println("Supplier " + supplier.toString() + " edited");
+
+                refreshSupplier(supplier);
             }
         } else {
             this.app.showWarning("No selection", "Select supplier to proceed.");
         }
+    }
+
+    private void refreshSupplier(Supplier supplier) {
+        this.supplierBox.getSelectionModel().select(supplier);
+        showSupplier(supplier);
     }
 
     /**
@@ -771,10 +1014,31 @@ public class WarehouseBusinessController {
         String trait = this.supplierTraitsBox.getValue();
         String wantedTrait = this.supplierSearchField.getText();
 
-        // TODO display Supplier's traits on supplierLabels and change supplierBox selection
-        // TODO or display information alert
-        this.app.sqlSelect("SELECT ID FROM supplier WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        if (wantedTrait.isEmpty()) {
+            System.out.println("null");
+            this.supplierBox.setItems(this.app.getSuppliers());
+        }
+        else {
+            String trait_patern = this.supplierTraitArg.getAskValue(trait);
 
+            // TODO display Supplier's traits on supplierLabels and change supplierBox selection
+            // TODO or display information alert
+            List<Integer> results = this.app.sqlSelect("SELECT ID FROM supplier WHERE LOWER(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+
+            if(results != null) {
+                System.out.println("res " + results);
+                ObservableList<Supplier> toShow = FXCollections.observableArrayList();
+                for (Supplier supplier : this.app.getSuppliers()) {
+                    for (Integer index : results) {
+                        if (index == supplier.getIndex()) {
+                            toShow.add(supplier);
+                        }
+                    }
+                }
+                this.supplierBox.setItems(toShow);
+            }
+        }
+        
     }
 
     /**
@@ -784,9 +1048,6 @@ public class WarehouseBusinessController {
         Supply supply = new Supply(0, null);
         boolean isOkClicked = this.app.showSupplyDialog("Add new supply", supply);
         if(isOkClicked) {
-            System.out.println("Supply " + supply.toString() + " added");
-            this.app.getSupplies().add(supply);
-
             // TODO SQL INSERT INTO
             // refresh supplies
             this.app.sqlDMLInsert("INSERT INTO supply (INVOICENUMBER, STARTDATE, ENDDATE, SUPPLIER) VALUES(" +
@@ -794,6 +1055,11 @@ public class WarehouseBusinessController {
                     supply.getStartDate().toString() + "', DATE '" +
                     supply.getEndDate().toString() + "', " +
                     supply.getSupplier().getIndex() + ")");
+
+            this.app.getSupplies().add(supply);
+            System.out.println("Supply " + supply.toString() + " added");
+            
+            refreshSupply(supply);
         }
     }
 
@@ -803,12 +1069,12 @@ public class WarehouseBusinessController {
     @FXML private void handleDelSupply() {
         Supply supply = this.supplyBox.getValue();
         if(supply != null) {
-            System.out.println("Supply " + supply.toString() + " removed");
-            this.app.getSupplies().remove(supply);
-
             // TODO SQL DELETE FROM
             // refresh supplies
             this.app.sqlDMLDelete("DELETE FROM supply WHERE INVOICENUMBER = " + supply.getInvoiceNumber());
+
+            this.app.getSupplies().remove(supply);
+            System.out.println("Supply " + supply.toString() + " removed");
 
         } else {
             this.app.showWarning("No selection", "Select supply to proceed.");
@@ -825,7 +1091,6 @@ public class WarehouseBusinessController {
             boolean isOkClicked = this.app.showSupplyDialog(
                     "Edit " + supply.toString() + " supply", supply);
             if(isOkClicked) {
-                System.out.println("Supply " + supply.toString() + " edited");
 
                 // TODO SQL UPDATE
                 // refresh supplies
@@ -834,10 +1099,19 @@ public class WarehouseBusinessController {
                         "', ENDDATE = DATE '" + supply.getEndDate().toString() +
                         "', SUPPLIER = " + supply.getSupplier().getIndex() +
                         " WHERE INVOICENUMBER = " + old_invoicenumber);
+                
+                System.out.println("Supply " + supply.toString() + " edited");
+                
+                refreshSupply(supply);
             }
         } else {
             this.app.showWarning("No selection", "Select supply to proceed");
         }
+    }
+    
+    private void refreshSupply(Supply supply) {
+        this.supplyBox.getSelectionModel().select(supply);
+        showSupply(supply);
     }
 
     /**
@@ -851,10 +1125,33 @@ public class WarehouseBusinessController {
         String trait = this.supplyTraitsBox.getValue();
         String wantedTrait = this.supplySearchField.getText();
 
-        // TODO display Supply's traits on supplyLabels and change supplyBox selection
-        // TODO or display information alert
+        String trait_patern = this.supplyTraitArg.getAskValue(trait);
 
-        this.app.sqlSelect("SELECT INVOICENUMBER FROM supply WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        if (wantedTrait.isEmpty()) {
+            System.out.println("null");
+            this.supplyBox.setItems(this.app.getSupplies());
+        }
+        else {
+
+            // TODO display Supply's traits on supplyLabels and change supplyBox selection
+            // TODO or display information alert
+            List<Integer> results = this.app.sqlSelect("SELECT INVOICENUMBER FROM supply " +
+                    "WHERE lower(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+
+            if(results != null) {
+                System.out.println("res " + results);
+                ObservableList<Supply> toShow = FXCollections.observableArrayList();
+                for(Supply supply : this.app.getSupplies()) {
+                    for(Integer index : results) {
+                        if(index == supply.getInvoiceNumber()) {
+                            toShow.add(supply);
+                        }
+                    }
+                }
+                this.supplyBox.setItems(toShow);
+            }
+        }
+        System.out.println("End of search");
 
     }
 
@@ -867,9 +1164,6 @@ public class WarehouseBusinessController {
             order = new Order(0, "01/01/0001", null, null);
             boolean isOkClicked = this.app.showOrderDialog("Add new order", order);
             if (isOkClicked) {
-                System.out.println("Order " + order.toString() + " added");
-                this.app.getOrders().add(order);
-
                 // TODO SQL INSERT INTO
                 // refresh orders
                 this.app.sqlDMLInsert("INSERT INTO w_order (INVOICENUMBER, STARTDATE, ENDDATE, COURIER, RECIPIENT) VALUES(" +
@@ -878,6 +1172,11 @@ public class WarehouseBusinessController {
                         order.getEndDate().toString() + "', " +
                         order.getCourier().getIndex() + ", " +
                         order.getRecipient().getIndex() + ")");
+
+                this.app.getOrders().add(order);
+                System.out.println("Order " + order.toString() + " added");
+                
+                refreshOrder(order);
             }
         } catch (WrongDateError ignored) {
             System.out.println("EARLY STATE: Wrong format when initializing.");
@@ -890,13 +1189,12 @@ public class WarehouseBusinessController {
     @FXML private void handleDelOrder() {
         Order order = this.orderBox.getValue();
         if(order != null) {
-            System.out.println("Order " + order.toString() + " removed");
-            this.app.getOrders().remove(order);
-
             // TODO SQL DELETE FROM
             // refresh orders
             this.app.sqlDMLDelete("DELETE FROM w_order WHERE INVOICENUMBER = " + order.getInvoiceNumber());
 
+            this.app.getOrders().remove(order);
+            System.out.println("Order " + order.toString() + " removed");
         } else {
             this.app.showWarning("No selection",  "Select order to proceed.");
         }
@@ -912,8 +1210,6 @@ public class WarehouseBusinessController {
             boolean isOkClicked = this.app.showOrderDialog(
                     "Edit " + order.toString() + " order", order);
             if(isOkClicked) {
-                System.out.println("Order " + order.toString() + " edited");
-
                 // TODO SQL UPDATE
                 // refresh orders
                 this.app.sqlDMLUpdate("UPDATE w_order SET INVOICENUMBER = " + order.getInvoiceNumber() +
@@ -922,10 +1218,19 @@ public class WarehouseBusinessController {
                         "', COURIER = " + order.getCourier().getIndex() +
                         ", RECIPIENT = " + order.getRecipient().getIndex() +
                         " WHERE INVOICENUMBER = " + old_invoicenumber);
+
+                System.out.println("Order " + order.toString() + " edited");
+                
+                refreshOrder(order);
             }
         } else {
             this.app.showWarning("No selection" , "Select order to proceed.");
         }
+    }
+
+    private void refreshOrder(Order order) {
+        this.orderBox.getSelectionModel().select(order);
+        showOrder(order);
     }
 
     /**
@@ -938,12 +1243,32 @@ public class WarehouseBusinessController {
     @FXML private void handleSearchOrder() {
         String trait = this.orderTraitsBox.getValue();
         String wantedTrait = this.orderSearchField.getText();
+        
+        if (wantedTrait.isEmpty()) {
+            System.out.println("null");
+            this.orderBox.setItems(this.app.getOrders());
+        }
+        else {
+            String trait_patern = this.orderTraitArg.getAskValue(trait);
 
-        // TODO display Order's traits on orderLabels and change orderBox selection
-        // TODO or display information alert
+            // TODO display Order's traits on orderLabels and change orderBox selection
+            // TODO or display information alert
+            List<Integer> results = this.app.sqlSelect("SELECT INVOICENUMBER FROM w_order WHERE LOWER(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
 
-        this.app.sqlSelect("SELECT INVOICENUMBER FROM w_order WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
-
+            if(results != null) {
+                System.out.println("res " + results);
+                ObservableList<Order> toShow = FXCollections.observableArrayList();
+                for (Order order : this.app.getOrders()) {
+                    for (Integer index : results) {
+                        if (index == order.getInvoiceNumber()) {
+                            toShow.add(order);
+                        }
+                    }
+                }
+                this.orderBox.setItems(toShow);
+            }
+        }
+        
     }
 
     /**
@@ -953,9 +1278,6 @@ public class WarehouseBusinessController {
         Recipient recipient = new Recipient(0, "[name]", "[surname]",
                 "[address]", "[telephone number]");
         if(this.app.showRecipientDialog("Add new recipient", recipient)) {
-            System.out.println("recipient " + recipient.toString() + " added");
-            this.app.getRecipients().add(recipient);
-
             // TODO SQL INSERT INTO
             // refresh recipients
             this.app.sqlDMLInsert("INSERT INTO recipient (ID, NAME, SURNAME, ADDRESS, TELNUM) VALUES(" +
@@ -964,6 +1286,11 @@ public class WarehouseBusinessController {
                     recipient.getSurname() + "', '" +
                     recipient.getAddress() + "', '" +
                     recipient.getTelNum() + "')");
+
+            this.app.getRecipients().add(recipient);
+            System.out.println("recipient " + recipient.toString() + " added");
+            
+            refreshRecipient(recipient);
         }
     }
 
@@ -973,12 +1300,12 @@ public class WarehouseBusinessController {
     @FXML private void handleDelRecipient() {
         Recipient recipient = this.recipientBox.getValue();
         if(recipient != null) {
-            System.out.println("Recipient " + recipient.toString() + " removed");
-            this.app.getRecipients().remove(recipient);
-
             // TODO SQL DELETE FROM
             // refresh recipients
             this.app.sqlDMLDelete("DELETE FROM recipient WHERE ID = " + recipient.getIndex());
+
+            this.app.getRecipients().remove(recipient);
+            System.out.println("Recipient " + recipient.toString() + " removed");
 
         } else {
             this.app.showWarning("No selection", "Select recipient to proceed.");
@@ -993,8 +1320,6 @@ public class WarehouseBusinessController {
         if(recipient != null) {
             int old_id = recipient.getIndex();
             if(this.app.showRecipientDialog("Edit " + recipient.toString() + " recipient", recipient)) {
-                System.out.println("Recipient " + recipient.toString() + " edited");
-
                 // TODO SQL UPADTE
                 // refresh recipients
                 this.app.sqlDMLUpdate("UPDATE recipient SET ID = " +
@@ -1004,11 +1329,19 @@ public class WarehouseBusinessController {
                         recipient.getAddress() + "', TELNUM = '" +
                         recipient.getTelNum() + "' WHERE ID = " + old_id);
 
+                System.out.println("Recipient " + recipient.toString() + " edited");
+                
+                refreshRecipient(recipient);
             }
         } else {
             this.app.showWarning("No selection", "Select recipient to proceed");
         }
 
+    }
+    
+    private void refreshRecipient(Recipient recipient) {
+        this.recipientBox.getSelectionModel().select(recipient);
+        showRecipient(recipient);
     }
 
     /**
@@ -1022,10 +1355,34 @@ public class WarehouseBusinessController {
         String trait = this.recipientTraitsBox.getValue();
         String wantedTrait = this.recipientSearchField.getText();
 
-        // TODO display Recipient's traits on recipientLabels and change recipientBox selection
-        // TODO or display information alert
-        this.app.sqlSelect("SELECT ID FROM recipient WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        String trait_patern = this.recipientTraitArg.getAskValue(trait);
 
+        if (wantedTrait.isEmpty()) {
+            System.out.println("null");
+            this.recipientBox.setItems(this.app.getRecipients());
+        }
+        else {
+
+            // TODO display Recipient's traits on recipientLabels and change recipientBox selection
+            // TODO or display information alert
+            List<Integer> results = this.app.sqlSelect("SELECT ID FROM recipient " +
+                    "WHERE lower(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+
+            if(results != null) {
+                System.out.println("res " + results);
+                ObservableList<Recipient> toShow = FXCollections.observableArrayList();
+                for(Recipient recipient : this.app.getRecipients()) {
+                    for(Integer index : results) {
+                        if(index == recipient.getIndex()) {
+                            toShow.add(recipient);
+                        }
+                    }
+                }
+                this.recipientBox.setItems(toShow);
+            }
+        }
+        System.out.println("End of search");
+        
     }
 
     /**
@@ -1034,14 +1391,16 @@ public class WarehouseBusinessController {
     @FXML private void handleAddCourier() {
         Courier courier = new Courier(0, "[telephone number]");
         if(this.app.showCourier("Add new courier", courier)) {
-            System.out.println("Courier " + courier.toString() + " added");
-            this.app.getCouriers().add(courier);
-
             // TODO SQL INSERT INTO
             // refresh couriers
             this.app.sqlDMLInsert("INSERT INTO courier (ID, TELNUM) VALUES(" +
                     courier.getIndex() + ", '" +
                     courier.getTelNum() + "')");
+
+            this.app.getCouriers().add(courier);
+            System.out.println("Courier " + courier.toString() + " added");
+
+            refreshCourier(courier);
         }
     }
 
@@ -1051,13 +1410,12 @@ public class WarehouseBusinessController {
     @FXML private void handleDelCourier() {
         Courier courier = this.courierBox.getValue();
         if(courier != null) {
-            System.out.println("Courier " + courier.toString() + " removed");
-            this.app.getCouriers().remove(courier);
-
             // TODO SQL DELETE FROM
             // refresh couriers
             this.app.sqlDMLDelete("DELETE FROM courier WHERE ID = " + courier.getIndex());
 
+            this.app.getCouriers().remove(courier);
+            System.out.println("Courier " + courier.toString() + " removed");
         } else {
             this.app.showWarning("No selection", "Select courier to proceed.");
         }
@@ -1071,18 +1429,25 @@ public class WarehouseBusinessController {
         if(courier != null) {
             int old_id = courier.getIndex();
             if(this.app.showCourier("Edit " + courier.toString() + " courier", courier)){
-                System.out.println("Courier " + courier.toString() + " edited");
-
                 // TODO SQL UPDATE
                 // refresh
                 this.app.sqlDMLUpdate("UPDATE courier SET ID = " +
                         courier.getIndex() + ", TELNUM = '" +
-                        courier.getTelNum() + "' WHERE ID = " + 
+                        courier.getTelNum() + "' WHERE ID = " +
                         old_id);
+
+                System.out.println("Courier " + courier.toString() + " edited");
+
+                refreshCourier(courier);
             }
         } else {
             this.app.showWarning("No selection", "Select courier to proceed.");
         }
+    }
+
+    private void refreshCourier(Courier courier) {
+        this.courierBox.getSelectionModel().select(courier);
+        showCourier(courier);
     }
 
     /**
@@ -1094,11 +1459,32 @@ public class WarehouseBusinessController {
      */
     @FXML private void handleSearchCourier() {
         String trait = this.courierTraitsBox.getValue();
-        String wantedTrait = this.categorySearchField.getText();
+        String wantedTrait = this.courierSearchField.getText();
 
-        // TODO display Courier's traits on courierLabels and change courierBox selection
-        // TODO or display information alert
-        this.app.sqlSelect("SELECT ID FROM courier WHERE LOWER(" + trait + ") like lower('%" + wantedTrait + "%')");
+        if (wantedTrait.isEmpty()) {
+            System.out.println("null");
+            this.courierBox.setItems(this.app.getCouriers());
+        }
+        else {
+            String trait_patern = this.courierTraitArg.getAskValue(trait);
+
+            // TODO display Courier's traits on courierLabels and change courierBox selection
+            // TODO or display information alert
+            List<Integer> results = this.app.sqlSelect("SELECT ID FROM courier WHERE LOWER(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+
+            if(results != null) {
+                System.out.println("res " + results);
+                ObservableList<Courier> toShow = FXCollections.observableArrayList();
+                for (Courier courier : this.app.getCouriers()) {
+                    for (Integer index : results) {
+                        if (index == courier.getIndex()) {
+                            toShow.add(courier);
+                        }
+                    }
+                }
+                this.courierBox.setItems(toShow);
+            }
+        }
 
     }
 
@@ -1356,7 +1742,7 @@ public class WarehouseBusinessController {
         List<String> stockTraitsList = new ArrayList<>(Arrays.asList("Amount", "Merchandise Id", "Warehouse Id"));
         stockTraits.addAll(stockTraitsList);
         this.stockTraitsBox.setItems(stockTraits);
-        this.stockTraitArg = new DQLHelper(stockTraitsList, Arrays.asList("AMOUNT,", "MERCHANDISE", "WAREHOUSE"));
+        this.stockTraitArg = new DQLHelper(stockTraitsList, Arrays.asList("AMOUNT", "MERCHANDISE", "WAREHOUSE"));
 
         //packDelivery
         ObservableList<String> packDeliveryTraits = FXCollections.observableArrayList();
@@ -1414,7 +1800,18 @@ public class WarehouseBusinessController {
         this.courierTraitsBox.setItems(courierTraits);
         this.courierTraitArg = new DQLHelper(courierTraitsList, Arrays.asList("ID", "TELNUM"));
 
-//        merch
+        //merch
+        ObservableList<String> merchandiseTraits = FXCollections.observableArrayList();
+        List<String> merchandiseTraitsList = new ArrayList<>(Arrays.asList("Id", "Name", "Price Retail", "Price Market", "Producer Id", "Category Id"));
+        merchandiseTraits.addAll(merchandiseTraitsList);
+        this.merchTraitsBox.setItems(merchandiseTraits);
+        this.merchTraitArg = new DQLHelper(merchandiseTraitsList, Arrays.asList("ID", "NAME", "PRICERETAIL", "PRICEMARKET", "PRODUCER", "CATEGORY"));
 
+        //producer
+        ObservableList<String> producerTraits = FXCollections.observableArrayList();
+        List<String> producerTraitsList = new ArrayList<>(Arrays.asList("Id", "Name", "Address", "Mail", "Telephone Number", "Web Page"));
+        producerTraits.addAll(producerTraitsList);
+        this.producerTraitsBox.setItems(producerTraits);
+        this.producerTraitArg = new DQLHelper(producerTraitsList, Arrays.asList("ID", "NAME", "ADDRESS", "MAIL", "TELNUM", "WEBPAGE"));
     }
 }

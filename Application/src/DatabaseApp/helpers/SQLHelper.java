@@ -7,6 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * TODO comments
@@ -487,6 +488,33 @@ public class SQLHelper {
         } catch (SQLException exception) {
             String title = "SQLException";
             String content = "Couldn't execute SELECT WHERE query.\n" +
+                    "Error Code: " + exception.getErrorCode() + "\n" +
+                    "SQLState: " + exception.getSQLState();
+            System.out.println(content);
+            this.app.showError(title, content);
+            return null;
+        }
+    }
+
+
+    public List<Vector<Integer>> searchWhereMore (String sqlSelectCode, int number){
+        try {
+            Statement stmt = conn.createStatement();
+            System.out.println(sqlSelectCode);
+            ResultSet resultSet = stmt.executeQuery(sqlSelectCode);
+            List<Vector<Integer>> results = new ArrayList<>();
+            while (resultSet.next()) {
+                Vector<Integer> vector = new Vector<>();
+                for (int i = 1; i <= number; i++) {
+                    vector.add(resultSet.getInt(i));
+                }
+                results.add(vector);
+                System.out.println(results.get(results.size() - 1));
+            }
+            return results;
+        } catch (SQLException exception) {
+            String title = "SQLException";
+            String content = "Couldn't execute SELECT WHERE for more arguments query.\n" +
                     "Error Code: " + exception.getErrorCode() + "\n" +
                     "SQLState: " + exception.getSQLState();
             System.out.println(content);

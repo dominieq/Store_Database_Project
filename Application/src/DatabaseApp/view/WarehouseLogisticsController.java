@@ -51,6 +51,7 @@ public class WarehouseLogisticsController {
         this.warehouseTableView.getSelectionModel().selectedItemProperty().addListener(
                 ((observable, oldValue, newValue) -> {
                     if(newValue != null) {
+                        System.out.println("tester2");
                         this.workerChoiceBox.setItems(newValue.getWorkersObservable());
                         this.informationLabel.setText("Workers from selected warehouse. " +
                                 "Double click on warehouse to cancel selection.");
@@ -66,7 +67,7 @@ public class WarehouseLogisticsController {
                     this.warehouseTableView.getSelectionModel().clearSelection();
                     this.informationLabel.setText("You are currently viewing all workers. " +
                             "Select warehouse to view it's workers");
-                    this.workerChoiceBox.getSelectionModel().selectFirst();
+//                    this.workerChoiceBox.getSelectionModel().selectFirst();
                 }
             });
             return row;
@@ -86,11 +87,11 @@ public class WarehouseLogisticsController {
     @FXML private void handleAddWarehouse() {
         Warehouse warehouse = new Warehouse(100, "[address]");
         if(this.app.showWarehouseDialog("Add warehouse", warehouse)) {
-            System.out.println("Warehouse: " + warehouse.toString() + " added");
             this.app.getWarehouses().add(warehouse);
 
             this.app.sqlDMLInsert("INSERT INTO warehouse (ID, ADDRESS) " +
                     "VALUES(" + warehouse.getIndex() + ", '" + warehouse.getAddress() + "')");
+            System.out.println("Warehouse: " + warehouse.toString() + " added");
 
             refreshWarehouse(warehouse);
         }
@@ -117,7 +118,7 @@ public class WarehouseLogisticsController {
             this.app.sqlDMLDelete("DELETE FROM warehouse WHERE ID = " + warehouse.getIndex());
 
             this.warehouseTableView.refresh();
-            this.warehouseTableView.getSelectionModel().selectFirst();
+//            this.warehouseTableView.getSelectionModel().selectFirst();
             this.workerChoiceBox.setItems(
                     this.warehouseTableView.getSelectionModel().getSelectedItem().getWorkersObservable());
         } else {
@@ -158,8 +159,27 @@ public class WarehouseLogisticsController {
 
         String trait_patern = this.warehouseTraitArg.getAskValue(trait);
 
-        this.app.sqlSelect("SELECT ID FROM warehouse WHERE LOWER(" + trait_patern + ") " +
+        List<Integer> results = this.app.sqlSelect("SELECT ID FROM warehouse " +
+                "WHERE LOWER(" + trait_patern + ") " +
                 "like lower('%" + wantedTrait + "%')");
+
+        if(results != null) {
+            System.out.println("res" + results);
+            ObservableList<Warehouse> toShow = FXCollections.observableArrayList();
+            for(Warehouse warehouse : this.app.getWarehouses()) {
+                for(Integer index : results) {
+                    if(index == warehouse.getIndex()) {
+                        toShow.add(warehouse);
+                    }
+                }
+            }
+            
+            this.warehouseTableView.setItems(toShow);
+        }
+
+
+//        this.app.sqlSelect("SELECT ID FROM warehouse WHERE LOWER(" + trait_patern + ") " +
+//                "like lower('%" + wantedTrait + "%')");
 
     }
 
@@ -169,28 +189,35 @@ public class WarehouseLogisticsController {
      * Function refreshes all fxml elements.
      */
     @FXML private void handleAddWorker() {
+        Warehouse warehouse_temp;
+        if (this.warehouseTableView.getSelectionModel().getSelectedItem() != null) {
+            warehouse_temp = this.app.getWarehouses().get(this.warehouseTableView.getSelectionModel().getSelectedIndex());
+        }
+        else {
+            warehouse_temp = this.app.getWarehouses().get(0);
+        }
         Worker worker = new Worker(100, "[name]", "[surname]", "[address]",
                 "[telephone number]", "[email address]", "00000000000",
-                this.app.getWarehouses().get(0).getIndex());
+                warehouse_temp.getIndex());
+//                this.app.getWarehouses().get(0).getIndex());
         boolean isOkClicked = this.app.showWorkerEditDialog("Add Worker", worker);
-
         if(isOkClicked){
-            System.out.println("Worker: " + worker.toString() + " added");
             this.app.getWorkers().add(worker);
+            this.app.sqlDMLInsert(
+                    "INSERT INTO worker (ID, NAME, SURNAME, ADDRESS, TELNUM, MAIL, PESEL, WAREHOUSE) " +
+                            "VALUES(" + worker.getIndex() + ", '" +
+                            worker.getName() + "', '" +
+                            worker.getSurname() + "', '" +
+                            worker.getAddress() + "', '" +
+                            worker.getTelNum() + "', '" +
+                            worker.getMail() + "', '" +
+                            worker.getPESEL() + "', " +
+                            worker.getWarehouseIndex() + ")");
+            System.out.println("Worker: " + worker.toString() + " added");
+
+            refreshWorker(worker);
         }
 
-        this.app.sqlDMLInsert(
-                "INSERT INTO worker (ID, NAME, SURNAME, ADDRESS, TELNUM, MAIL, PESEL, WAREHOUSE) " +
-                        "VALUES(" + worker.getIndex() + ", '" +
-                        worker.getName() + "', '" +
-                        worker.getSurname() + "', '" +
-                        worker.getAddress() + "', '" +
-                        worker.getTelNum() + "', '" +
-                        worker.getMail() + "', '" +
-                        worker.getPESEL() + "', " +
-                        worker.getWarehouseIndex() + ")");
-
-        refreshWorker(worker);
     }
 
     /**
@@ -217,7 +244,7 @@ public class WarehouseLogisticsController {
                 this.workerChoiceBox.getSelectionModel().clearSelection();
                 this.workerChoiceBox.setItems(warehouse.getWorkersObservable());
             }
-            this.workerChoiceBox.getSelectionModel().selectFirst();
+//            this.workerChoiceBox.getSelectionModel().selectFirst();
 
         }
         else {
@@ -266,14 +293,15 @@ public class WarehouseLogisticsController {
         String trait_patern = this.workerTraitArg.getAskValue(trait);
 
         List<Integer> results = this.app.sqlSelect("SELECT ID FROM worker " +
-                "WHERE " + trait_patern + " like lower('%" + wantedTrait + "%')");
+                "WHERE lower(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
 
         if(results != null) {
+            System.out.println("res " + results);
             ObservableList<Worker> toShow = FXCollections.observableArrayList();
             for(Worker worker : this.app.getWorkers()) {
                 for(Integer index : results) {
                     if(index == worker.getIndex()) {
-                        System.out.println(worker.getIndexString());
+                        System.out.println("tt1 " + worker.getIndexString());
                         toShow.add(worker);
                     }
                 }
@@ -282,8 +310,20 @@ public class WarehouseLogisticsController {
             if(!toShow.isEmpty()){
                 this.warehouseTableView.getSelectionModel().clearSelection();
                 this.workerChoiceBox.getSelectionModel().clearSelection();
-                this.workerChoiceBox.getItems().clear();
+//                System.out.println(this.app.getWorkers().size());
+
+
+//                this.workerChoiceBox.setItems(this.app.getWorkers());
+
+//                System.out.println("przed " + this.workerChoiceBox.getItems().size());
+//                System.out.println(this.app.getWorkers().size());
+////                this.workerChoiceBox.getItems().clear();
+//                System.out.println("po " + this.workerChoiceBox.getItems().size());
+//                System.out.println(this.app.getWorkers().size());
+
                 this.workerChoiceBox.setItems(toShow);
+//                System.out.println("po step2 " + this.workerChoiceBox.getItems().size());
+//                System.out.println(this.app.getWorkers().size());
             }
 
         }
@@ -310,7 +350,7 @@ public class WarehouseLogisticsController {
      */
     private void refreshWorker(Worker worker) {
         this.warehouseTableView.getSelectionModel().clearSelection();
-        this.workerChoiceBox.getItems().clear();
+//        this.workerChoiceBox.getItems().clear();
         this.workerChoiceBox.getSelectionModel().clearSelection();
 
         for(Warehouse warehouse : this.app.getWarehouses()) {
@@ -318,9 +358,30 @@ public class WarehouseLogisticsController {
                 this.warehouseTableView.getSelectionModel().select(warehouse);
                 this.workerChoiceBox.setItems(warehouse.getWorkersObservable());
                 this.workerChoiceBox.getSelectionModel().select(worker);
+                break;
             }
         }
         showWorker(worker);
+
+
+
+
+//        this.warehouseTableView.getSelectionModel().clearSelection();
+////        this.workerChoiceBox.getItems().clear();
+//        this.workerChoiceBox.getSelectionModel().clearSelection();
+//
+//        for(Warehouse warehouse : this.app.getWarehouses()) {
+//            if(warehouse.getIndex() == worker.getWarehouseIndex()) {
+//                this.warehouseTableView.getSelectionModel().select(warehouse);
+//                this.workerChoiceBox.setItems(warehouse.getWorkersObservable());
+//                this.workerChoiceBox.getSelectionModel().select(worker);
+//            }
+//        }
+//        showWorker(worker);
+
+
+
+
     }
 
     /**
