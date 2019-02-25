@@ -715,7 +715,7 @@
                                                       </AnchorPane>
                                                       <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                          <children>
-                                                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchCategory" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchMerchCategory" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <font>
                                                                   <Font size="30.0" />
                                                                </font>
@@ -773,7 +773,7 @@
                                                       </AnchorPane>
                                                       <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                          <children>
-                                                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchProducer" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchMerchProducer" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <font>
                                                                   <Font size="30.0" />
                                                                </font>

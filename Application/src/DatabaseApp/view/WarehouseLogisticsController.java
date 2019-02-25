@@ -51,7 +51,7 @@ public class WarehouseLogisticsController {
         this.warehouseTableView.getSelectionModel().selectedItemProperty().addListener(
                 ((observable, oldValue, newValue) -> {
                     if(newValue != null) {
-                        System.out.println("tester2");
+//                        System.out.println("tester2");
                         this.workerChoiceBox.setItems(newValue.getWorkersObservable());
                         this.informationLabel.setText("Workers from selected warehouse. " +
                                 "Double click on warehouse to cancel selection.");
@@ -157,28 +157,33 @@ public class WarehouseLogisticsController {
         String trait = this.warehouseTraitChoiceBox.getValue();
         String wantedTrait = this.warehouseTraitTextField.getText();
 
-        String trait_patern = this.warehouseTraitArg.getAskValue(trait);
+        String trait_pattern = this.warehouseTraitArg.getAskValue(trait);
 
-        List<Integer> results = this.app.sqlSelect("SELECT ID FROM warehouse " +
-                "WHERE LOWER(" + trait_patern + ") " +
-                "like lower('%" + wantedTrait + "%')");
+        if(wantedTrait.isEmpty()) {
+            this.warehouseTableView.setItems(this.app.getWarehouses());
+        }
+        else {
+            List<Integer> results = this.app.sqlSelect("SELECT ID FROM warehouse " +
+                    "WHERE LOWER(" + trait_pattern + ") " +
+                    "like lower('%" + wantedTrait + "%')");
 
-        if(results != null) {
-            System.out.println("res" + results);
-            ObservableList<Warehouse> toShow = FXCollections.observableArrayList();
-            for(Warehouse warehouse : this.app.getWarehouses()) {
-                for(Integer index : results) {
-                    if(index == warehouse.getIndex()) {
-                        toShow.add(warehouse);
+            if(results != null) {
+//            System.out.println("res" + results);
+                ObservableList<Warehouse> toShow = FXCollections.observableArrayList();
+                for(Warehouse warehouse : this.app.getWarehouses()) {
+                    for(Integer index : results) {
+                        if(index == warehouse.getIndex()) {
+                            toShow.add(warehouse);
+                        }
                     }
                 }
+
+                this.warehouseTableView.setItems(toShow);
             }
-            
-            this.warehouseTableView.setItems(toShow);
         }
 
 
-//        this.app.sqlSelect("SELECT ID FROM warehouse WHERE LOWER(" + trait_patern + ") " +
+//        this.app.sqlSelect("SELECT ID FROM warehouse WHERE LOWER(" + trait_pattern + ") " +
 //                "like lower('%" + wantedTrait + "%')");
 
     }
@@ -202,7 +207,6 @@ public class WarehouseLogisticsController {
 //                this.app.getWarehouses().get(0).getIndex());
         boolean isOkClicked = this.app.showWorkerEditDialog("Add Worker", worker);
         if(isOkClicked){
-            this.app.getWorkers().add(worker);
             this.app.sqlDMLInsert(
                     "INSERT INTO worker (ID, NAME, SURNAME, ADDRESS, TELNUM, MAIL, PESEL, WAREHOUSE) " +
                             "VALUES(" + worker.getIndex() + ", '" +
@@ -213,6 +217,7 @@ public class WarehouseLogisticsController {
                             worker.getMail() + "', '" +
                             worker.getPESEL() + "', " +
                             worker.getWarehouseIndex() + ")");
+            this.app.getWorkers().add(worker);
             System.out.println("Worker: " + worker.toString() + " added");
 
             refreshWorker(worker);
@@ -290,26 +295,31 @@ public class WarehouseLogisticsController {
         String trait = this.workerTraitChoiceBox.getValue();
         String wantedTrait = this.workerTraitTextField.getText();
 
-        String trait_patern = this.workerTraitArg.getAskValue(trait);
+        String trait_pattern = this.workerTraitArg.getAskValue(trait);
 
-        List<Integer> results = this.app.sqlSelect("SELECT ID FROM worker " +
-                "WHERE lower(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+        if(wantedTrait.isEmpty()) {
+            this.workerChoiceBox.setItems(this.app.getWorkers());
+        }
+        else {
 
-        if(results != null) {
-            System.out.println("res " + results);
-            ObservableList<Worker> toShow = FXCollections.observableArrayList();
-            for(Worker worker : this.app.getWorkers()) {
-                for(Integer index : results) {
-                    if(index == worker.getIndex()) {
-                        System.out.println("tt1 " + worker.getIndexString());
-                        toShow.add(worker);
+            List<Integer> results = this.app.sqlSelect("SELECT ID FROM worker " +
+                    "WHERE lower(" + trait_pattern + ") like lower('%" + wantedTrait + "%')");
+
+            if(results != null) {
+//            System.out.println("res " + results);
+                ObservableList<Worker> toShow = FXCollections.observableArrayList();
+                for(Worker worker : this.app.getWorkers()) {
+                    for(Integer index : results) {
+                        if(index == worker.getIndex()) {
+//                        System.out.println("tt1 " + worker.getIndexString());
+                            toShow.add(worker);
+                        }
                     }
                 }
-            }
 
-            if(!toShow.isEmpty()){
-                this.warehouseTableView.getSelectionModel().clearSelection();
-                this.workerChoiceBox.getSelectionModel().clearSelection();
+                if(!toShow.isEmpty()){
+                    this.warehouseTableView.getSelectionModel().clearSelection();
+                    this.workerChoiceBox.getSelectionModel().clearSelection();
 //                System.out.println(this.app.getWorkers().size());
 
 
@@ -321,11 +331,12 @@ public class WarehouseLogisticsController {
 //                System.out.println("po " + this.workerChoiceBox.getItems().size());
 //                System.out.println(this.app.getWorkers().size());
 
-                this.workerChoiceBox.setItems(toShow);
+                    this.workerChoiceBox.setItems(toShow);
 //                System.out.println("po step2 " + this.workerChoiceBox.getItems().size());
 //                System.out.println(this.app.getWorkers().size());
-            }
+                }
 
+            }
         }
         System.out.println("End of search");
     }
@@ -432,6 +443,8 @@ public class WarehouseLogisticsController {
                 "Telephone Number", "Mail Address", "PESEL", "Warehouse Id"), Arrays.asList("ID", "NAME", "SURNAME", "ADDRESS", "TELNUM", "MAIL", "PESEL", "WAREHOUSE"));
 
         this.warehouseTraitChoiceBox.setItems(warehouseTraits);
+        this.warehouseTraitChoiceBox.getSelectionModel().selectFirst();
         this.workerTraitChoiceBox.setItems(workerTraits);
+        this.workerTraitChoiceBox.getSelectionModel().selectFirst();
     }
 }

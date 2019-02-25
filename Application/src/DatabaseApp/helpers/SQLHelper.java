@@ -415,7 +415,7 @@ public class SQLHelper {
                 return stock;
             }
         }
-        System.out.println(7);
+//        System.out.println(7);
         return null;
     }
 
@@ -482,7 +482,7 @@ public class SQLHelper {
             List<Integer> results = new ArrayList<>();
             while (resultSet.next()) {
                 results.add(resultSet.getInt(1));
-                System.out.println(results.get(results.size() - 1));
+//                System.out.println(results.get(results.size() - 1));
             }
             return results;
         } catch (SQLException exception) {
@@ -509,7 +509,7 @@ public class SQLHelper {
                     vector.add(resultSet.getInt(i));
                 }
                 results.add(vector);
-                System.out.println(results.get(results.size() - 1));
+//                System.out.println(results.get(results.size() - 1));
             }
             return results;
         } catch (SQLException exception) {

@@ -15,8 +15,6 @@ public class DQLHelper {
 
 
     public String getAskValue (String choiceValue) {
-        System.out.println(choiceValue);
-        System.out.println(askValues.size());
         return askValues.get(choiceValues.indexOf(choiceValue));
     }
 }

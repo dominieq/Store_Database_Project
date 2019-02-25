@@ -281,21 +281,21 @@ public class WarehouseBusinessController {
         String wantedTrait = this.stockSearchField.getText();
         try{
             if (wantedTrait.isEmpty()) {
-                System.out.println("null");
+//                System.out.println("null");
                 this.stockBox.setItems(this.app.getStocks());
             }
             else {
                 int wantedTraitInt = Integer.parseInt(wantedTrait);
-                System.out.println(wantedTraitInt);
+//                System.out.println(wantedTraitInt);
 
-                String trait_patern = this.stockTraitArg.getAskValue(trait);
+                String trait_pattern = this.stockTraitArg.getAskValue(trait);
 
                 // TODO display stock traits on stockLabels and change stockBox selection
                 // TODO or display information alert
-                List<Vector<Integer>> results = this.app.sqlSelectMore("SELECT MERCHANDISE, WAREHOUSE FROM stock WHERE LOWER(" + trait_patern + ") = " + wantedTraitInt, 2);
+                List<Vector<Integer>> results = this.app.sqlSelectMore("SELECT MERCHANDISE, WAREHOUSE FROM stock WHERE LOWER(" + trait_pattern + ") = " + wantedTraitInt, 2);
 
                 if(results != null) {
-                    System.out.println("res " + results);
+//                    System.out.println("res " + results);
                     ObservableList<Stock> toShow = FXCollections.observableArrayList();
                     for(Stock stock : this.app.getStocks()) {
                         for(Vector<Integer> vector : results) {
@@ -358,6 +358,8 @@ public class WarehouseBusinessController {
 
             this.app.getPackDeliveries().remove(packDelivery);
             System.out.println("PackDelivery " + packDelivery.toString() + " removed");
+
+            showPackDelivery(null);
         }
         else {
             this.app.showWarning("No selection", "Select package of deliveries to proceed.");
@@ -414,21 +416,20 @@ public class WarehouseBusinessController {
 
         try{
             if (wantedTrait.isEmpty()) {
-                System.out.println("null");
+//                System.out.println("null");
                 this.packDeliveryBox.setItems(this.app.getPackDeliveries());
             }
             else {
                 int wantedTraitInt = Integer.parseInt(wantedTrait);
-                System.out.println(wantedTraitInt);
 
-                String trait_patern = this.packDeliveryTraitArg.getAskValue(trait);
+                String trait_pattern = this.packDeliveryTraitArg.getAskValue(trait);
 
                 // TODO display packDelivery's traits on packDeliveryLabels and change packDeliveryBox selection
                 // TODO or display information alert
-                List<Integer> results = this.app.sqlSelect("SELECT INVOICENUMBER FROM packdelivery WHERE LOWER(" + trait_patern + ") = " + wantedTraitInt);
+                List<Integer> results = this.app.sqlSelect("SELECT INVOICENUMBER FROM packdelivery WHERE LOWER(" + trait_pattern + ") = " + wantedTraitInt);
 
                 if(results != null) {
-                    System.out.println("res " + results);
+//                    System.out.println("res " + results);
                     ObservableList<PackDelivery> toShow = FXCollections.observableArrayList();
                     for(PackDelivery packDelivery : this.app.getPackDeliveries()) {
                         for(Integer invoicenumber : results) {
@@ -488,6 +489,8 @@ public class WarehouseBusinessController {
 
             this.app.getPackOrders().remove(packOrder);
             System.out.println("PackOrder " + packOrder.toString() + " removed");
+
+            showPackOrder(null);
         }
         else {
             this.app.showWarning("No selection", "Select package of orders to proceed.");
@@ -543,21 +546,20 @@ public class WarehouseBusinessController {
 
         try{
             if (wantedTrait.isEmpty()) {
-                System.out.println("null");
+//                System.out.println("null");
                 this.packOrderBox.setItems(this.app.getPackOrders());
             }
             else {
                 int wantedTraitInt = Integer.parseInt(wantedTrait);
-                System.out.println(wantedTraitInt);
 
-                String trait_patern = this.packOrderTraitArg.getAskValue(trait);
+                String trait_pattern = this.packOrderTraitArg.getAskValue(trait);
 
                 // TODO display packOrder's traits on packOrderLabels and change packOrderBox selection
                 // TODO or display information alert
-                List<Integer> results = this.app.sqlSelect("SELECT INVOICENUMBER FROM packorder WHERE LOWER(" + trait_patern + ") = " + wantedTraitInt);
+                List<Integer> results = this.app.sqlSelect("SELECT INVOICENUMBER FROM packorder WHERE LOWER(" + trait_pattern + ") = " + wantedTraitInt);
 
                 if(results != null) {
-                    System.out.println("res " + results);
+//                    System.out.println("res " + results);
                     ObservableList<PackOrder> toShow = FXCollections.observableArrayList();
                     for(PackOrder packOrder : this.app.getPackOrders()) {
                         for(Integer invoicenumber : results) {
@@ -617,6 +619,7 @@ public class WarehouseBusinessController {
             this.app.getMerchandise().remove(merchandise);
             System.out.println("Merchandise " + merchandise.toString() + " removed");
 
+            showMerchandise(null);
         } else {
             this.app.showWarning("No selection", "Select merchandise to proceed.");
         }
@@ -666,10 +669,10 @@ public class WarehouseBusinessController {
         String trait = this.merchTraitsBox.getValue();
         String wantedTrait = this.merchSearchField.getText();
 
-        String trait_patern = this.merchTraitArg.getAskValue(trait);
+        String trait_pattern = this.merchTraitArg.getAskValue(trait);
 
         if (wantedTrait.isEmpty()) {
-            System.out.println("null");
+//            System.out.println("null");
             this.merchBox.setItems(this.app.getMerchandise());
         }
         else {
@@ -677,10 +680,10 @@ public class WarehouseBusinessController {
             // TODO display Merchandise's traits on merchandiseLabels and change merchandiseBox selection
             // TODO or display information alert
             List<Integer> results = this.app.sqlSelect("SELECT ID FROM merchandise " +
-                    "WHERE lower(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+                    "WHERE lower(" + trait_pattern + ") like lower('%" + wantedTrait + "%')");
 
             if(results != null) {
-                System.out.println("res " + results);
+//                System.out.println("res " + results);
                 ObservableList<Merchandise> toShow = FXCollections.observableArrayList();
                 for(Merchandise merchandise : this.app.getMerchandise()) {
                     for(Integer index : results) {
@@ -695,16 +698,123 @@ public class WarehouseBusinessController {
         System.out.println("End of search");
     }
 
+
+    @FXML private void handleSearchMerchProducer() {
+        String trait = this.merchProducerTraitsBox.getValue();
+        String wantedTrait = this.merchProducerSearchField.getText();
+
+        String trait_pattern = this.producerTraitArg.getAskValue(trait);
+
+        if (wantedTrait.isEmpty()) {
+//            System.out.println("null");
+            this.merchProducerBox.setItems(this.app.getProducers());
+        }
+        else {
+
+            // TODO display Producer's traits on producerLabels and change producerBox selection
+            // TODO or display information alert
+            List<Integer> results = this.app.sqlSelect("SELECT ID FROM producer " +
+                    "WHERE lower(" + trait_pattern + ") like lower('%" + wantedTrait + "%')");
+
+            if(results != null) {
+//                System.out.println("res " + results);
+                ObservableList<Producer> toShow = FXCollections.observableArrayList();
+                for(Producer producer : this.app.getProducers()) {
+                    for(Integer index : results) {
+                        if(index == producer.getIndex()) {
+                            toShow.add(producer);
+                        }
+                    }
+                }
+                this.merchProducerBox.setItems(toShow);
+            }
+        }
+        System.out.println("End of search");
+    }
+
+    @FXML private void handleSearchMerchCategory() {
+        String trait = this.merchCategoryTraitsBox.getValue();
+        String wantedTrait = this.merchCategorySearchField.getText();
+
+        if (wantedTrait.isEmpty()) {
+//            System.out.println("null");
+            this.merchCategoryBox.setItems(this.app.getCategories());
+        }
+        else {
+            String trait_pattern = this.categoryTraitArg.getAskValue(trait);
+
+            // TODO display Category's traits on categoryLabels and change categoryBox selection
+            // TODO or display information alert
+            List<Integer> results = this.app.sqlSelect("SELECT ID FROM category WHERE LOWER(" + trait_pattern + ") like lower('%" + wantedTrait + "%')");
+
+            if(results != null) {
+//                System.out.println("res " + results);
+                ObservableList<Category> toShow = FXCollections.observableArrayList();
+                for (Category category : this.app.getCategories()) {
+                    for (Integer index : results) {
+                        if (index == category.getIndex()) {
+                            toShow.add(category);
+                        }
+                    }
+                }
+                this.merchCategoryBox.setItems(toShow);
+            }
+        }
+    }
+
+
     /**
      * Gets selection from merchCategoryBox and merchProducerBox.
      * Sets merchBox with items that match selection.
      */
     @FXML private void handleFilterMerch() {
-
         // TODO get selection from merchCategoryBox and merchProducerBox
         // TODO create temporary merchandise list
         // TODO set merchBox with new list
 
+        Category category = this.merchCategoryBox.getValue();
+        Producer producer = this.merchProducerBox.getValue();
+
+        List<Integer> results;
+        String askCode = "SELECT ID FROM merchandise";
+        if ((category != null) || (producer != null)) {
+            if ((category != null) && (producer != null)) {
+                askCode += " WHERE CATEGORY = " + category.getIndex() + " AND PRODUCER = " + producer.getIndex();
+            } else if (category != null) {
+                askCode += " WHERE CATEGORY = " + category.getIndex();
+            } else {
+                askCode += " WHERE PRODUCER = " + producer.getIndex();
+            }
+
+            if (!this.merchSearchField.getText().isEmpty()) {
+                String trait = this.merchTraitsBox.getValue();
+                String wantedTrait = this.merchSearchField.getText();
+
+                String trait_pattern = this.merchTraitArg.getAskValue(trait);
+
+                askCode += " AND lower(" + trait_pattern + ") like lower('%" + wantedTrait + "%')";
+            }
+
+            results = this.app.sqlSelect(askCode);
+
+            if(results != null) {
+//                System.out.println("res " + results);
+                ObservableList<Merchandise> toShow = FXCollections.observableArrayList();
+                for(Merchandise merchandise : this.app.getMerchandise()) {
+                    for(Integer index : results) {
+                        if(index == merchandise.getIndex()) {
+                            toShow.add(merchandise);
+                        }
+                    }
+                }
+                this.merchBox.setItems(toShow);
+            }
+        }
+        else {
+//            System.out.println("null");
+            this.merchProducerBox.setItems(this.app.getProducers());
+        }
+        System.out.println("End of search");
     }
 
     /**
@@ -739,6 +849,8 @@ public class WarehouseBusinessController {
 
             this.app.getCategories().remove(category);
             System.out.println("Category " + category.toString() + " removed");
+
+            showCategory(null);
         } else {
             this.app.showWarning("No selection", "Select category to proceed.");
         }
@@ -785,18 +897,18 @@ public class WarehouseBusinessController {
         String wantedTrait = this.categorySearchField.getText();
 
         if (wantedTrait.isEmpty()) {
-            System.out.println("null");
+//            System.out.println("null");
             this.categoryBox.setItems(this.app.getCategories());
         }
         else {
-            String trait_patern = this.categoryTraitArg.getAskValue(trait);
+            String trait_pattern = this.categoryTraitArg.getAskValue(trait);
 
             // TODO display Category's traits on categoryLabels and change categoryBox selection
             // TODO or display information alert
-            List<Integer> results = this.app.sqlSelect("SELECT ID FROM category WHERE LOWER(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+            List<Integer> results = this.app.sqlSelect("SELECT ID FROM category WHERE LOWER(" + trait_pattern + ") like lower('%" + wantedTrait + "%')");
 
             if(results != null) {
-                System.out.println("res " + results);
+//                System.out.println("res " + results);
                 ObservableList<Category> toShow = FXCollections.observableArrayList();
                 for (Category category : this.app.getCategories()) {
                     for (Integer index : results) {
@@ -848,6 +960,7 @@ public class WarehouseBusinessController {
             this.app.getProducers().remove(producer);
             System.out.println("Producer " + producer.toString() + " removed");
 
+            showProducer(null);
         } else {
             this.app.showWarning("No selection", "Select producer to proceed.");
         }
@@ -900,10 +1013,10 @@ public class WarehouseBusinessController {
         String trait = this.producerTraitsBox.getValue();
         String wantedTrait = this.producerSearchField.getText();
 
-        String trait_patern = this.producerTraitArg.getAskValue(trait);
+        String trait_pattern = this.producerTraitArg.getAskValue(trait);
 
         if (wantedTrait.isEmpty()) {
-            System.out.println("null");
+//            System.out.println("null");
             this.producerBox.setItems(this.app.getProducers());
         }
         else {
@@ -911,10 +1024,10 @@ public class WarehouseBusinessController {
             // TODO display Producer's traits on producerLabels and change producerBox selection
             // TODO or display information alert
             List<Integer> results = this.app.sqlSelect("SELECT ID FROM producer " +
-                    "WHERE lower(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+                    "WHERE lower(" + trait_pattern + ") like lower('%" + wantedTrait + "%')");
 
             if(results != null) {
-                System.out.println("res " + results);
+//                System.out.println("res " + results);
                 ObservableList<Producer> toShow = FXCollections.observableArrayList();
                 for(Producer producer : this.app.getProducers()) {
                     for(Integer index : results) {
@@ -964,6 +1077,8 @@ public class WarehouseBusinessController {
 
             this.app.getSuppliers().remove(supplier);
             System.out.println("Supplier " + supplier.toString() + " removed");
+
+            showSupplier(null);
         } else {
             this.app.showWarning("No selection", "Select supplier to proceed");
         }
@@ -1015,18 +1130,18 @@ public class WarehouseBusinessController {
         String wantedTrait = this.supplierSearchField.getText();
 
         if (wantedTrait.isEmpty()) {
-            System.out.println("null");
+//            System.out.println("null");
             this.supplierBox.setItems(this.app.getSuppliers());
         }
         else {
-            String trait_patern = this.supplierTraitArg.getAskValue(trait);
+            String trait_pattern = this.supplierTraitArg.getAskValue(trait);
 
             // TODO display Supplier's traits on supplierLabels and change supplierBox selection
             // TODO or display information alert
-            List<Integer> results = this.app.sqlSelect("SELECT ID FROM supplier WHERE LOWER(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+            List<Integer> results = this.app.sqlSelect("SELECT ID FROM supplier WHERE LOWER(" + trait_pattern + ") like lower('%" + wantedTrait + "%')");
 
             if(results != null) {
-                System.out.println("res " + results);
+//                System.out.println("res " + results);
                 ObservableList<Supplier> toShow = FXCollections.observableArrayList();
                 for (Supplier supplier : this.app.getSuppliers()) {
                     for (Integer index : results) {
@@ -1076,6 +1191,7 @@ public class WarehouseBusinessController {
             this.app.getSupplies().remove(supply);
             System.out.println("Supply " + supply.toString() + " removed");
 
+            showSupply(null);
         } else {
             this.app.showWarning("No selection", "Select supply to proceed.");
         }
@@ -1125,21 +1241,40 @@ public class WarehouseBusinessController {
         String trait = this.supplyTraitsBox.getValue();
         String wantedTrait = this.supplySearchField.getText();
 
-        String trait_patern = this.supplyTraitArg.getAskValue(trait);
+        String trait_pattern = this.supplyTraitArg.getAskValue(trait);
 
         if (wantedTrait.isEmpty()) {
-            System.out.println("null");
+//            System.out.println("null");
             this.supplyBox.setItems(this.app.getSupplies());
         }
         else {
 
             // TODO display Supply's traits on supplyLabels and change supplyBox selection
             // TODO or display information alert
-            List<Integer> results = this.app.sqlSelect("SELECT INVOICENUMBER FROM supply " +
-                    "WHERE lower(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+            List<Integer> results;
+
+            if(trait_pattern.contains("DATE")) {
+                try {
+                    int specTrait = Integer.parseInt(wantedTrait);
+
+                    results = this.app.sqlSelect("SELECT INVOICENUMBER FROM supply " +
+                            "WHERE EXTRACT(YEAR FROM " + trait_pattern + ") = " + specTrait +
+                            " OR EXTRACT(MONTH FROM " + trait_pattern + ") = " + specTrait +
+                            " OR EXTRACT(DAY FROM " + trait_pattern + ") = " + specTrait);
+
+                } catch (Exception e) {
+
+                    results = this.app.sqlSelect("SELECT INVOICENUMBER FROM supply " +
+                            "WHERE " + trait_pattern + " = DATE '" + wantedTrait + "'");
+                }
+            }
+            else {
+                results = this.app.sqlSelect("SELECT INVOICENUMBER FROM supply " +
+                        "WHERE lower(" + trait_pattern + ") like lower('%" + wantedTrait + "%')");
+            }
 
             if(results != null) {
-                System.out.println("res " + results);
+//                System.out.println("res " + results);
                 ObservableList<Supply> toShow = FXCollections.observableArrayList();
                 for(Supply supply : this.app.getSupplies()) {
                     for(Integer index : results) {
@@ -1195,6 +1330,8 @@ public class WarehouseBusinessController {
 
             this.app.getOrders().remove(order);
             System.out.println("Order " + order.toString() + " removed");
+
+            showOrder(null);
         } else {
             this.app.showWarning("No selection",  "Select order to proceed.");
         }
@@ -1243,20 +1380,41 @@ public class WarehouseBusinessController {
     @FXML private void handleSearchOrder() {
         String trait = this.orderTraitsBox.getValue();
         String wantedTrait = this.orderSearchField.getText();
-        
+
         if (wantedTrait.isEmpty()) {
-            System.out.println("null");
+//            System.out.println("null");
             this.orderBox.setItems(this.app.getOrders());
         }
         else {
-            String trait_patern = this.orderTraitArg.getAskValue(trait);
+            String trait_pattern = this.orderTraitArg.getAskValue(trait);
 
             // TODO display Order's traits on orderLabels and change orderBox selection
             // TODO or display information alert
-            List<Integer> results = this.app.sqlSelect("SELECT INVOICENUMBER FROM w_order WHERE LOWER(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+
+            List<Integer> results;
+
+            if(trait_pattern.contains("DATE")) {
+                try {
+                    int specTrait = Integer.parseInt(wantedTrait);
+
+                    results = this.app.sqlSelect("SELECT INVOICENUMBER FROM w_order " +
+                            "WHERE EXTRACT(YEAR FROM " + trait_pattern + ") = " + specTrait +
+                            " OR EXTRACT(MONTH FROM " + trait_pattern + ") = " + specTrait +
+                            " OR EXTRACT(DAY FROM " + trait_pattern + ") = " + specTrait);
+
+                } catch (Exception e) {
+                    results = this.app.sqlSelect("SELECT INVOICENUMBER FROM w_order " +
+                            "WHERE lower(" + trait_pattern + ") like lower('%" + wantedTrait + "%')");
+
+                }
+            }
+            else {
+
+                    results = this.app.sqlSelect("SELECT INVOICENUMBER FROM w_order WHERE LOWER(" + trait_pattern + ") like lower('%" + wantedTrait + "%')");
+            }
 
             if(results != null) {
-                System.out.println("res " + results);
+//                System.out.println("res " + results);
                 ObservableList<Order> toShow = FXCollections.observableArrayList();
                 for (Order order : this.app.getOrders()) {
                     for (Integer index : results) {
@@ -1307,6 +1465,7 @@ public class WarehouseBusinessController {
             this.app.getRecipients().remove(recipient);
             System.out.println("Recipient " + recipient.toString() + " removed");
 
+            showRecipient(null);
         } else {
             this.app.showWarning("No selection", "Select recipient to proceed.");
         }
@@ -1355,10 +1514,10 @@ public class WarehouseBusinessController {
         String trait = this.recipientTraitsBox.getValue();
         String wantedTrait = this.recipientSearchField.getText();
 
-        String trait_patern = this.recipientTraitArg.getAskValue(trait);
+        String trait_pattern = this.recipientTraitArg.getAskValue(trait);
 
         if (wantedTrait.isEmpty()) {
-            System.out.println("null");
+//            System.out.println("null");
             this.recipientBox.setItems(this.app.getRecipients());
         }
         else {
@@ -1366,10 +1525,10 @@ public class WarehouseBusinessController {
             // TODO display Recipient's traits on recipientLabels and change recipientBox selection
             // TODO or display information alert
             List<Integer> results = this.app.sqlSelect("SELECT ID FROM recipient " +
-                    "WHERE lower(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+                    "WHERE lower(" + trait_pattern + ") like lower('%" + wantedTrait + "%')");
 
             if(results != null) {
-                System.out.println("res " + results);
+//                System.out.println("res " + results);
                 ObservableList<Recipient> toShow = FXCollections.observableArrayList();
                 for(Recipient recipient : this.app.getRecipients()) {
                     for(Integer index : results) {
@@ -1416,6 +1575,8 @@ public class WarehouseBusinessController {
 
             this.app.getCouriers().remove(courier);
             System.out.println("Courier " + courier.toString() + " removed");
+
+            showCourier(null);
         } else {
             this.app.showWarning("No selection", "Select courier to proceed.");
         }
@@ -1462,18 +1623,18 @@ public class WarehouseBusinessController {
         String wantedTrait = this.courierSearchField.getText();
 
         if (wantedTrait.isEmpty()) {
-            System.out.println("null");
+//            System.out.println("null");
             this.courierBox.setItems(this.app.getCouriers());
         }
         else {
-            String trait_patern = this.courierTraitArg.getAskValue(trait);
+            String trait_pattern = this.courierTraitArg.getAskValue(trait);
 
             // TODO display Courier's traits on courierLabels and change courierBox selection
             // TODO or display information alert
-            List<Integer> results = this.app.sqlSelect("SELECT ID FROM courier WHERE LOWER(" + trait_patern + ") like lower('%" + wantedTrait + "%')");
+            List<Integer> results = this.app.sqlSelect("SELECT ID FROM courier WHERE LOWER(" + trait_pattern + ") like lower('%" + wantedTrait + "%')");
 
             if(results != null) {
-                System.out.println("res " + results);
+//                System.out.println("res " + results);
                 ObservableList<Courier> toShow = FXCollections.observableArrayList();
                 for (Courier courier : this.app.getCouriers()) {
                     for (Integer index : results) {
@@ -1742,6 +1903,7 @@ public class WarehouseBusinessController {
         List<String> stockTraitsList = new ArrayList<>(Arrays.asList("Amount", "Merchandise Id", "Warehouse Id"));
         stockTraits.addAll(stockTraitsList);
         this.stockTraitsBox.setItems(stockTraits);
+        this.stockTraitsBox.getSelectionModel().selectFirst();
         this.stockTraitArg = new DQLHelper(stockTraitsList, Arrays.asList("AMOUNT", "MERCHANDISE", "WAREHOUSE"));
 
         //packDelivery
@@ -1749,6 +1911,7 @@ public class WarehouseBusinessController {
         List<String> packDeliveryTraitsList = new ArrayList<>(Arrays.asList("InvoiceNumber", "Merchandise Id", "Warehouse Id", "Amount"));
         packDeliveryTraits.addAll(packDeliveryTraitsList);
         this.packDeliveryTraitsBox.setItems(packDeliveryTraits);
+        this.packDeliveryTraitsBox.getSelectionModel().selectFirst();
         this.packDeliveryTraitArg = new DQLHelper(packDeliveryTraitsList, Arrays.asList("INVOICENUMBER", "MERCHANDISE", "WAREHOUSE", "AMOUNT"));
 
         //packOrder
@@ -1756,6 +1919,7 @@ public class WarehouseBusinessController {
         List<String> packOrderTraitsList = new ArrayList<>(Arrays.asList("Invoice Number", "Merchandise Id", "Warehouse Id", "Amount"));
         packOrderTraits.addAll(packOrderTraitsList);
         this.packOrderTraitsBox.setItems(packOrderTraits);
+        this.packOrderTraitsBox.getSelectionModel().selectFirst();
         this.packOrderTraitArg = new DQLHelper(packOrderTraitsList, Arrays.asList("INVOICENUMBER", "MERCHANDISE", "WAREHOUSE", "AMOUNT"));
 
         //category
@@ -1763,6 +1927,7 @@ public class WarehouseBusinessController {
         List<String> categoryTraitsList = new ArrayList<>(Arrays.asList("Id", "Name"));
         categoryTraits.addAll(categoryTraitsList);
         this.categoryTraitsBox.setItems(categoryTraits);
+        this.categoryTraitsBox.getSelectionModel().selectFirst();
         this.categoryTraitArg = new DQLHelper(categoryTraitsList, Arrays.asList("ID", "NAME"));
         
         //supplier
@@ -1770,6 +1935,7 @@ public class WarehouseBusinessController {
         List<String> supplierTraitsList = new ArrayList<>(Arrays.asList("Id", "Name", "Address", "Telephone Number", "Mail Address"));
         supplierTraits.addAll(supplierTraitsList);
         this.supplierTraitsBox.setItems(supplierTraits);
+        this.supplierTraitsBox.getSelectionModel().selectFirst();
         this.supplierTraitArg = new DQLHelper(supplierTraitsList, Arrays.asList("ID", "NAME", "ADDRESS", "TELNUM", "MAIL"));
 
         //supply
@@ -1777,6 +1943,7 @@ public class WarehouseBusinessController {
         List<String> supplyTraitsList = new ArrayList<>(Arrays.asList("Invoice Number", "Start Date", "End Date", "Supplier Id"));
         supplyTraits.addAll(supplyTraitsList);
         this.supplyTraitsBox.setItems(supplyTraits);
+        this.supplyTraitsBox.getSelectionModel().selectFirst();
         this.supplyTraitArg = new DQLHelper(supplyTraitsList, Arrays.asList("INVOICENUMBER", "STARTDATE", "ENDDATE", "SUPPLIER"));
 
         //order
@@ -1784,6 +1951,7 @@ public class WarehouseBusinessController {
         List<String> orderTraitsList = new ArrayList<>(Arrays.asList("Invoice Number", "Start Date", "End Date", "Courier Id", "Recipient Id"));
         orderTraits.addAll(orderTraitsList);
         this.orderTraitsBox.setItems(orderTraits);
+        this.orderTraitsBox.getSelectionModel().selectFirst();
         this.orderTraitArg = new DQLHelper(orderTraitsList, Arrays.asList("INVOICENUMBER", "STARTDATE", "ENDDATE", "COURIER", "RECIPIENT"));
         
         //recipient
@@ -1791,6 +1959,7 @@ public class WarehouseBusinessController {
         List<String> recipientTraitsList = new ArrayList<>(Arrays.asList("Id", "Name", "Surname", "Address", "Telephone Number"));
         recipientTraits.addAll(recipientTraitsList);
         this.recipientTraitsBox.setItems(recipientTraits);
+        this.recipientTraitsBox.getSelectionModel().selectFirst();
         this.recipientTraitArg = new DQLHelper(recipientTraitsList, Arrays.asList("ID", "NAME", "SURNAME", "ADDRESS", "TELNUM"));
         
         //courier
@@ -1798,20 +1967,28 @@ public class WarehouseBusinessController {
         List<String> courierTraitsList = new ArrayList<>(Arrays.asList("Id", "Telephone Number"));
         courierTraits.addAll(courierTraitsList);
         this.courierTraitsBox.setItems(courierTraits);
+        this.courierTraitsBox.getSelectionModel().selectFirst();
         this.courierTraitArg = new DQLHelper(courierTraitsList, Arrays.asList("ID", "TELNUM"));
-
-        //merch
-        ObservableList<String> merchandiseTraits = FXCollections.observableArrayList();
-        List<String> merchandiseTraitsList = new ArrayList<>(Arrays.asList("Id", "Name", "Price Retail", "Price Market", "Producer Id", "Category Id"));
-        merchandiseTraits.addAll(merchandiseTraitsList);
-        this.merchTraitsBox.setItems(merchandiseTraits);
-        this.merchTraitArg = new DQLHelper(merchandiseTraitsList, Arrays.asList("ID", "NAME", "PRICERETAIL", "PRICEMARKET", "PRODUCER", "CATEGORY"));
 
         //producer
         ObservableList<String> producerTraits = FXCollections.observableArrayList();
         List<String> producerTraitsList = new ArrayList<>(Arrays.asList("Id", "Name", "Address", "Mail", "Telephone Number", "Web Page"));
         producerTraits.addAll(producerTraitsList);
         this.producerTraitsBox.setItems(producerTraits);
+        this.producerTraitsBox.getSelectionModel().selectFirst();
         this.producerTraitArg = new DQLHelper(producerTraitsList, Arrays.asList("ID", "NAME", "ADDRESS", "MAIL", "TELNUM", "WEBPAGE"));
+
+        //merch
+        ObservableList<String> merchandiseTraits = FXCollections.observableArrayList();
+        List<String> merchandiseTraitsList = new ArrayList<>(Arrays.asList("Id", "Name", "Price Retail", "Price Market", "Producer Id", "Category Id"));
+        merchandiseTraits.addAll(merchandiseTraitsList);
+        this.merchTraitsBox.setItems(merchandiseTraits);
+        this.merchTraitsBox.getSelectionModel().selectFirst();
+        this.merchTraitArg = new DQLHelper(merchandiseTraitsList, Arrays.asList("ID", "NAME", "PRICERETAIL", "PRICEMARKET", "PRODUCER", "CATEGORY"));
+        this.merchCategoryTraitsBox.setItems(categoryTraits);
+        this.merchCategoryTraitsBox.getSelectionModel().selectFirst();
+        this.merchProducerTraitsBox.setItems(producerTraits);
+        this.merchProducerTraitsBox.getSelectionModel().selectFirst();
+
     }
 }
