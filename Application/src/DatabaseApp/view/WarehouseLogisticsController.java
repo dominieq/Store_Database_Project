@@ -201,6 +201,7 @@ public class WarehouseLogisticsController {
         else {
             warehouse_temp = this.app.getWarehouses().get(0);
         }
+//        System.out.println(warehouse_temp.getIndex());
         Worker worker = new Worker(100, "[name]", "[surname]", "[address]",
                 "[telephone number]", "[email address]", "00000000000",
                 warehouse_temp.getIndex());
@@ -360,9 +361,9 @@ public class WarehouseLogisticsController {
      * @param worker Worker
      */
     private void refreshWorker(Worker worker) {
+        this.workerChoiceBox.getSelectionModel().clearSelection();
         this.warehouseTableView.getSelectionModel().clearSelection();
 //        this.workerChoiceBox.getItems().clear();
-        this.workerChoiceBox.getSelectionModel().clearSelection();
 
         for(Warehouse warehouse : this.app.getWarehouses()) {
             if(warehouse.getIndex() == worker.getWarehouseIndex()) {
