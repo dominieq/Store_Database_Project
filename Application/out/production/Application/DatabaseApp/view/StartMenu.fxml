@@ -5,7 +5,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="870.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DatabaseApp.view.StartMenuController">
+
+<AnchorPane cache="true" cacheHint="SCALE" prefHeight="870.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DatabaseApp.view.StartMenuController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="586.0" layoutY="121.0" text="Database Project" textAlignment="CENTER" AnchorPane.bottomAnchor="700.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="25.0">
          <font>

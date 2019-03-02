@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -7,30 +8,492 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="870.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DatabaseApp.view.WarehouseBusinessController">
+
+<TabPane cache="true" cacheHint="SCALE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="870.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DatabaseApp.view.WarehouseBusinessController">
   <tabs>
-    <Tab text="Merchandise">
+    <Tab text="STOCK">
          <content>
             <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
                <items>
-                  <SplitPane dividerPositions="0.12, 0.125, 0.9375" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                  <SplitPane dividerPositions="0.125, 0.25, 0.375, 0.875" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                    <items>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" text="Stock:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ChoiceBox fx:id="stockBox" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddStock" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditStock" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                        <GridPane hgap="15.0" vgap="15.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="132.0" layoutY="74.0" text="Amount:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="132.0" layoutY="62.0" text="Merchandise's ID:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="132.0" layoutY="73.0" text="Warehouse's ID:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <children>
+                                    <Label fx:id="stockWarehouseLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="73.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label fx:id="stockMerchandiseLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="74.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <Label fx:id="stockAmountLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="74.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </GridPane>
+                        <SplitPane dividerPositions="0.33, 0.66" prefHeight="160.0" prefWidth="200.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <ChoiceBox fx:id="stockTraitsBox" layoutX="22.0" layoutY="39.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TextField fx:id="stockSearchField" alignment="CENTER" layoutX="21.0" layoutY="39.0" promptText="Choose feature" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="39.0" mnemonicParsing="false" onAction="#handleSearchStock" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                    </items>
+                  </SplitPane>
+                  <Accordion>
+                    <panes>
+                      <TitledPane animated="false" text="All deliveries:">
+                           <content>
+                              <SplitPane dividerPositions="0.125, 0.25, 0.875" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <ChoiceBox fx:id="packDeliveryBox" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <SplitPane dividerPositions="0.33, 0.66" prefHeight="160.0" prefWidth="200.0">
+                                      <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleAddPackDelivery" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleDelPackDelivery" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleEditPackDelivery" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                      </items>
+                                    </SplitPane>
+                                    <GridPane hgap="15.0" vgap="15.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="41.0" text="Invoice number:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="53.0" text="Merchandise's ID:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="53.0" text="Warehouse's ID" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="53.0" text="Number of products:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Label fx:id="packDeliveryNumberLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="53.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label fx:id="packDeliveryMerchLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="53.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <children>
+                                                <Label fx:id="packDeliveryWarehouseLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="53.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <children>
+                                                <Label fx:id="packDeliveryAmountLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="53.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </GridPane>
+                                    <SplitPane dividerPositions="0.33, 0.66" prefHeight="160.0" prefWidth="200.0">
+                                      <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <ChoiceBox fx:id="packDeliveryTraitsBox" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <TextField fx:id="packDeliverySearchField" alignment="CENTER" layoutX="21.0" layoutY="35.0" promptText="Choose feature" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleSearchPackDelivery" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                      </items>
+                                    </SplitPane>
+                                </items>
+                              </SplitPane>
+                           </content>
+                      </TitledPane>
+                      <TitledPane animated="false" text="All orders:">
+                           <content>
+                              <SplitPane dividerPositions="0.125, 0.25, 0.875" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <ChoiceBox fx:id="packOrderBox" layoutX="224.0" layoutY="36.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <SplitPane dividerPositions="0.33, 0.66" prefHeight="160.0" prefWidth="200.0">
+                                      <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleAddPackOrder" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleDelPackOrder" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleEditPackOrder" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                      </items>
+                                    </SplitPane>
+                                    <GridPane hgap="15.0" vgap="15.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="132.0" layoutY="47.0" text="Order's number:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="132.0" layoutY="47.0" text="Merchandise's ID:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="132.0" layoutY="47.0" text="Warehouse's ID:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="132.0" layoutY="47.0" text="Number of products:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Label fx:id="packOrderNumberLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="47.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label fx:id="packOrderMerchLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="47.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <children>
+                                                <Label fx:id="packOrderWarehouseLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="47.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <children>
+                                                <Label fx:id="packOrderAmountLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="47.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </GridPane>
+                                    <SplitPane dividerPositions="0.33, 0.66" prefHeight="160.0" prefWidth="200.0">
+                                      <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <ChoiceBox fx:id="packOrderTraitsBox" layoutX="22.0" layoutY="36.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <TextField fx:id="packOrderSearchField" layoutX="21.0" layoutY="35.0" promptText="Choose feature" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleSearchPackOrder" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                      </items>
+                                    </SplitPane>
+                                </items>
+                              </SplitPane>
+                           </content>
+                      </TitledPane>
+                    </panes>
+                  </Accordion>
+               </items>
+            </SplitPane>
+         </content>
+      </Tab>
+    <Tab text="MERCHANDISE">
+         <content>
+            <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
+               <items>
+                  <SplitPane dividerPositions="0.125, 0.25, 0.875" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                      <items>
                         <AnchorPane>
                            <children>
-                              <ChoiceBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <ChoiceBox fx:id="merchBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                         <SplitPane dividerPositions="0.33, 0.66" prefHeight="200.0" prefWidth="200.0">
                            <items>
                               <AnchorPane>
                                  <children>
-                                    <Button mnemonicParsing="false" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddMerch" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -39,7 +502,7 @@
                               </AnchorPane>
                               <AnchorPane>
                                  <children>
-                                    <Button mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelMerch" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -48,7 +511,7 @@
                               </AnchorPane>
                               <AnchorPane>
                                  <children>
-                                    <Button mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditMerch" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -57,7 +520,7 @@
                               </AnchorPane>
                            </items>
                         </SplitPane>
-                        <GridPane hgap="15.0" vgap="20.0">
+                        <GridPane hgap="15.0" vgap="15.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -109,7 +572,7 @@
                               </AnchorPane>
                               <AnchorPane GridPane.halignment="RIGHT" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                                  <children>
-                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Producer's name:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Producer:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -118,7 +581,7 @@
                               </AnchorPane>
                               <AnchorPane GridPane.halignment="RIGHT" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                                  <children>
-                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Category name:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Category:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -127,7 +590,7 @@
                               </AnchorPane>
                               <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label fx:id="merchLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -136,7 +599,7 @@
                               </AnchorPane>
                               <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label fx:id="merchNameLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -145,7 +608,7 @@
                               </AnchorPane>
                               <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label fx:id="merchRetailLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -154,7 +617,7 @@
                               </AnchorPane>
                               <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label fx:id="merchMarketLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -163,7 +626,7 @@
                               </AnchorPane>
                               <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label fx:id="merchProducerLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -172,7 +635,7 @@
                               </AnchorPane>
                               <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label fx:id="merchCategoryLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -185,12 +648,12 @@
                            <items>
                               <AnchorPane>
                                  <children>
-                                    <ChoiceBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ChoiceBox fx:id="merchTraitsBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane>
                                  <children>
-                                    <TextField alignment="CENTER" promptText="Choose feauture" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TextField fx:id="merchSearchField" alignment="CENTER" promptText="Choose feauture" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -199,7 +662,7 @@
                               </AnchorPane>
                               <AnchorPane>
                                  <children>
-                                    <Button mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchMerch" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -210,36 +673,306 @@
                         </SplitPane>
                      </items>
                   </SplitPane>
-                  <SplitPane dividerPositions="0.45, 0.55" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-                    <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                           <children>
-                              <SplitPane dividerPositions="0.33, 0.66" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
-                                 <items>
+                  <Accordion>
+                    <panes>
+                      <TitledPane animated="false" text="Additional search options:">
+                           <content>
+                              <SplitPane dividerPositions="0.45, 0.55" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.33, 0.66" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <items>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" text="Choose Category:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <font>
+                                                            <Font size="30.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <ChoiceBox fx:id="merchCategoryBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <SplitPane dividerPositions="0.33, 0.66" prefHeight="160.0" prefWidth="200.0">
+                                                   <items>
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <ChoiceBox fx:id="merchCategoryTraitsBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <TextField fx:id="merchCategorySearchField" alignment="CENTER" promptText="Choose feature" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <font>
+                                                                  <Font size="20.0" />
+                                                               </font>
+                                                            </TextField>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchMerchCategory" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <font>
+                                                                  <Font size="30.0" />
+                                                               </font>
+                                                            </Button>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </items>
+                                                </SplitPane>
+                                             </items>
+                                          </SplitPane>
+                                       </children>
+                                    </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Choose Category:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleFilterMerch" text="Filter merchandise" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.33, 0.66" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <items>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" text="Choose Producer:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <font>
+                                                            <Font size="30.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </AnchorPane>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ChoiceBox fx:id="merchProducerBox" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <SplitPane dividerPositions="0.33, 0.66" prefHeight="160.0" prefWidth="200.0">
+                                                  <items>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                         <children>
+                                                            <ChoiceBox fx:id="merchProducerTraitsBox" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                         </children>
+                                                      </AnchorPane>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                         <children>
+                                                            <TextField fx:id="merchProducerSearchField" alignment="CENTER" promptText="Choose feature" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <font>
+                                                                  <Font size="20.0" />
+                                                               </font>
+                                                            </TextField>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchMerchProducer" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <font>
+                                                                  <Font size="30.0" />
+                                                               </font>
+                                                            </Button>
+                                                         </children>
+                                                      </AnchorPane>
+                                                  </items>
+                                                </SplitPane>
+                                            </items>
+                                          </SplitPane>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </content>
+                      </TitledPane>
+                      <TitledPane animated="false" text="Producers:">
+                           <content>
+                              <SplitPane dividerPositions="0.125, 0.25, 0.375, 0.875" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                                <items>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Producers:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font size="30.0" />
                                              </font>
                                           </Label>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <ChoiceBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <ChoiceBox fx:id="producerBox" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
-                                    <SplitPane dividerPositions="0.33, 0.66" prefHeight="160.0" prefWidth="200.0">
+                                    <SplitPane dividerPositions="0.33, 0.66" prefHeight="200.0" prefWidth="200.0">
                                        <items>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <ChoiceBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddProducer" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
                                              </children>
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <TextField alignment="CENTER" promptText="Choose feature" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelProducer" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditProducer" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                       </items>
+                                    </SplitPane>
+                                    <GridPane hgap="15.0" vgap="15.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="127.0" layoutY="26.0" text="Producer's ID:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Name:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Address:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Email address:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Telephone number:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Web page:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Label fx:id="producerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label fx:id="producerNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <children>
+                                                <Label fx:id="producerAddressLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <children>
+                                                <Label fx:id="producerEmailLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <children>
+                                                <Label fx:id="producerTelNumLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                             <children>
+                                                <Label fx:id="producerWebLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </GridPane>
+                                    <SplitPane dividerPositions="0.33, 0.66" prefHeight="200.0" prefWidth="200.0">
+                                       <items>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <ChoiceBox fx:id="producerTraitsBox" layoutX="22.0" layoutY="39.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <TextField fx:id="producerSearchField" alignment="CENTER" promptText="Choose feature" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
@@ -248,7 +981,1034 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchProducer" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                       </items>
+                                    </SplitPane>
+                                </items>
+                              </SplitPane>
+                           </content>
+                      </TitledPane>
+                      <TitledPane animated="false" text="Categories:">
+                           <content>
+                              <SplitPane dividerPositions="0.125, 0.25, 0.375, 0.875" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                                <items>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Categories:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <ChoiceBox fx:id="categoryBox" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <SplitPane dividerPositions="0.33, 0.66" prefHeight="200.0" prefWidth="200.0">
+                                       <items>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddCategory" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelCategory" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditCategory" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                       </items>
+                                    </SplitPane>
+                                    <GridPane hgap="15.0" vgap="15.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="96.0" text="Category's ID:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="95.0" text="Name:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Label fx:id="categoryLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="96.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label fx:id="categoryNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="95.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </GridPane>
+                                    <SplitPane dividerPositions="0.33, 0.66" prefHeight="200.0" prefWidth="200.0">
+                                       <items>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <ChoiceBox fx:id="categoryTraitsBox" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <TextField fx:id="categorySearchField" alignment="CENTER" promptText="Choose feature" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchCategory" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                       </items>
+                                    </SplitPane>
+                                </items>
+                              </SplitPane>
+                           </content>
+                      </TitledPane>
+                    </panes>
+                  </Accordion>
+               </items>
+            </SplitPane>
+         </content>
+    </Tab>
+    <Tab text="SUPPLIERS &amp; SUPPLIES">
+         <content>
+            <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
+               <items>
+                  <SplitPane dividerPositions="0.125, 0.25, 0.375, 0.875" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                     <items>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" text="Suppliers:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <ChoiceBox fx:id="supplierBox" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <SplitPane dividerPositions="0.33, 0.66" prefHeight="200.0" prefWidth="200.0">
+                           <items>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddSupplier" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelSupplier" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditSupplier" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                        <GridPane hgap="15.0" vgap="15.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="117.0" layoutY="26.0" text="Supplier's ID:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="117.0" layoutY="26.0" text="Name:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Address:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Telephone Number:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="127.0" layoutY="26.0" text="Email address:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <Label fx:id="supplierLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label fx:id="supplierNameLabel" alignment="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <children>
+                                    <Label fx:id="supplierAddressLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <children>
+                                    <Label fx:id="supplierTelNumLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <children>
+                                    <Label fx:id="supplierEmailLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </GridPane>
+                        <SplitPane dividerPositions="0.33, 0.66" prefHeight="200.0" prefWidth="200.0">
+                           <items>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <ChoiceBox fx:id="supplierTraitsBox" layoutX="22.0" layoutY="39.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="supplierSearchField" alignment="CENTER" promptText="Choose feature" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchSupplier" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </items>
+                  </SplitPane>
+                  <SplitPane dividerPositions="0.125, 0.25, 0.375, 0.875" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                     <items>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" text="Supplies:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <ChoiceBox fx:id="supplyBox" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <SplitPane dividerPositions="0.33, 0.66" prefHeight="200.0" prefWidth="200.0">
+                           <items>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddSupply" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelSupply" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditSupply" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                        <GridPane hgap="15.0" vgap="15.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="132.0" layoutY="38.0" text="Supply's ID:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="132.0" layoutY="38.0" text="Date of beginning:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="132.0" layoutY="38.0" text="Date of realization:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="132.0" layoutY="38.0" text="Supplier:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <Label fx:id="supplyLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="38.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label fx:id="supplyStartLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="38.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <children>
+                                    <Label fx:id="supplyEndLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="38.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <children>
+                                    <Label fx:id="supplySupplierLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="38.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </GridPane>
+                        <SplitPane dividerPositions="0.33, 0.66" prefHeight="200.0" prefWidth="200.0">
+                           <items>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <ChoiceBox fx:id="supplyTraitsBox" layoutY="-3.0" prefWidth="150.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-3.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="supplySearchField" alignment="CENTER" promptText="Choose feature" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchSupply" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </items>
+                  </SplitPane>
+               </items>
+            </SplitPane>
+         </content>
+      </Tab>
+    <Tab text="ORDERS">
+         <content>
+            <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
+               <items>
+                  <SplitPane dividerPositions="0.125, 0.25, 0.875" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                     <items>
+                        <AnchorPane>
+                           <children>
+                              <ChoiceBox fx:id="orderBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <SplitPane dividerPositions="0.33, 0.66" prefHeight="200.0" prefWidth="200.0">
+                           <items>
+                              <AnchorPane>
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddOrder" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane>
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelOrder" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane>
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditOrder" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                        <GridPane hgap="15.0" vgap="15.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <AnchorPane GridPane.halignment="RIGHT" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Order's ID:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane GridPane.halignment="RIGHT" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Date of order:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane GridPane.halignment="RIGHT" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Date of realization:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane GridPane.halignment="RIGHT" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Courier:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane GridPane.halignment="RIGHT" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Recipient:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                                 <children>
+                                    <Label fx:id="orderLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                                 <children>
+                                    <Label fx:id="orderStartLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                                 <children>
+                                    <Label fx:id="orderEndLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                                 <children>
+                                    <Label fx:id="orderCourierLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                                 <children>
+                                    <Label fx:id="orderRecipientLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </GridPane>
+                        <SplitPane dividerPositions="0.33, 0.66" prefHeight="160.0" prefWidth="200.0">
+                           <items>
+                              <AnchorPane>
+                                 <children>
+                                    <ChoiceBox fx:id="orderTraitsBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane>
+                                 <children>
+                                    <TextField fx:id="orderSearchField" alignment="CENTER" promptText="Choose feauture" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane>
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchOrder" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </items>
+                  </SplitPane>
+                  <Accordion>
+                    <panes>
+                      <TitledPane animated="false" text="Information related to order:">
+                           <content>
+                              <SplitPane dividerPositions="0.125, 0.625, 0.75" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                                 <items>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Recpient's info:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <GridPane hgap="15.0" vgap="15.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="131.0" layoutY="17.0" text="Recipient's ID:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="131.0" layoutY="16.0" text="Name:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="131.0" layoutY="16.0" text="Surname:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="131.0" layoutY="16.0" text="Address:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="131.0" layoutY="16.0" text="Telephone number:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Label fx:id="orderRecipientRightLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="131.0" layoutY="28.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label fx:id="orderRecipientNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="131.0" layoutY="16.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <children>
+                                                <Label fx:id="orderRecipientSurnameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="131.0" layoutY="16.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <children>
+                                                <Label fx:id="orderRecipientAddressLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="131.0" layoutY="16.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <children>
+                                                <Label fx:id="orderRecipientTelNumLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="131.0" layoutY="16.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </GridPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Courier's info:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="135.0" layoutY="69.0" text="Courier's ID:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="135.0" layoutY="69.0" text="Telephone Number:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Label fx:id="orderCourierRightLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="135.0" layoutY="69.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label fx:id="orderCourierTelNumLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="135.0" layoutY="69.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </GridPane>
+                                 </items>
+                              </SplitPane>
+                           </content>
+                      </TitledPane>
+                      <TitledPane animated="false" text="Recipients:">
+                           <content>
+                              <SplitPane dividerPositions="0.125, 0.25, 0.375, 0.875" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                                 <items>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Recipients" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <ChoiceBox fx:id="recipientBox" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <SplitPane dividerPositions="0.33, 0.66" prefHeight="200.0" prefWidth="200.0">
+                                       <items>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddRecipient" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelRecipient" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditRecipient" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                       </items>
+                                    </SplitPane>
+                                    <GridPane hgap="15.0" vgap="15.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="127.0" layoutY="26.0" text="Recipient's ID:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Name:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Surname:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Address" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Telephone number:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Label fx:id="recipientLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label fx:id="recipientNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <children>
+                                                <Label fx:id="recipientSurnameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <children>
+                                                <Label fx:id="recipientAddressLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <children>
+                                                <Label fx:id="recipientTelNumLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="26.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </GridPane>
+                                    <SplitPane dividerPositions="0.33, 0.66" prefHeight="200.0" prefWidth="200.0">
+                                       <items>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <ChoiceBox fx:id="recipientTraitsBox" layoutX="22.0" layoutY="39.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <TextField fx:id="recipientSearchField" alignment="CENTER" promptText="Choose feature" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchRecipient" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -259,45 +2019,115 @@
                                     </SplitPane>
                                  </items>
                               </SplitPane>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <Button mnemonicParsing="false" text="Filter merchandise" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                           <children>
-                              <SplitPane dividerPositions="0.33, 0.66" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
-                                <items>
+                           </content>
+                      </TitledPane>
+                      <TitledPane animated="false" text="Couriers:">
+                           <content>
+                              <SplitPane dividerPositions="0.125, 0.25, 0.375, 0.875" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                                 <items>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Choose Producer:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Couriers:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font size="30.0" />
                                              </font>
                                           </Label>
                                        </children>
                                     </AnchorPane>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <ChoiceBox prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <ChoiceBox fx:id="courierBox" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
-                                    <SplitPane dividerPositions="0.33, 0.66" prefHeight="160.0" prefWidth="200.0">
-                                      <items>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                    <SplitPane dividerPositions="0.33, 0.66" prefHeight="200.0" prefWidth="200.0">
+                                       <items>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <ChoiceBox prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddCourier" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
                                              </children>
                                           </AnchorPane>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <TextField alignment="CENTER" promptText="Choose feature" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleDelCourier" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleEditCourier" text="Edit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                       </items>
+                                    </SplitPane>
+                                    <GridPane hgap="15.0" vgap="15.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="96.0" text="Courier's ID:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="136.0" layoutY="95.0" text="Telephone number:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Label fx:id="courierLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="96.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label fx:id="courierTelNumLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="95.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </GridPane>
+                                    <SplitPane dividerPositions="0.33, 0.66" prefHeight="200.0" prefWidth="200.0">
+                                       <items>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <ChoiceBox fx:id="courierTraitsBox" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <TextField fx:id="courierSearchField" alignment="CENTER" promptText="Choose feature" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
@@ -306,27 +2136,24 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchCourier" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
                                                 </Button>
                                              </children>
                                           </AnchorPane>
-                                      </items>
+                                       </items>
                                     </SplitPane>
-                                </items>
+                                 </items>
                               </SplitPane>
-                           </children>
-                        </AnchorPane>
-                    </items>
-                  </SplitPane>
+                           </content>
+                      </TitledPane>
+                    </panes>
+                  </Accordion>
                </items>
             </SplitPane>
          </content>
-    </Tab>
-    <Tab text="Producers &amp; Categories" />
-    <Tab text="Supplies and Suppliers" />
-    <Tab text="Orders" />
+      </Tab>
   </tabs>
 </TabPane>
